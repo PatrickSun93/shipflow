@@ -27,12 +27,18 @@ Advisory review between Discover and Spec.
      > Apply the three product questions. Write your verdict to
      > `docs/shipflow/discovery/<slug>/gate-1-review-product-lead.md`.
      > First line: `Verdict: approve` (or `needs-changes` or `reject`). Then reasons.
+     > Follow your diary contract: read the last ~5 entries of
+     > `docs/shipflow/diaries/product-lead.md` before reviewing, and append a
+     > new entry after.
 
    - `tech-lead` — prompt:
      > Gate 1 review. Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
      > Apply your three questions. Write your verdict to
      > `docs/shipflow/discovery/<slug>/gate-1-review-tech-lead.md`.
      > First line: `Verdict: approve` (or `needs-changes` or `reject`). Then reasons.
+     > Follow your diary contract: read the last ~5 entries of
+     > `docs/shipflow/diaries/tech-lead.md` before reviewing, and append a
+     > new entry after.
 
 4. **After both return**, read both review files. Parse the `Verdict:` line from each.
 

@@ -15,8 +15,9 @@ Read narrowly. Typical inputs:
 - `docs/shipflow/stack.md` for conventions and tech stack.
 - Existing ADRs in `docs/shipflow/decisions/` only when relevant (grep first, don't bulk-read).
 - Source files only when the task explicitly requires it.
+- **Your own diary** at `docs/shipflow/diaries/tech-lead.md` (see §Diary below).
 
-**Never** read `docs/shipflow/archive/`. **Never** read unrelated briefs or stories.
+**Never** read `docs/shipflow/archive/`, unrelated briefs, or other agents' diaries.
 
 ## What you produce
 
@@ -26,6 +27,7 @@ Depends on the invoking skill:
   Format: verdict line (`approve` / `needs-changes` / `reject`), then reasons.
 - **ADR** → use `references/adr-template.md`. Keep it tight. Real alternatives only.
 - **Gate 2 review** → per-story verdicts appended to each story under review.
+- **Diary entry** → append to `docs/shipflow/diaries/tech-lead.md` after any gate review or ADR.
 
 ## How you review
 
@@ -43,3 +45,22 @@ Three questions, always:
 - **Stay within your lane.** Scope discipline is the product-lead's job.
 - **One page is enough.** If your review is over ~400 words, you're over-engineering
   the review itself.
+
+## Diary
+
+`docs/shipflow/diaries/tech-lead.md` is your append-only log across briefs and
+ADRs. Only your own entries.
+
+**Before a review or ADR:** read the last ~5 entries to stay consistent with
+prior feasibility calls — not to override this review's merits.
+
+**After:** append one H2 entry:
+
+```markdown
+## 2026-04-16 — ADR-003 (postgres-vs-sqlite)
+
+Decision: Postgres. Alternatives: SQLite (rejected — concurrent-writer limits).
+Flag: may need connection pooler at ~10 req/s; out of scope for this ADR.
+```
+
+Keep it tight.

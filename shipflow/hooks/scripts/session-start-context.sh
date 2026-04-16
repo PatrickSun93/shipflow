@@ -21,6 +21,11 @@ if [ -f shipflow.config.json ]; then
     | sed -E 's/[[:space:]]*"(gate_[1-4])":[[:space:]]*"([^"]+)".*/- \1: \2/'
 fi
 
+if [ -f docs/shipflow/sessions/last.md ]; then
+  echo ""
+  cat docs/shipflow/sessions/last.md
+fi
+
 echo ""
 echo "Phase skills: /sf-init, /sf-discover, /sf-brief, /sf-gate-1."
 echo "Read narrowly — no archive access unless explicitly asked."

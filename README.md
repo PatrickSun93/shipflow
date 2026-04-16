@@ -51,6 +51,22 @@ See [`shipflow/README.md`](./shipflow/README.md) for the full quick-start.
 - **Read narrowly.** No archive access from phase skills unless explicitly
   asked. Enforced by agent prompts; audit hook designed but not yet written.
 
+## Acknowledgements
+
+Ideas borrowed (not code — everything here is ShipFlow-native, no external deps):
+
+- **[MemPalace](https://github.com/MemPalace/mempalace)** — The per-agent diary
+  concept in `docs/shipflow/diaries/<agent>.md` is a file-based reimagining of
+  MemPalace's `diary_write` / `diary_read` MCP tools. The Stop + PreCompact
+  hooks also borrow from MemPalace's hook design, but as minimal markdown
+  markers rather than verbatim transcript storage.
+- **The Claude Code / agentic-dev workflow prior art** — overall phased
+  structure (Discover → Spec → Build → Verify → Ship) and multi-persona
+  discovery draws on patterns from projects including BMAD, Agent OS,
+  SuperClaude, Claude-Code-Game-Studios, and claude-sub-agent. See
+  [`workflow-comparison.md`](./workflow-comparison.md) — the comparison table's
+  rows for those projects are still marked `_TODO_` pending firsthand review.
+
 ## License
 
 MIT — see [`LICENSE`](./LICENSE).

@@ -20,7 +20,8 @@
 | 3 | Agent OS | _TODO: add link_ | _TODO: 1-line summary_ |
 | 4 | SuperClaude | _TODO: add link_ | _TODO: 1-line summary_ |
 | 5 | claude-sub-agent | _TODO: add link_ | _TODO: 1-line summary_ |
-| 6 | **ShipFlow** (this repo) | — | Solo-dev 5-phase workflow with 4 advisory gates. |
+| 6 | MemPalace | https://github.com/MemPalace/mempalace | Local-first AI conversation memory with verbatim storage, Wings/Rooms/Drawers taxonomy, ChromaDB + BM25 semantic search, and 19 MCP tools. |
+| 7 | **ShipFlow** (this repo) | — | Solo-dev 5-phase workflow with 4 advisory gates. |
 
 ---
 
@@ -29,29 +30,38 @@
 Fill each column from the project's own docs. Err toward concrete ("5 agents
 named X/Y/Z") over abstract ("has agents").
 
-| Dimension | Game Studios | BMAD | Agent OS | SuperClaude | claude-sub-agent | **ShipFlow** |
-|-----------|--------------|------|----------|-------------|------------------|--------------|
-| Target user | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Solo developer |
-| Packaging | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Claude Code plugin |
-| Phases | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | 5 (Discover → Spec → Build → Verify → Ship) |
-| Agent count | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | 6 in Discover (plan: ~12 total) |
-| Parallelism during discovery | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | 3 personas in parallel, 2 rounds max |
-| Gates / reviews | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | 4 advisory gates, configurable to blocking |
-| Story/brief storage | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | In-repo markdown, frontmatter-linked |
-| Memory model | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | 3-layer (Hot / Warm / Cold) with archiving |
-| Uses marketplace skills | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Yes — Spec suggests installs |
-| Opinionated on stack | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | No — `stack.md` is user-defined |
-| External integrations (Linear/Jira/etc.) | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | None in v1 |
+> **Note on MemPalace:** it's a memory system, not a workflow framework, so
+> several workflow dimensions below are `n/a` for that column. Included here
+> because we borrowed concepts from it (see "What ShipFlow borrowed" below).
+
+| Dimension | Game Studios | BMAD | Agent OS | SuperClaude | claude-sub-agent | MemPalace | **ShipFlow** |
+|-----------|--------------|------|----------|-------------|------------------|-----------|--------------|
+| Target user | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Any AI-agent user | Solo developer |
+| Packaging | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Python pkg + Claude Code plugin + MCP | Claude Code plugin |
+| Phases | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | 5 (Discover → Spec → Build → Verify → Ship) |
+| Agent count | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | 6 in Discover (plan: ~12 total) |
+| Parallelism during discovery | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | 3 personas in parallel, 2 rounds max |
+| Gates / reviews | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | 4 advisory gates, configurable to blocking |
+| Story/brief storage | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | In-repo markdown, frontmatter-linked |
+| Memory model | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Verbatim store, Wings/Rooms/Drawers + KG + semantic search | 3-layer (Hot / Warm / Cold) with archiving |
+| Uses marketplace skills | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | n/a | Yes — Spec suggests installs |
+| Opinionated on stack | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | Python + ChromaDB (pluggable backend interface) | No — `stack.md` is user-defined |
+| External integrations (Linear/Jira/etc.) | _TODO_ | _TODO_ | _TODO_ | _TODO_ | _TODO_ | None (local-first by design) | None in v1 |
 
 ---
 
 ## What ShipFlow borrowed (and from where)
 
-Each bullet should cite the project that contributed the idea. Placeholders
-below — replace with real attributions.
-
-- **Phase structure (Discover → Build → Ship etc.)** — common across _TODO:
-  which projects_.
+- **Per-agent diary** (`docs/shipflow/diaries/<agent>.md`) — borrowed from
+  MemPalace's `diary_write` / `diary_read` MCP tools. Reimplemented as
+  markdown files so ShipFlow has no runtime dependency on MemPalace.
+- **Stop + PreCompact hooks** for session continuity — borrowed from
+  MemPalace's hook design. Reimplemented as minimal markdown markers
+  (branch, last commit, dirty files) rather than verbatim transcript
+  storage — ShipFlow's source of truth stays in committed markdown.
+- **Phase structure (Discover → Build → Ship etc.)** — common across
+  BMAD, Agent OS, SuperClaude, and others; the specific 5-phase cut is
+  ShipFlow's own.
 - **Per-persona discovery** — _TODO: which project inspired this, if any._
 - **Advisory vs. blocking gates** — _TODO._
 - **In-repo markdown as source of truth** — _TODO._

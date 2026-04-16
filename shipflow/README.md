@@ -70,6 +70,16 @@ your-repo/
     └── archive/                 # cold layer — shipped work moves here
 ```
 
+## Acknowledgements
+
+- **Per-agent diary** (`docs/shipflow/diaries/<agent>.md`) and **Stop +
+  PreCompact hooks** are file-based reimaginings of ideas from
+  [MemPalace](https://github.com/MemPalace/mempalace). No code shared —
+  ShipFlow stays dependency-free.
+- **Phased multi-persona workflow structure** draws on prior art documented
+  in `workflow-comparison.md` in the parent directory (rows pending
+  firsthand review).
+
 ## License
 
 MIT.

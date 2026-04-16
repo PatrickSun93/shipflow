@@ -29,6 +29,8 @@ Real content → append a delimited ShipFlow section.
      releases/         .gitkeep
      retros/           .gitkeep
      discovery/        .gitkeep
+     diaries/          .gitkeep   (agent-only memory, see §"Diaries" below)
+     sessions/         .gitkeep   (written by Stop + PreCompact hooks)
      archive/
        briefs/         .gitkeep
        stories/        .gitkeep
