@@ -1,0 +1,28 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Build output (none yet, but future-proofing)
+dist/
+build/
+node_modules/
+
+# ShipFlow CLAUDE.md backup (sf-init --overwrite creates this)
+CLAUDE.md.pre-shipflow

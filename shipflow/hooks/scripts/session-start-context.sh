@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# ShipFlow SessionStart hook — emits brief project context.
+# Silent in non-ShipFlow repos (i.e. no docs/shipflow/ directory).
+set -euo pipefail
+
+[ -d docs/shipflow ] || exit 0
+
+echo "## ShipFlow context"
+echo ""
+echo "This repo uses ShipFlow (Discover → Spec → Build → Verify → Ship)."
+echo ""
+
+[ -f docs/shipflow/index.md ] && echo "- Index: \`docs/shipflow/index.md\`"
+[ -f docs/shipflow/stack.md ] && echo "- Stack:  \`docs/shipflow/stack.md\`"
+[ -f CLAUDE.md ]              && echo "- Hot layer: \`CLAUDE.md\` (already in context)"
+
+if [ -f shipflow.config.json ]; then
+  echo ""
+  echo "Gate modes:"
+  grep -E '"gate_[1-4]"' shipflow.config.json \
+    | sed -E 's/[[:space:]]*"(gate_[1-4])":[[:space:]]*"([^"]+)".*/- \1: \2/'
+fi
+
+echo ""
+echo "Phase skills: /sf-init, /sf-discover, /sf-brief, /sf-gate-1."
+echo "Read narrowly — no archive access unless explicitly asked."
