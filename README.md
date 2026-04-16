@@ -1,5 +1,7 @@
 # claude-code-project
 
+> **Other languages:** [中文](./README.zh.md)
+
 This repo houses **ShipFlow** — a Claude Code plugin that gives solo developers
 a multi-agent product-dev workflow (Discover → Spec → Build → Verify → Ship),
 plus the design docs and handoff notes that produced it.

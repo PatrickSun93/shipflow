@@ -1,5 +1,7 @@
 # ShipFlow
 
+> **Other languages:** [中文](./README.zh.md)
+
 A Claude Code plugin that gives solo developers a multi-agent product-dev workflow:
 **Discover → Spec → Build → Verify → Ship**, with four advisory gates between phases.
 
