@@ -1,6 +1,6 @@
 ---
 name: sf-init
-description: Initialize ShipFlow in the current repo. Creates docs/shipflow/ directory tree, writes shipflow.config.json, and seeds CLAUDE.md using the plugin's template. Run once per project. Supports --overwrite and --append flags.
+description: Initialize ShipFlow in the current repo. Creates docs/shipflow/ directory tree, writes shipflow.config.json, and seeds CLAUDE.md using the plugin's template. Run once per project. Supports --overwrite, --append, and --existing flags.
 ---
 
 # sf-init
@@ -9,11 +9,11 @@ One-time repo setup for ShipFlow.
 
 ## Flags
 
-- `--overwrite` — if `CLAUDE.md` exists, back it up to `CLAUDE.md.pre-shipflow` and overwrite with the template. Safe: the backup is kept.
+- `--overwrite` — back up existing `CLAUDE.md` to `CLAUDE.md.pre-shipflow`, then overwrite with the template.
 - `--append` — force append mode even if `CLAUDE.md` is empty or a placeholder.
+- `--existing` — ask the user for a one-paragraph stack description; skip the `stack.md` stub. Use when adopting ShipFlow into a long-running repo.
 
-Default behavior: smart. Empty or placeholder `CLAUDE.md` → overwrite in place.
-Real content → append a delimited ShipFlow section.
+Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwise); `stack.md` written as stub.
 
 ## Steps
 
@@ -40,7 +40,9 @@ Real content → append a delimited ShipFlow section.
 3. **Write `docs/shipflow/index.md`** with empty sections: Briefs, Stories, ADRs, Releases.
    Include the comment `<!-- Auto-regenerated. Edit shipflow.config.json to change cadence. -->`.
 
-4. **Write `docs/shipflow/stack.md`** as a stub (one paragraph: "Describe your stack here").
+4. **Write `docs/shipflow/stack.md`.** Default: stub ("Describe your stack here").
+   With `--existing`: pause and ask the user "Describe your stack in a few
+   sentences — languages, frameworks, key paths." Write their reply verbatim.
 
 5. **Write `shipflow.config.json`:**
    ```json
