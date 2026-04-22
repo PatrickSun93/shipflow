@@ -16,14 +16,7 @@ Output: `dialogue-ux.md`.
 
 ### Round 1
 
-```markdown
-# UX persona
-
-## Round 1
-
-- Q1. ...
-- Q2. ...
-```
+Output format: `# UX persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
 5–8 questions. Focus on:
 - **Who** — concrete persona, role, context. Push back on "users" and "customers."

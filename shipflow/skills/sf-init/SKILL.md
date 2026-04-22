@@ -79,4 +79,3 @@ Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwi
 
 - Never silently clobber `CLAUDE.md` without a backup. `--overwrite` writes `.pre-shipflow` first.
 - Never create files outside `docs/shipflow/`, `CLAUDE.md`, and `shipflow.config.json`.
-- If the repo has a productivity-plugin CLAUDE.md marker, preserve that section (see open question #1 in handoff).

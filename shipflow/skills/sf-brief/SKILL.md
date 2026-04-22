@@ -1,6 +1,6 @@
 ---
 name: sf-brief
-description: Synthesize a ShipFlow brief from the user's discovery answers. Writes answers.md verbatim, spawns the three personas in synthesis mode in parallel, and stitches their slices into docs/shipflow/briefs/BRIEF-NNN-<slug>.md.
+description: Synthesize a ShipFlow brief from the user's discovery answers after /sf-discover. Assembles BRIEF-NNN-<slug>.md from per-persona slices and runs the challenger on the result.
 ---
 
 # sf-brief
@@ -56,10 +56,21 @@ Turn a completed discovery dialogue into a brief.
 
 6. **Update `docs/shipflow/index.md`** by adding the new brief to the Briefs section.
 
-7. **Report to the user:**
+7. **Spawn the challenger.** Use the Agent tool with `subagent_type: "challenger"`
+   and a prompt like:
+
+   > Working directory: `docs/shipflow/discovery/<slug>/`.
+   > Brief path: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
+   > Read seed, answers, and the brief. Run your challenge loop (soft cap —
+   > stop when further pressing would be theater). Write `open-questions.md`
+   > in the discovery dir. Report back with the count of unresolved questions.
+
+8. **Report to the user:**
    - Brief path
    - Number of unresolved flags (if any)
-   - Next step: `/sf-gate-1`
+   - Number of open challenges from the challenger + path to `open-questions.md`
+     (skip this line if challenger found none)
+   - Next step: review `open-questions.md` if present, then `/sf-gate-1`
 
 ## Hard rules
 

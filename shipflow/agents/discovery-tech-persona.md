@@ -15,15 +15,7 @@ Output: `dialogue-tech.md`.
 
 ### Round 1
 
-```markdown
-# Tech persona
-
-## Round 1
-
-- Q1. ...
-- Q2. ...
-- Q3. ...
-```
+Output format: `# Tech persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
 5–8 questions. Focus on:
 - **Feasibility** — does the stack support this? what's missing?

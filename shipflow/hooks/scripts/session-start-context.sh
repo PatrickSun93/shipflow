@@ -7,12 +7,8 @@ set -euo pipefail
 
 echo "## ShipFlow context"
 echo ""
-echo "This repo uses ShipFlow (Discover → Spec → Build → Verify → Ship)."
-echo ""
-
 [ -f docs/shipflow/index.md ] && echo "- Index: \`docs/shipflow/index.md\`"
-[ -f docs/shipflow/stack.md ] && echo "- Stack:  \`docs/shipflow/stack.md\`"
-[ -f CLAUDE.md ]              && echo "- Hot layer: \`CLAUDE.md\` (already in context)"
+[ -f docs/shipflow/stack.md ] && echo "- Stack: \`docs/shipflow/stack.md\`"
 
 if [ -f shipflow.config.json ]; then
   echo ""
@@ -25,7 +21,3 @@ if [ -f docs/shipflow/sessions/last.md ]; then
   echo ""
   cat docs/shipflow/sessions/last.md
 fi
-
-echo ""
-echo "Phase skills: /sf-init, /sf-discover, /sf-brief, /sf-gate-1."
-echo "Read narrowly — no archive access unless explicitly asked."

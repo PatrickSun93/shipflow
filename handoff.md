@@ -48,6 +48,7 @@ Do not relitigate these unless Patrick explicitly asks — they were debated and
 | Agent prompt length | ≤80 lines each | Simplicity constraint |
 | Hook script length | ≤40 lines of bash each | Simplicity constraint |
 | `sf-init` CLAUDE.md handling | Smart default: overwrite-if-empty-or-placeholder, append-if-real-content. Flags: `--overwrite` (with auto-backup to `CLAUDE.md.pre-shipflow`), `--append` (force) | Avoids destroying existing context; gives escape hatches |
+| Challenger subagent | Runs at the **tail of Discover (`sf-brief`) and Spec (`sf-spec`, when scaffolded)**. Persona is **smart-but-skeptical** (not "plays dumb"). Loops have a **soft cap** — the challenger self-judges when pressing further would be theater. Reads brief + seed + answers and resolves challenges internally (no spawn of product-lead); unresolved items escalate to `open-questions.md` with 2–4 options + recommendation + optional checklist, **user decides** | Stress-tests the brief for load-bearing claims without infinite loops. User is the terminator, not the challenger. Single-agent self-reasoning keeps token budget flat. |
 
 ---
 
@@ -84,7 +85,8 @@ claude-code-project/
     │   ├── discovery-moderator.md     Tier 2 (Sonnet) — orchestrates the 3 personas
     │   ├── discovery-tech-persona.md  Tech questions lens
     │   ├── discovery-ux-persona.md    UX questions lens
-    │   └── discovery-business-persona.md   Business questions lens
+    │   ├── discovery-business-persona.md   Business questions lens
+    │   └── challenger.md              Tier 2 (Sonnet) — smart-but-skeptical stress-tester, runs at tail of Discover/Spec
     ├── skills/
     │   ├── sf-init/SKILL.md           initialize ShipFlow in a repo (one-time)
     │   ├── sf-discover/SKILL.md       run the Discover dialogue
@@ -125,6 +127,10 @@ User: /sf-brief
     → writes slice-<persona>.md (tech: constraints+risks; ux: who+open-qs; business: why-now+success+non-goals)
   Skill stitches the slices into docs/shipflow/briefs/BRIEF-NNN-<slug>.md
   Flags contradictions under "## Unresolved"
+  Spawns challenger (smart-but-skeptical, soft cap)
+    → reads seed.md, answers.md, the assembled brief
+    → writes open-questions.md (only unresolved challenges, each with options + recommendation)
+  Skill reports brief path + open-challenges count to user
 
 User: /sf-gate-1
   Spawns product-lead + tech-lead in parallel

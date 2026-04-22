@@ -42,6 +42,8 @@ three independent lenses (Tech, UX, Business) before any solutioning.
 - `answers.md` — user's raw answers, stored verbatim.
 - `slice-tech.md`, `slice-ux.md`, `slice-business.md` — synthesized brief
   sections, one per persona.
+- `open-questions.md` — challenger's unresolved challenges (omitted if none),
+  each with 2–4 options, a recommendation, and an optional closing checklist.
 - `gate-1-review-tech-lead.md`, `gate-1-review-product-lead.md` — Gate 1
   review breadcrumbs.
 
@@ -52,6 +54,10 @@ three independent lenses (Tech, UX, Business) before any solutioning.
   (Tier 2) — dual-mode. In Discover mode they ask lens-specific questions and
   only ask (no solutioning). In Synthesis mode they author their slice of the
   brief.
+- `challenger` (Tier 2) — smart-but-skeptical stress-tester. Runs at the tail
+  of `/sf-brief` (and, when Spec is scaffolded, at the tail of `/sf-spec`).
+  Reads seed, answers, and the assembled brief; resolves challenges internally
+  from the materials; escalates remaining gaps to `open-questions.md`.
 
 **Skills:** `/sf-discover`, `/sf-brief`.
 
@@ -72,6 +78,22 @@ verdict (approve | needs-changes | reject) and appends it to the brief.
    modes stay under the 80-line cap.
 3. **Round cap.** Moderator is capped at 2 rounds. A 3rd round would add
    churn without meaningful new information (tested informally in Cowork).
+4. **Challenger: persona, cap, and terminator.** Considered three axes:
+   (a) "plays dumb outsider" vs. "smart but skeptical" — chose **smart
+   skeptical** because playing dumb produces shallow strawmen; we want pushback
+   grounded in the brief's actual text. (b) hard round cap vs. soft self-judged
+   cap — chose **soft**, because the moderator's 2-round cap works for
+   bounded Q-generation but challenging is variable-depth; a hard cap either
+   cuts short a live thread or pads an already-resolved one. (c) single-agent
+   self-reasoning vs. spawning `product-lead` as the responder — chose
+   **single-agent**: the brief + seed + answers are enough material for the
+   challenger to simulate "I asked, then I tried to answer from the docs." Saves
+   a spawn and keeps the token budget flat; upgradeable to dual-agent if
+   real-world use shows self-reasoning lacks bite.
+5. **Who terminates?** The challenger never blocks — it writes
+   `open-questions.md` with options and a recommendation, and the **user** is
+   the decider. This keeps the challenger from becoming a bottleneck and
+   preserves the advisory-by-default model.
 
 ### Spec
 
@@ -93,6 +115,10 @@ dependency, each small enough to implement in one Build pass.
 - `frontend-specialist`, `backend-specialist`, `data-infra-specialist`,
   `security-reviewer` (Tier 3) — path-scoped specialists. Called in only when
   the brief's path hints activate them. Not always run.
+- `challenger` (Tier 2, reused from Discover) — runs at the tail of `/sf-spec`
+  the same way it runs at the tail of `/sf-brief`. Reads the approved brief
+  and the newly-written stories; escalates gaps to a Spec-level
+  `open-questions.md` under the stories dir (exact path TBD when scaffolding).
 
 **Skills:**
 - `/sf-spec` — reads brief, spawns `spec-author`, writes stories.

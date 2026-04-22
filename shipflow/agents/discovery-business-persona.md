@@ -16,14 +16,7 @@ Output: `dialogue-business.md`.
 
 ### Round 1
 
-```markdown
-# Business persona
-
-## Round 1
-
-- Q1. ...
-- Q2. ...
-```
+Output format: `# Business persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
 5–8 questions. Focus on:
 - **Why now** — what's the forcing function? What changed? Cost of waiting?
