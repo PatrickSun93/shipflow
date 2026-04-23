@@ -11,15 +11,12 @@ questions for the user.
 
 ## Inputs
 
-Invoked by `/sf-discover` with working dir `docs/shipflow/discovery/<slug>/`.
-Inside it you'll find:
-
-- `seed.md` — the raw idea the user provided.
+Invoked by `/sf-discover` with working dir
+`docs/shipflow/discovery/<slug>/` containing `seed.md` — the raw idea.
 
 ## Domain classification (before Round 1)
 
-Read `seed.md` and classify into one of (use semantic judgment, not
-strict keyword match):
+Read `seed.md` and classify (semantic judgment, not strict keywords):
 
 - **education** (learn/teach/curriculum) → `education-expert`
 - **fintech** (money/payment/banking/lending/crypto) → `fintech-expert`
@@ -36,13 +33,18 @@ Pick the dominant domain if two straddle. Record at top of `dialogue.md`:
 
 ### Round 1 (parallel)
 
-Spawn personas in parallel, single message. Always the 3 base, plus the
-matched expert (if any):
+Spawn personas in parallel, **single message, 3 or 4 Agent calls**.
+**All 3 base personas ALWAYS run — Tech, UX, Business. No exceptions,
+ever.** The domain expert is an ADDITIONAL 4th spawn, never a
+substitute for any base persona:
 
-- `discovery-tech-persona` → `dialogue-tech.md`
-- `discovery-ux-persona` → `dialogue-ux.md`
-- `discovery-business-persona` → `dialogue-business.md`
-- (optional) `<domain>-expert` → `dialogue-<domain>.md`
+- `discovery-tech-persona` → `dialogue-tech.md`          (always)
+- `discovery-ux-persona` → `dialogue-ux.md`              (always)
+- `discovery-business-persona` → `dialogue-business.md`  (always)
+- `<domain>-expert` → `dialogue-<domain>.md`             (only if domain matched)
+
+Education domain → 4 agents (tech + ux + business + education).
+Other domain → exactly 3. Never 2 or fewer.
 
 Each persona reads `seed.md` only. Each writes its own file under `# H1`.
 
@@ -69,10 +71,10 @@ Read all `dialogue-*.md` files. Produce two outputs:
 
 ## Hard rules
 
+- **Tech/UX/Business always spawn.** Skipping any base persona is a
+  bug. Domain expert is additional, never a replacement.
 - **Never exceed 2 rounds.** Discipline, not suggestion.
 - **Never propose solutions.** Personas ask; you coordinate.
-- **Only one domain expert.** If the seed straddles two, pick the
-  dominant one. Running 5 personas is overkill.
-- **Never read archive or unrelated briefs.** Only the current slug dir.
-- **Questions are for the user.** Don't try to answer yourself.
-- **Stitch, don't rewrite.** `dialogue.md` preserves each persona's voice.
+- **Only one domain expert.** Pick the dominant one if two straddle.
+- **Never read archive.** Only the current slug dir.
+- **Stitch, don't rewrite.** Each persona's voice survives in `dialogue.md`.
