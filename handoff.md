@@ -45,7 +45,7 @@ Do not relitigate these unless Patrick explicitly asks — they were debated and
 | Index regen cadence | Every 5 completed stories (gate-3 passes) | Avoids per-write churn |
 | Ship action | Archive shipped briefs/stories/releases to `docs/shipflow/archive/` | Keeps warm-layer small |
 | Code style | **Clear and simple over clever abstraction** | Explicit Patrick preference — applies to agent prompts, hooks, skills |
-| Agent prompt length | ≤80 lines each | Simplicity constraint |
+| Agent prompt length | ≤100 lines each (relaxed from ≤80 in v0.2.4 — reviewer agents with named frameworks + research protocols legitimately need more room; still a discipline, still triggers "split the agent" thinking at the cap) | Simplicity constraint |
 | Hook script length | ≤40 lines of bash each | Simplicity constraint |
 | `sf-init` CLAUDE.md handling | Smart default: overwrite-if-empty-or-placeholder, append-if-real-content. Flags: `--overwrite` (with auto-backup to `CLAUDE.md.pre-shipflow`), `--append` (force) | Avoids destroying existing context; gives escape hatches |
 | Challenger subagent | Runs at the **tail of Discover (`sf-brief`) and Spec (`sf-spec`, when scaffolded)**. Persona is **smart-but-skeptical** (not "plays dumb"). Loops have a **soft cap** — the challenger self-judges when pressing further would be theater. Reads brief + seed + answers and resolves challenges internally (no spawn of product-lead); unresolved items escalate to `open-questions.md` with 2–4 options + recommendation + optional checklist, **user decides** | Stress-tests the brief for load-bearing claims without infinite loops. User is the terminator, not the challenger. Single-agent self-reasoning keeps token budget flat. |
@@ -247,7 +247,7 @@ These came up during Discover-phase scaffolding and were deferred:
 
 2. **Try Discover end-to-end** in a throwaway repo before building more. Pick any small idea ("add a /health endpoint," "dark mode toggle"). Run `/sf-init` → `/sf-discover "..."` → answer → `/sf-brief` → `/sf-gate-1`. Make notes on friction points. These notes should drive Spec-phase design before scaffolding it.
 
-3. **Build Spec phase** using the design sketch above. Keep the simplicity constraint: ≤80-line agent prompts, ≤40-line hook scripts, clear over clever.
+3. **Build Spec phase** using the design sketch above. Keep the simplicity constraint: ≤100-line agent prompts, ≤40-line hook scripts, clear over clever.
 
 4. **Refer to source-of-truth files**:
    - `claude-code-project/shipflow-plan.md` — full per-phase plan with challenges and trade-offs.

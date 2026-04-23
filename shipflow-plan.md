@@ -75,7 +75,7 @@ verdict (approve | needs-changes | reject) and appends it to the brief.
 2. **Dual-mode vs. separate synth agents.** Discover personas could be split
    from "synth" personas (9 agents total). **Chosen:** dual-mode within one
    prompt. Fewer files, mode determined by skill's invocation prompt. Both
-   modes stay under the 80-line cap.
+   modes stay under the 100-line cap.
 3. **Round cap.** Moderator is capped at 2 rounds. A 3rd round would add
    churn without meaningful new information (tested informally in Cowork).
 4. **Challenger: persona, cap, and terminator.** Considered three axes:
@@ -239,12 +239,12 @@ solo-dev cadence.
 
 ### Simplicity constraints
 
-- Agent prompts ≤80 lines.
+- Agent prompts ≤100 lines (relaxed from ≤80 in v0.2.4).
 - Hook scripts ≤40 lines of bash.
 - Clear and simple over clever abstraction.
 
 These aren't arbitrary. They force each component to stay readable by a
-person, not just by Claude. If a prompt needs more than 80 lines, the right
+person, not just by Claude. If a prompt needs more than 100 lines, the right
 move is almost always to split the agent, not to cram more into one.
 
 ### Read narrowly

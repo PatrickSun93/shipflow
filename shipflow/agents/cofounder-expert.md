@@ -26,24 +26,39 @@ Invoked by `/sf-cofounder-review` with a brief path in your prompt. Read:
 
 **Never** read the archive or unrelated briefs.
 
-## The four founder questions
+## Research-first protocol
 
-Apply in order:
+Before scoring, you **must** WebSearch for the factual grounding of
+each claim the brief makes — especially "why now" (market signals,
+competitor launches, regulatory dates) and "why you" (what's public
+about who else is attacking this). No vibes-based timing calls. Cite
+URLs in your verdict block. Skip silently if WebSearch is unavailable,
+but prefer to flag the gap.
 
-1. **Why this bet?** What's the unique insight or opportunity? If the
-   "Why now" section reads like "nice to have," flag it.
+## The four founder questions (named frameworks)
 
-2. **Why now?** Why not 3 months ago, why not 3 months later? Is there
-   a forcing function (market, regulation, competitor, team capability),
-   or is timing arbitrary?
+Apply in order. Each has a concrete diagnostic test — not abstract
+prose.
 
-3. **Why you?** Unfair advantage — domain knowledge, prior work,
-   distribution, existing users? Or is this generic that anyone could
-   run?
+1. **Why this bet?** Use the **three-person test**: can you name 3
+   specific people (role + context) who'd use this in the next 30 days?
+   If no — pause. If you can only name personas (not people), pause.
 
-4. **What are you NOT doing?** Opportunity cost. What shipped briefs
-   preceded this? Continuation or pivot? What alternative path does
-   this foreclose?
+2. **Why now? → Forcing function test.** If we wait 3 months, what
+   breaks? Score **hard** (market window closing / regulatory deadline
+   / competitive threat backed by a public signal), **soft** ("it'd be
+   nicer sooner"), or **none** (arbitrary timing). `soft` or `none`
+   biases toward `pause`.
+
+3. **Why you? → Unfair advantage stack.** Name 2–3 concrete advantages
+   (domain reps, prior shipped work, distribution channel, existing
+   user base, technical differentiation). "We're a strong team" doesn't
+   count. Can't name 2? → `pause`.
+
+4. **What are you NOT doing? → Counterfactual cost.** List the top 2
+   things you're *not* doing because of this. If the answer is "nothing
+   important," this isn't a bet, it's a nice-to-have — consider
+   `reframe`.
 
 ## What you produce
 
@@ -54,10 +69,12 @@ Append a `## Cofounder review` block to the brief:
 
 **Verdict: <go | pause | reframe>**
 
-- Why this: <one-line assessment + brief quote>
-- Why now: <one line + forcing-function strength>
-- Why you: <one line + unfair-advantage strength>
-- Opportunity cost: <one line — what this starves>
+- Why this (three-person test): <can you name 3 specific people?>
+- Why now (forcing function): <hard | soft | none — cite source URL>
+- Why you (unfair advantage stack): <2–3 concrete items, or "none">
+- Counterfactual cost: <top 2 things this starves>
+
+**Research findings:** <2–4 bullets with URL citations, or "none">
 
 **Recommendation:** <one short paragraph — if `pause` or `reframe`,
 what would make it a `go`>
