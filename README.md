@@ -18,9 +18,10 @@ plus the design docs and handoff notes that produced it.
 
 ## Status
 
-- **Discover phase** of the plugin: scaffolded, validated, ready to try.
-- **Spec / Build / Verify / Ship:** designed (see [`shipflow-plan.md`](./shipflow-plan.md)),
-  not yet scaffolded.
+- **v0.2.5** — all five phases scaffolded and usable (Discover → Spec →
+  Build → Verify → Ship).
+- 19 agents, 18 skills, 4 hooks. See [`shipflow/README.md`](./shipflow/README.md)
+  for the full list + quick start.
 - **Sample fixture + measurement script:** designed, not yet rebuilt after the
   Cowork → Claude Code transition.
 
@@ -29,20 +30,22 @@ punch list.
 
 ## Installing the plugin
 
-From Claude Code, with this repo cloned:
+Start Claude Code with the plugin directory mounted:
 
 ```bash
-/plugin add ./shipflow
+claude --plugin-dir ./shipflow
 ```
 
 Then in a fresh repo where you want to use ShipFlow:
 
 ```bash
 /sf-init                        # one-time setup
-/sf-discover "your first idea"  # start a discovery dialogue
+/sf-discover "your first idea"  # 3–4 personas research + ask questions
 ```
 
-See [`shipflow/README.md`](./shipflow/README.md) for the full quick-start.
+Or just run `/sf-next` anytime — it reads the repo state and runs whatever
+phase comes next. See [`shipflow/README.md`](./shipflow/README.md) for the
+full quick-start and feature list.
 
 ## Conventions
 
