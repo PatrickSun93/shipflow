@@ -81,8 +81,8 @@ Explicit divergences from prior art:
 - **Dual-mode personas** — same agent prompt handles Discover-mode
   questioning and Synthesis-mode authoring. Fewer files, same behavior.
   _TODO: confirm whether this is novel or borrowed._
-- **Simplicity constraints** — ≤100 lines per agent (relaxed from ≤80 in v0.2.4), ≤40 lines per hook
-  script. _TODO: note if any prior art has similar caps._
+- **Simplicity constraints** — agents 800–1500 tokens, hooks ≤500 tokens
+  (migrated from line-based caps in v0.2.5). _TODO: note if any prior art has similar caps._
 
 ---
 

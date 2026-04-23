@@ -48,8 +48,9 @@ See [`shipflow/README.md`](./shipflow/README.md) for the full quick-start.
 
 - **Clear and simple over clever abstraction.** Agent prompts, hook scripts, and
   skill instructions all follow this rule.
-- **Agent prompts ≤100 lines.** Hook scripts ≤40 lines of bash. Not arbitrary —
-  it keeps each component readable by a human, not just by the model.
+- **Agent prompts 800–1500 tokens.** Hook scripts ≤500 tokens. Tokens, not
+  lines, because that's what the model actually budgets against. Keeps each
+  component readable by a human, not just by the model.
 - **Read narrowly.** No archive access from phase skills unless explicitly
   asked. Enforced by agent prompts; audit hook designed but not yet written.
 
