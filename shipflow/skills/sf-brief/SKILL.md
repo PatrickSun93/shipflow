@@ -70,7 +70,7 @@ Turn a completed discovery dialogue into a brief.
    - Number of unresolved flags (if any)
    - Number of open challenges from the challenger + path to `open-questions.md`
      (skip this line if challenger found none)
-   - Next step: review `open-questions.md` if present, then `/sf-gate-1`
+   - Next step: review `open-questions.md` if present, then `/sf-check-brief`
 
 ## Hard rules
 

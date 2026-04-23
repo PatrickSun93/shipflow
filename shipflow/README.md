@@ -27,7 +27,7 @@ Or copy this folder to your Claude Code plugins directory and `/plugin reload`.
 /sf-discover "dark mode toggle" # start a discovery dialogue
 # ...answer the questions the moderator produces...
 /sf-brief                       # synthesize answers into a brief
-/sf-gate-1                      # advisory review before Spec
+/sf-check-brief                 # advisory review before Spec
 ```
 
 ## How it works
@@ -41,7 +41,7 @@ The moderator converges the three into a deduped `questions.md` for you to answe
 the final brief (tech: constraints+risks; ux: who+open-qs; business: why-now+success+non-goals),
 then stitches them into `docs/shipflow/briefs/BRIEF-NNN-<slug>.md`.
 
-`/sf-gate-1` spawns `product-lead` + `tech-lead` reviewers in parallel; they each
+`/sf-check-brief` spawns `product-lead` + `tech-lead` reviewers in parallel; they each
 write a `gate-1-review-<role>.md` breadcrumb. The skill classifies a single verdict
 (approve | needs-changes | reject) and appends it to the brief.
 

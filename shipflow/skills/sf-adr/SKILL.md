@@ -42,7 +42,7 @@ Draft one ADR to unblock a flagged story.
    - ADR path written
    - Story unblocked
    - Next step: if more stories carry `needs-ADR`, run `/sf-adr <next-id>`;
-     otherwise `/sf-gate-2` or `/sf-build`.
+     otherwise `/sf-check-plan` or `/sf-build`.
 
 ## Hard rules
 

@@ -43,7 +43,7 @@ Build one story.
 6. **Report to the user:**
    - Story id + final status
    - Test result from the build log
-   - Next step: `/sf-gate-3` for advisory review, then `/sf-verify`
+   - Next step: `/sf-check-build` for advisory review, then `/sf-verify`
 
 ## Hard rules
 

@@ -28,7 +28,7 @@
 /sf-discover "暗黑模式切换"        # 开始发现对话
 # ...回答主持人生成的问题...
 /sf-brief                         # 将答案综合为需求简报
-/sf-gate-1                        # 进入规格阶段前的建议性评审
+/sf-check-brief                   # 进入规格阶段前的建议性评审
 ```
 
 ## 工作原理
@@ -41,7 +41,7 @@
 目标用户 + 未解问题；商业：现在做的理由 + 成功标准 + 非目标），然后拼合成
 `docs/shipflow/briefs/BRIEF-NNN-<slug>.md`。
 
-`/sf-gate-1` 并行启动 `product-lead`（产品负责人）和 `tech-lead`（技术负责人）审阅者，
+`/sf-check-brief` 并行启动 `product-lead`（产品负责人）和 `tech-lead`（技术负责人）审阅者，
 各自写入 `gate-1-review-<角色>.md` 记录文件。技能对最终裁决进行分类
 （通过 | 需要修改 | 拒绝），并将结果追加到简报中。
 

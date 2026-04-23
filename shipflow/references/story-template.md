@@ -28,4 +28,4 @@ rationale lives in the parent brief.
 
 ## Gate verdicts
 
-_(Appended by `/sf-gate-2` and `/sf-gate-3` as the story progresses.)_
+_(Appended by `/sf-check-plan` and `/sf-check-build` as the story progresses.)_

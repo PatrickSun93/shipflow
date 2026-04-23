@@ -1,6 +1,6 @@
 ---
 name: sf-ship
-description: Cut a release for a brief whose stories are all done, or for a HOTFIX record as a patch. Spawns release-manager to write the release note and archive the brief + stories. Run after /sf-gate-4 on the normal flow.
+description: Cut a release for a brief whose stories are all done, or for a HOTFIX record as a patch. Spawns release-manager to write the release note and archive the brief + stories. Run after /sf-check-ship on the normal flow.
 ---
 
 # sf-ship

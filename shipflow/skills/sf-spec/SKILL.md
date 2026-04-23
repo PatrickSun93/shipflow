@@ -42,7 +42,7 @@ Turn an approved brief into a working set of stories.
    - Any stories flagged needs-ADR + the reasons
    - Next step:
      - If any needs-ADR → run `/sf-adr <STORY-id>` for each
-     - Else → `/sf-gate-2` for advisory review, then `/sf-build`
+     - Else → `/sf-check-plan` for advisory review, then `/sf-build`
 
 ## Hard rules
 
