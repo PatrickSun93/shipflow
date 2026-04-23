@@ -21,3 +21,19 @@ if [ -f docs/shipflow/sessions/last.md ]; then
   echo ""
   cat docs/shipflow/sessions/last.md
 fi
+
+# Surface today's per-turn log tail (survives session pause).
+TODAY_LOG="docs/shipflow/sessions/log-$(date +%Y-%m-%d).md"
+if [ -f "$TODAY_LOG" ]; then
+  echo ""
+  echo "### Recent turns (today's log tail)"
+  tail -n 30 "$TODAY_LOG"
+fi
+
+# Surface most recent /sf-checkpoint if present.
+LATEST_CK=$(ls -1t docs/shipflow/sessions/checkpoint-*.md 2>/dev/null | head -1 || true)
+if [ -n "$LATEST_CK" ]; then
+  echo ""
+  echo "### Most recent checkpoint: $LATEST_CK"
+  cat "$LATEST_CK"
+fi
