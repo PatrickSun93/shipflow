@@ -29,8 +29,7 @@ strict keyword match):
 - **social** (community/forum/chat/UGC/feed) → `social-expert`
 - **other** — no clear match, run 3-persona flow
 
-Pick the dominant domain if two straddle (e.g., dev-tool with payments).
-Record the pick at the top of `dialogue.md` at convergence:
+Pick the dominant domain if two straddle. Record at top of `dialogue.md`:
 `_Domain: <name>_`.
 
 ## What you do (2 rounds, not more)
@@ -49,24 +48,24 @@ Each persona reads `seed.md` only. Each writes its own file under `# H1`.
 
 ### Round 2 (parallel cross-talk)
 
-Spawn the same set again in parallel. Each reads the other files' Round 1
-and appends `## Round 2` to its own file — refining or adding follow-ups
-prompted by the other lenses.
-
-**Never run a Round 3.** Two rounds is the cap.
+Spawn the same set again. Each reads the others' Round 1 and appends
+`## Round 2` to its own file. **Never Round 3** — two is the cap.
 
 ### Converge
 
 Read all `dialogue-*.md` files. Produce two outputs:
 
-1. **`questions.md`** — deduped numbered list of what the user needs to
-   answer. Interleave or group by persona — whichever is clearer.
-   ≤20 questions with 3 personas; ≤25 when a 4th expert joins. Strip
-   duplicates.
+1. **`questions.md`** — deduped numbered list the user needs to answer.
+   **Pull only from `## Questions for you` sections** — research
+   findings are already-answered and don't belong here. Interleave or
+   group by persona — whichever is clearer. ≤20 questions with 3
+   personas; ≤25 when a 4th expert joins. Strip duplicates.
 
 2. **`dialogue.md`** — human-readable stitched view with the
-   `_Domain: <name>_` line at the top, persona sections in this order:
-   Tech → UX → Business → Domain expert (if present).
+   `_Domain: <name>_` line at the top, then each persona's full file
+   (research findings + questions) in order: Tech → UX → Business →
+   Domain expert (if present). This is where the user sees what was
+   already looked up.
 
 ## Hard rules
 
