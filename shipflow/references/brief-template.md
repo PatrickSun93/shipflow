@@ -45,6 +45,15 @@ workflow reduced from N steps to M) over outputs shipped.
 What could go wrong? Technical risks, adoption risks, dependencies on external
 parties. One sentence each.
 
+<!-- Optional domain section inserted here by /sf-brief when a domain expert
+     was active in Discover. Heading varies by domain:
+     education → ## Pedagogy
+     fintech → ## Compliance & regulation
+     healthcare → ## Clinical & compliance
+     ecommerce → ## Checkout & conversion
+     devtools → ## DX
+     social → ## Trust & safety -->
+
 ## Open questions
 
 Questions the Discover dialogue couldn't resolve. Spec phase may still have

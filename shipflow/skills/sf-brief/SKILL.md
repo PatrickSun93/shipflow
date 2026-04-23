@@ -20,28 +20,39 @@ Turn a completed discovery dialogue into a brief.
    answers. Save that message's text exactly, in an `answers.md` under the
    discovery dir. Don't summarize, rephrase, or reorder.
 
-3. **Spawn the three personas in parallel (single message, three Agent calls).**
-   Each call uses the persona's `subagent_type` with a synthesis-mode prompt:
+3. **Detect whether a domain expert was active.** Look in the discovery
+   dir for any `dialogue-<domain>.md` file beyond the 3 base personas
+   (education / fintech / healthcare / ecommerce / devtools / social).
+   If one exists, include its expert in the synthesis spawn — its slug
+   is the one written to `dialogue.md`'s `_Domain: <name>_` line.
+
+4. **Spawn 3 or 4 personas in parallel (single message).** Each uses the
+   persona's `subagent_type` with a synthesis-mode prompt:
 
    - `discovery-tech-persona` — prompt:
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-tech.md`, `answers.md`.
-     > Write `slice-tech.md` with the `## Constraints` and `## Risks` sections.
+     > Write `slice-tech.md` with `## Constraints` and `## Risks`.
 
    - `discovery-ux-persona` — prompt:
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-ux.md`, `answers.md`.
-     > Write `slice-ux.md` with the `## Who` and `## Open questions` sections.
+     > Write `slice-ux.md` with `## Who` and `## Open questions`.
 
    - `discovery-business-persona` — prompt:
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-business.md`, `answers.md`.
-     > Write `slice-business.md` with the `## Why now`, `## Success`, and `## Non-goals` sections.
+     > Write `slice-business.md` with `## Why now`, `## Success`, `## Non-goals`.
 
-4. **Derive the next brief id.** Scan `docs/shipflow/briefs/` for existing
+   - (optional, only if domain expert is active) `<domain>-expert`:
+     > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
+     > Read `seed.md`, `dialogue-<domain>.md`, `answers.md`.
+     > Write `slice-<domain>.md` per your agent prompt's contract.
+
+5. **Derive the next brief id.** Scan `docs/shipflow/briefs/` for existing
    `BRIEF-NNN-*.md` filenames, take the max NNN, add 1. Zero-pad to 3 digits.
 
-5. **Assemble the brief** at `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md` using
+6. **Assemble the brief** at `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md` using
    `references/brief-template.md`:
    - Fill frontmatter: `id`, `slug`, `status: draft`, `created`, `updated`.
    - Derive a title from the slug (title-case with spaces).
@@ -50,13 +61,17 @@ Turn a completed discovery dialogue into a brief.
    - **Who**, **Open questions** ← `slice-ux.md`
    - **Why now**, **Success**, **Non-goals** ← `slice-business.md`
    - **Constraints**, **Risks** ← `slice-tech.md`
+   - **Domain section** (only if a domain expert was active) — copy the
+     `## Pedagogy` / `## Compliance & regulation` / `## Clinical & compliance`
+     / `## Checkout & conversion` / `## DX` / `## Trust & safety` section from
+     `slice-<domain>.md` verbatim, placed after Risks and before Unresolved.
    - **Unresolved** section: if any slice contained a `## Unresolved` block,
-     collect all three into a single `## Unresolved` block in the brief.
+     collect all (3 or 4) into a single `## Unresolved` block in the brief.
      If none, omit the section.
 
-6. **Update `docs/shipflow/index.md`** by adding the new brief to the Briefs section.
+7. **Update `docs/shipflow/index.md`** by adding the new brief to the Briefs section.
 
-7. **Spawn the challenger.** Use the Agent tool with `subagent_type: "challenger"`
+8. **Spawn the challenger.** Use the Agent tool with `subagent_type: "challenger"`
    and a prompt like:
 
    > Working directory: `docs/shipflow/discovery/<slug>/`.
@@ -65,7 +80,7 @@ Turn a completed discovery dialogue into a brief.
    > stop when further pressing would be theater). Write `open-questions.md`
    > in the discovery dir. Report back with the count of unresolved questions.
 
-8. **Report to the user:**
+9. **Report to the user:**
    - Brief path
    - Number of unresolved flags (if any)
    - Number of open challenges from the challenger + path to `open-questions.md`
