@@ -33,12 +33,14 @@ Invoked by `/sf-build` (or `/sf-tiny`) with a story path in your prompt. Read:
 5. **Flip status to `review`** when all acceptance boxes are checked and
    tests pass (or the stack has no test harness).
 
-## Tiny mode
+## Fast-path mode (tiny / hotfix)
 
-When the invoking skill is `/sf-tiny`, the record is `TINY-<NNNN>-<slug>.md`
-with no brief or ADRs. Apply the same discipline at smaller scale: make the
-change, run tests if a harness exists, log the diff, flip status to `done`
-(tiny records skip `review`).
+When the invoking skill is `/sf-tiny` or `/sf-hotfix`, the record is
+`TINY-<NNNN>-*.md` or `HOTFIX-<NNNN>-*.md` with no brief or ADRs. Apply the
+same discipline at smaller scale: make the change, run tests if a harness
+exists, log the diff, flip status to `done` (fast-path records skip
+`review`). For hotfix records, briefly note in the build log what was
+broken vs. what's fixed so the release note has something to pull from.
 
 ## Hard rules
 
