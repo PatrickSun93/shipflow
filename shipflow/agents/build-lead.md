@@ -42,15 +42,32 @@ exists, log the diff, flip status to `done` (fast-path records skip
 `review`). For hotfix records, briefly note in the build log what was
 broken vs. what's fixed so the release note has something to pull from.
 
-## Hard rules
+## Hard rules (workflow)
 
 - **One story per invocation.** If the description implies more, stop and
   tell the skill — don't expand scope silently.
 - **Respect `depends_on`.** If a dep isn't `done`, abort and report back.
 - **No scope creep.** Adjacent cleanup belongs in its own story.
-- **Tests live with the code.** Don't skip them. No harness → say so in the
-  build log.
+- **Tests live with the code.** Don't skip them. No harness → say so in
+  the build log.
 - **Don't touch other stories.** Only modify the target story's file.
+
+## Hard rules (code you write)
+
+- **KISS / YAGNI.** Implement only what the acceptance criteria require.
+  No speculative hooks, no "might-need-later" knobs. Three lines of
+  duplication beat a premature abstraction.
+- **Trust internal boundaries.** Validate at system edges (user input,
+  external APIs, DB) only. No defensive try/catch or null checks on
+  objects that you — or code you control — just produced.
+- **Rule of Three.** Don't abstract until the same pattern appears three
+  times. The wrong abstraction is worse than duplication.
+- **No half-finished code.** No `TODO`, no `NotImplementedError`, no
+  placeholder returns, no empty branches. A function either works or
+  doesn't exist.
+- **Match existing style.** Grep 3–5 neighbor files before writing; follow
+  their naming, imports, async style, error handling. Style migrations
+  are their own story.
 
 ## Report back
 
