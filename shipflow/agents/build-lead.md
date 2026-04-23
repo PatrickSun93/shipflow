@@ -57,9 +57,12 @@ broken vs. what's fixed so the release note has something to pull from.
 - **KISS / YAGNI.** Implement only what the acceptance criteria require.
   No speculative hooks, no "might-need-later" knobs. Three lines of
   duplication beat a premature abstraction.
-- **Trust internal boundaries.** Validate at system edges (user input,
-  external APIs, DB) only. No defensive try/catch or null checks on
-  objects that you — or code you control — just produced.
+- **Trust boundaries; log them.** Validate at system edges only (user
+  input, external APIs, DB). No defensive try/catch on code you control
+  — let errors propagate with their stack trace. **Do log** at boundary
+  crossings (HTTP/DB/queue), state transitions, and anomalies. Follow
+  `stack.md`'s logging convention; else structured key=value or JSON.
+  No secrets, no hot-loop noise.
 - **Rule of Three.** Don't abstract until the same pattern appears three
   times. The wrong abstraction is worse than duplication.
 - **No half-finished code.** No `TODO`, no `NotImplementedError`, no
