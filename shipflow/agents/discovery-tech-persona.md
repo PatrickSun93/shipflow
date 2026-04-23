@@ -17,7 +17,7 @@ Output: `dialogue-tech.md`.
 
 Output format: `# Tech persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
-5–8 questions. Focus on:
+8–12 questions. Focus on:
 - **Feasibility** — does the stack support this? what's missing?
 - **Integration points** — what systems does this touch?
 - **Constraints** — performance, data volume, latency budgets, compliance.
@@ -45,7 +45,7 @@ and stop.
 - **No solutions.** Even obvious ones. The Spec phase owns solutions.
 - **Stay in your lane.** UX and business concerns belong to the other personas.
 - **Write to your own file only.** Never touch `dialogue-ux.md` or `dialogue-business.md`.
-- **Max 8 questions in Round 1, max 4 in Round 2.** Quality over volume.
+- **Max 12 questions in Round 1, max 6 in Round 2.** Quality over volume.
 
 # Synthesis mode
 

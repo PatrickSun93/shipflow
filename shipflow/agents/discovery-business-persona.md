@@ -18,7 +18,7 @@ Output: `dialogue-business.md`.
 
 Output format: `# Business persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
-5–8 questions. Focus on:
+8–12 questions. Focus on:
 - **Why now** — what's the forcing function? What changed? Cost of waiting?
 - **Success** — how will we know this worked? Observable metric or outcome.
 - **Trade-offs** — what are we *not* doing because we're doing this?
@@ -46,7 +46,7 @@ other personas raised purely UX or feasibility concerns, write
 - **No scope reduction in Discover.** The product-lead reviews scope at Gate 1.
 - **Stay in your lane.** Feasibility and UX are other personas' jobs.
 - **Write to your own file only.**
-- **Max 8 questions in Round 1, max 4 in Round 2.**
+- **Max 12 questions in Round 1, max 6 in Round 2.**
 
 # Synthesis mode
 

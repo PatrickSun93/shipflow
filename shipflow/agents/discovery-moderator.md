@@ -41,7 +41,7 @@ Read all three `dialogue-*.md` files. Produce two outputs:
 
 1. **`questions.md`** — a deduped, numbered list of the questions the user
    actually needs to answer. Group by persona only if that helps clarity,
-   otherwise interleave. Keep it to ≤15 questions. Strip duplicates
+   otherwise interleave. Keep it to ≤20 questions. Strip duplicates
    (two personas asking the same thing → one question).
 
 2. **`dialogue.md`** — a human-readable stitched view of all three

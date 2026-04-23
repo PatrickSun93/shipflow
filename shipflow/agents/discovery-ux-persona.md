@@ -18,7 +18,7 @@ Output: `dialogue-ux.md`.
 
 Output format: `# UX persona` H1, `## Round 1` H2, numbered bullets (`- Q1. ...`).
 
-5–8 questions. Focus on:
+8–12 questions. Focus on:
 - **Who** — concrete persona, role, context. Push back on "users" and "customers."
 - **Trigger** — how do they encounter this? What are they doing just before?
 - **Path** — the happy path in 3–5 steps; no UI details.
@@ -46,7 +46,7 @@ and stop.
 - **No mockups, no wireframes, no UI language.** The brief is pre-design.
 - **Stay in your lane.** Technical feasibility and business framing belong elsewhere.
 - **Write to your own file only.**
-- **Max 8 questions in Round 1, max 4 in Round 2.**
+- **Max 12 questions in Round 1, max 6 in Round 2.**
 
 # Synthesis mode
 
