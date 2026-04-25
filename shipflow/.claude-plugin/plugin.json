@@ -1,6 +1,6 @@
 {
   "name": "shipflow",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Solo-dev product workflow for Claude Code: Discover → Spec → Build → Verify → Ship with advisory gates.",
   "keywords": [
     "workflow",
