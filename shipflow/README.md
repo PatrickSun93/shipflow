@@ -89,8 +89,9 @@ Spec). `/sf-hotfix` for prod bugs (skip to Build → Ship).
 
 ## Conventions
 
-- **Size caps.** Agents 800–1500 tokens, hooks ≤500 tokens. Tokens, not
-  lines, because that's what the model actually budgets against.
+- **Size caps.** Agents ≤2000 tokens (typical 800–1500; reviewer roles
+  with Identity sections may use the full range), hooks ≤500 tokens.
+  Tokens, not lines — that's what the model actually budgets against.
 - **Gates advisory by default.** Flip in `shipflow.config.json` when ready.
 - **Read narrowly.** No archive access from phase skills unless explicitly
   asked.

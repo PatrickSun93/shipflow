@@ -81,8 +81,8 @@ Explicit divergences from prior art:
 - **Dual-mode personas** — same agent prompt handles Discover-mode
   questioning and Synthesis-mode authoring. Fewer files, same behavior.
   _TODO: confirm whether this is novel or borrowed._
-- **Simplicity constraints** — agents 800–1500 tokens, hooks ≤500 tokens
-  (migrated from line-based caps in v0.2.5). _TODO: note if any prior art has similar caps._
+- **Simplicity constraints** — agents ≤2000 tokens (typical 800–1500),
+  hooks ≤500 tokens. _TODO: note if any prior art has similar caps._
 
 ---
 

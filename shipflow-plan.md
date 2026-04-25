@@ -75,7 +75,7 @@ verdict (approve | needs-changes | reject) and appends it to the brief.
 2. **Dual-mode vs. separate synth agents.** Discover personas could be split
    from "synth" personas (9 agents total). **Chosen:** dual-mode within one
    prompt. Fewer files, mode determined by skill's invocation prompt. Both
-   modes stay within the 800–1500 token range.
+   modes stay within the 800–2000 token range (typical 800–1500).
 3. **Round cap.** Moderator is capped at 2 rounds. A 3rd round would add
    churn without meaningful new information (tested informally in Cowork).
 4. **Challenger: persona, cap, and terminator.** Considered three axes:
@@ -239,12 +239,12 @@ solo-dev cadence.
 
 ### Simplicity constraints
 
-- Agent prompts 800–1500 tokens (migrated from line-based cap in v0.2.5).
+- Agent prompts ≤2000 tokens (typical 800–1500; raised from 1500 → 2000 in v0.2.7 for reviewer-role Identity sections).
 - Hook scripts ≤500 tokens.
 - Clear and simple over clever abstraction.
 
 These aren't arbitrary. They force each component to stay readable by a
-person, not just by Claude. If a prompt pushes past 1500 tokens, the right
+person, not just by Claude. If a prompt pushes past 2000 tokens, the right
 move is almost always to split the agent, not to cram more into one.
 
 ### Read narrowly

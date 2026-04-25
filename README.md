@@ -51,9 +51,9 @@ full quick-start and feature list.
 
 - **Clear and simple over clever abstraction.** Agent prompts, hook scripts, and
   skill instructions all follow this rule.
-- **Agent prompts 800–1500 tokens.** Hook scripts ≤500 tokens. Tokens, not
-  lines, because that's what the model actually budgets against. Keeps each
-  component readable by a human, not just by the model.
+- **Agent prompts ≤2000 tokens** (typical 800–1500; reviewer roles with
+  Identity sections may use the full range). Hook scripts ≤500 tokens.
+  Tokens, not lines, because that's what the model actually budgets against.
 - **Read narrowly.** No archive access from phase skills unless explicitly
   asked. Enforced by agent prompts; audit hook designed but not yet written.
 

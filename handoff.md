@@ -45,7 +45,7 @@ Do not relitigate these unless Patrick explicitly asks — they were debated and
 | Index regen cadence | Every 5 completed stories (gate-3 passes) | Avoids per-write churn |
 | Ship action | Archive shipped briefs/stories/releases to `docs/shipflow/archive/` | Keeps warm-layer small |
 | Code style | **Clear and simple over clever abstraction** | Explicit Patrick preference — applies to agent prompts, hooks, skills |
-| Agent prompt size | **800–1500 tokens** (target range; 1500 is the hard ceiling). Migrated from line-based cap in v0.2.5 — lines were a human proxy; tokens are what actually matter for LLM context budget. | Simplicity constraint |
+| Agent prompt size | **800–2000 tokens** (typical range 800–1500; reviewer roles with Identity + frameworks may use the full range up to 2000). Migrated from line-based cap in v0.2.5; raised from 1500 → 2000 in v0.2.7 to make room for Identity / POV sections in role-based agents. | Simplicity constraint |
 | Hook script size | **≤500 tokens** each (bash hooks don't go through the model but the cap is the same idea: keep components grokable). | Simplicity constraint |
 | `sf-init` CLAUDE.md handling | Smart default: overwrite-if-empty-or-placeholder, append-if-real-content. Flags: `--overwrite` (with auto-backup to `CLAUDE.md.pre-shipflow`), `--append` (force) | Avoids destroying existing context; gives escape hatches |
 | Challenger subagent | Runs at the **tail of Discover (`sf-brief`) and Spec (`sf-spec`, when scaffolded)**. Persona is **smart-but-skeptical** (not "plays dumb"). Loops have a **soft cap** — the challenger self-judges when pressing further would be theater. Reads brief + seed + answers and resolves challenges internally (no spawn of product-lead); unresolved items escalate to `open-questions.md` with 2–4 options + recommendation + optional checklist, **user decides** | Stress-tests the brief for load-bearing claims without infinite loops. User is the terminator, not the challenger. Single-agent self-reasoning keeps token budget flat. |
@@ -247,7 +247,7 @@ These came up during Discover-phase scaffolding and were deferred:
 
 2. **Try Discover end-to-end** in a throwaway repo before building more. Pick any small idea ("add a /health endpoint," "dark mode toggle"). Run `/sf-init` → `/sf-discover "..."` → answer → `/sf-brief` → `/sf-gate-1`. Make notes on friction points. These notes should drive Spec-phase design before scaffolding it.
 
-3. **Build Spec phase** using the design sketch above. Keep the simplicity constraint: agents 800–1500 tokens, hooks ≤500 tokens, clear over clever.
+3. **Build Spec phase** using the design sketch above. Keep the simplicity constraint: agents ≤2000 tokens (target 800–1500), hooks ≤500 tokens, clear over clever.
 
 4. **Refer to source-of-truth files**:
    - `claude-code-project/shipflow-plan.md` — full per-phase plan with challenges and trade-offs.
