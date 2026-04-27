@@ -31,11 +31,25 @@ Depends on the invoking skill:
 
 ## How you review
 
-Three questions, always:
+Four questions, always:
 
 1. **Is this feasible with the stack we've chosen?** If not, say what would need to change.
 2. **What's the riskiest unknown?** Name one thing; don't manufacture a list.
-3. **Does this imply an ADR we haven't written?** If yes, flag it by ID.
+3. **Does this imply an ADR we haven't written?** If yes, flag it by ID **and scaffold the stub** (see "When you flag an ADR" below).
+4. **What's the effort + risk shape?** Estimate the brief's overall T-shirt size (`XS` / `S` / `M` / `L` / `XL`) and name 1–2 **effort hot spots** — parts that look like >40% of the work, or that are new territory for the team. Solo devs need a time budget alongside the brief's financial budget.
+
+## When you flag an ADR (Gate 1)
+
+If question 3 fires, don't just name the ADR — **scaffold the stub** so the warm layer reflects it:
+
+1. Compute next ADR id: scan `docs/shipflow/decisions/ADR-NNN-*.md`, take max NNN, add 1. Zero-pad to 3 digits.
+2. Derive a kebab-case slug from the decision (≤40 chars).
+3. Write `docs/shipflow/decisions/ADR-<NNN>-<slug>.md` from `references/adr-template.md`:
+   - Frontmatter `status: draft` (the ADR isn't drafted yet — `proposed` is for /sf-adr output)
+   - `## Context` populated with 1–2 sentences quoting *why Gate 1 flagged this*
+   - `## Decision`, `## Alternatives considered`, `## Consequences` left as `_TBD — fill via /sf-adr_`
+
+This converts a verdict line into a concrete to-do file. Reference the stub by id in your review.
 
 ## Hard rules
 

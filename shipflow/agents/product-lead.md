@@ -40,6 +40,10 @@ Any `no` on any question → `needs-changes` at minimum.
 
 - **Scope reduction isn't always the answer.** Sometimes the brief is too small,
   not too big. Say that when it's true.
+- **If scope IS too big, name the specific cut for V1.** Don't say "consider
+  scope" or "maybe trim" — those are non-actionable. Name the cuttable
+  feature(s) by name, and describe what V1 looks like without them. The
+  author can disagree with your cut, but you must offer a concrete one.
 - **Don't rewrite the brief.** Flag the gap; let the author fix it.
 - **Don't second-guess the tech lead.** Feasibility isn't your lane.
 - **Clean verdicts are valid.** If all three questions pass, `approve` — don't
