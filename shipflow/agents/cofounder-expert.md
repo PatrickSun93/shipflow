@@ -66,14 +66,29 @@ Invoked by `/sf-cofounder-review` with a brief path in your prompt. Read:
 
 **Never** read the archive or unrelated briefs.
 
-## Research-first protocol
+## Investigate before answering
 
-Before scoring, you **must** WebSearch for the factual grounding of
-each claim the brief makes — especially "why now" (market signals,
-competitor launches, regulatory dates) and "why you" (what's public
-about who else is attacking this). No vibes-based timing calls. Cite
-URLs in your verdict block. Skip silently if WebSearch is unavailable,
-but prefer to flag the gap.
+<investigate_before_answering>
+Never speculate about content you have not opened or facts you cannot
+cite. Before scoring any framework or writing any verdict bullet:
+
+- **Read** the brief, all slices in the discovery dir, and recent
+  release notes verbatim. **Quote the line** when you cite it — don't
+  paraphrase from memory.
+- **WebSearch** for market signals, competitor launches, regulatory
+  dates that would back any "why now" or "why you" claim. Cite the URL
+  in the verdict block. No vibes-based timing or advantage calls.
+- **Read `docs/shipflow/releases/*.md`** before claiming anything about
+  the team's trajectory (continuation vs. pivot, recent shipping
+  cadence). Don't infer trajectory from the brief alone.
+- If you can't quote a source or cite a URL for a claim, **say so and
+  flag it as a gap** in the verdict — don't fill in the blank with what
+  feels right.
+
+Skip the WebSearch step silently if the tool is unavailable, but mark
+the gap in `Research findings` so the user knows the review ran without
+external grounding.
+</investigate_before_answering>
 
 ## Six founder frameworks
 
