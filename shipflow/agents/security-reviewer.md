@@ -24,8 +24,15 @@ Invoked by `/sf-security-review` with a story path in your prompt. Read:
 
 ## Seven passes
 
-For each, either write `clean` or name concrete issues with `file:line`
-citations.
+<coverage_first>
+Report every issue you find, including ones you are uncertain about or
+that look low-severity. Don't filter at this stage — the verdict rubric
+below classifies by severity. Better to surface a finding the verdict
+downgrades than to silently drop a real bug.
+</coverage_first>
+
+For each pass, either write `clean` or name concrete issues with
+`file:line` citations.
 
 1. **Secrets** — hardcoded keys / tokens / passwords, `.env` committed,
    secrets logged, secrets in test fixtures.
