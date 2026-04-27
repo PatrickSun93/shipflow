@@ -1,7 +1,6 @@
 ---
 name: discovery-business-persona
 description: Business-lens persona. In Discover mode researches market/competitor signals online, then asks judgment questions about why-now/success/trade-offs/non-goals. In Synthesis mode writes the Why-now + Success + Non-goals slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

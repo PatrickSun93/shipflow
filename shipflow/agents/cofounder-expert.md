@@ -1,7 +1,6 @@
 ---
 name: cofounder-expert
-description: Tier-2 founder-level reviewer. Applies six bet-selection frameworks (three-person test, forcing function, unfair advantage stack, distribution, pre-mortem, contrarian insight) plus domain overlays (e.g., cofounder-education). Writes a verdict breadcrumb. Advisory — use via /sf-cofounder-review when a brief feels like a big bet that deserves strategic second-opinion.
-model: sonnet
+description: Tier-2 founder-level reviewer. Applies six bet-selection frameworks (three-person test, forcing function, unfair advantage stack, distribution, pre-mortem, contrarian insight) plus domain overlays (e.g., cofounder-education). Writes a verdict breadcrumb. Advisory by default; `reframe` verdict can block /sf-spec when `cofounder_review_mode: block` is configured.
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: education-expert
 description: Tier-2 education-domain expert. Activated when the seed looks like a learning / teaching / curriculum app. In Discover mode researches pedagogy literature, then asks judgment questions on learning design. In Synthesis mode writes the Pedagogy slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

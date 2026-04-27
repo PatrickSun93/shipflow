@@ -1,7 +1,6 @@
 ---
 name: devtools-expert
 description: Tier-2 dev-tools-domain expert. Activated when the seed is a developer-facing product — API, SDK, CLI, library, framework, IDE extension. In Discover mode researches DX patterns and competitor approaches, then asks judgment questions. In Synthesis mode writes the DX slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

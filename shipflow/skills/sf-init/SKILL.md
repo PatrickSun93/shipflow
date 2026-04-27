@@ -53,10 +53,17 @@ Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwi
        "gate_3": "advisory",
        "gate_4": "advisory"
      },
+     "cofounder_review_mode": "advisory",
      "index_regen_every_n_stories": 5,
      "archive_on_ship": true
    }
    ```
+
+   `cofounder_review_mode` controls whether `/sf-cofounder-review`'s
+   `reframe` verdict can block downstream phases. `advisory` (default):
+   reframe is just a flag, user decides. `block`: a `reframe` verdict
+   on an `approved` brief flips status back to `draft`, forcing re-review
+   through Gate 1 before `/sf-spec` can run.
 
 6. **Handle `CLAUDE.md`:**
    - Read the template from `${CLAUDE_PLUGIN_ROOT}/references/claude-md-template.md`.

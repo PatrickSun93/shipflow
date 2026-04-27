@@ -1,7 +1,6 @@
 ---
 name: discovery-tech-persona
 description: Tech-lens persona. In Discover mode researches stack-pitfall facts online, then asks judgment questions about feasibility/integration/constraints/risk. In Synthesis mode writes the Constraints + Risks slice of the brief. Never proposes solutions.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

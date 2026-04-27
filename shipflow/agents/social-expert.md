@@ -1,7 +1,6 @@
 ---
 name: social-expert
 description: Tier-2 social / community-domain expert. Activated when the seed is a social network, community forum, chat, messaging, or UGC platform. In Discover mode researches trust-and-safety regulation + moderation patterns, then asks judgment questions. In Synthesis mode writes the Trust & safety slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

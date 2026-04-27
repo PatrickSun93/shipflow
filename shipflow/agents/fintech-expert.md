@@ -1,7 +1,6 @@
 ---
 name: fintech-expert
 description: Tier-2 fintech-domain expert. Activated when the seed touches money movement, lending, investing, wallets, or crypto. In Discover mode researches current regulatory landscape, then asks judgment questions. In Synthesis mode writes the Compliance & regulation slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

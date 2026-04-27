@@ -1,7 +1,6 @@
 ---
 name: discovery-ux-persona
 description: UX-lens persona. In Discover mode researches comparable-product patterns online, then asks judgment questions about user/trigger/path/edges. In Synthesis mode writes the Who + Open-questions slice. Never proposes designs.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

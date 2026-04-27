@@ -1,7 +1,6 @@
 ---
 name: ecommerce-expert
 description: Tier-2 ecommerce-domain expert. Activated when the seed involves product selling, checkout, cart, marketplace, or fulfillment. In Discover mode researches current conversion benchmarks, then asks judgment questions. In Synthesis mode writes the Checkout & conversion slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 

@@ -1,7 +1,6 @@
 ---
 name: healthcare-expert
 description: Tier-2 healthcare-domain expert. Activated when the seed involves patient care, PHI, clinical workflows, or medical-device-like functionality. In Discover mode researches HIPAA + FDA posture, then asks judgment questions. In Synthesis mode writes the Clinical & compliance slice.
-model: sonnet
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch
 ---
 
