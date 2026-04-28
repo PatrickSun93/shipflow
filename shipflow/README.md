@@ -36,13 +36,21 @@ external services.
 
 ### Recommended — via Claude Code marketplace
 
-In any Claude Code session:
+In any Claude Code session, **run these two commands one at a time**
+(wait for each to return before sending the next):
 
 ```
 /plugin marketplace add https://github.com/PatrickSun93/shipflow
+```
+
+```
 /plugin install shipflow@shipflow-marketplace
 ```
 
+> Slash-command parsers can concatenate multiple lines into one if you
+> paste them together — leading to a malformed URL. Send each on its
+> own turn.
+>
 > The `PatrickSun93/shipflow` shorthand defaults to SSH and may fail on
 > machines without `github.com` in `~/.ssh/known_hosts`. The full HTTPS
 > URL above works everywhere for public repos.

@@ -34,16 +34,22 @@ CAP / 三人测试 / Rollback Test⋯），以及在不对劲的时候敢于 pus
 
 ### 推荐方式 —— 通过 Claude Code marketplace
 
-在任意 Claude Code 会话中：
+在任意 Claude Code 会话中，**两条命令分开发**（一条返回结果后再发下一条）：
 
 ```
 /plugin marketplace add https://github.com/PatrickSun93/shipflow
+```
+
+```
 /plugin install shipflow@shipflow-marketplace
 ```
 
-> `PatrickSun93/shipflow` 这个 shorthand 默认走 SSH，在 `~/.ssh/known_hosts`
-> 里没有 github.com key 的机器上会失败。上面这个完整 HTTPS URL 对 public
-> repo 任何机器都能用。
+> slash-command parser 在你一起 paste 时会把两行拼成一条命令，导致 URL
+> malformed。一条一条发。
+>
+> `PatrickSun93/shipflow` 这个 shorthand 默认走 SSH，在
+> `~/.ssh/known_hosts` 里没有 github.com key 的机器上会失败。完整 HTTPS
+> URL 对 public repo 任何机器都能用。
 
 验证：
 
