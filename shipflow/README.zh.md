@@ -3,81 +3,156 @@
 > **其他语言：** [English](./README.md)
 
 一个面向独立开发者的 Claude Code 插件，提供多智能体产品开发工作流：
-**发现 → 规格 → 构建 → 验证 → 发布**，并在阶段间设置四个建议性关卡。
+**发现 → 规格 → 构建 → 验证 → 发布**，配以四道建议性关卡和跨切关注的
+专项审阅者（安全、数据库、联合创始人）。
 
-故事卡、架构决策记录（ADR）、需求简报和发布说明均以 Markdown 文件存储于仓库中，
-无需任何外部集成。
+所有产物（简报、故事卡、ADR、发布说明）均以 Markdown 文件存储于仓库中，
+无需任何外部服务集成。
 
 ## 状态
 
-- **发现阶段**：已搭建，可以使用。
-- **规格 / 构建 / 验证 / 发布**：已完成设计，尚未搭建。
+**v0.2.16** —— 五个阶段全部搭建完成，已通过 dogfood 验证。
+
+- **20 个智能体** —— 2 个一级审阅者（product-lead、tech-lead），4 个发现期
+  角色（moderator + tech/ux/business），1 个 challenger，6 个领域专家
+  （education / fintech / healthcare / ecommerce / devtools / social），
+  7 个阶段 + 跨切审阅者（spec-author、build-lead、qa-lead、release-manager、
+  security-reviewer、db-reviewer、cofounder-expert）。其中 8 个具备
+  Identity & POV 段落（角色具身化，不止是岗位说明书）。
+- **21 个技能** —— init、discover、brief、spec、adr、build、tiny、hotfix、
+  verify、ship、regen-index、next、checkpoint、lint，外加四道 gate
+  （`/sf-check-brief` / `-plan` / `-build` / `-ship`）和三个跨切审阅
+  （`/sf-security-review`、`/sf-db-review`、`/sf-cofounder-review`）。
+- **4 个钩子** —— SessionStart、Stop、PreCompact、UserPromptSubmit。
 
 ## 安装（本地 / 开发模式）
 
+启动 Claude Code 时挂载插件目录：
+
 ```bash
-/plugin add ./shipflow
+claude --plugin-dir ./shipflow
 ```
 
-或将此文件夹复制到 Claude Code 插件目录，然后执行 `/plugin reload`。
+或者添加 shell 别名：
+
+```bash
+alias claude-sf='claude --plugin-dir /path/to/shipflow'
+```
+
+修改插件源代码后，会话内热加载：
+
+```
+/reload-plugins
+```
 
 ## 快速入门
 
 ```bash
 /sf-init                          # 仓库一次性初始化
-/sf-discover "暗黑模式切换"        # 开始发现对话
-# ...回答主持人生成的问题...
-/sf-brief                         # 将答案综合为需求简报
-/sf-check-brief                   # 进入规格阶段前的建议性评审
+/sf-discover "你的想法"            # 3-4 个角色先研究后提问
+# ...回答问题...
+/sf-brief                         # 综合答案；challenger 做压力测试
+/sf-check-brief                   # 关卡 1：product-lead + tech-lead
+/sf-spec                          # 将简报切成 5-10 个故事卡
+/sf-check-plan                    # 关卡 2：逐故事技术评审
+/sf-build                         # 实现一个故事（或用 --all 批量执行）
+/sf-check-build                   # 关卡 3：测试 + 验收 + 代码审查
+/sf-verify                        # qa-lead 对照简报 Success 验收
+/sf-check-ship                    # 关卡 4：结构性检查 + 阻断审阅检查
+/sf-ship                          # 出版本、归档、自动重建索引
 ```
 
-## 工作原理
+或者直接 `/sf-next` —— 它会读取仓库状态并执行（或推荐）下一步。
 
-`/sf-discover` 会启动一个**发现主持人**，协调三个并行角色——**技术**、**用户体验**、**商业**——进行
-两轮对话（初始轮 + 交叉讨论轮）。每个角色各自写入独立的 `dialogue-<角色>.md` 文件，避免并行写入冲突。
-主持人将三方意见汇总为去重后的 `questions.md` 供你回答。
+## 与众不同之处
 
-`/sf-brief` 会并行重启三个角色，各自综合简报的一个切片（技术：约束条件 + 风险；用户体验：
-目标用户 + 未解问题；商业：现在做的理由 + 成功标准 + 非目标），然后拼合成
-`docs/shipflow/briefs/BRIEF-NNN-<slug>.md`。
+**多角度发现 + 自动调研。** Tech / UX / Business 三个角色并行运行，再外加
+一个根据 seed 自动匹配的领域专家（education / fintech / healthcare /
+ecommerce / devtools / social）。每个角色先用 1-3 次 WebSearch 查事实——
+用户只回答判断题，不回答可以查到的事实题。
 
-`/sf-check-brief` 并行启动 `product-lead`（产品负责人）和 `tech-lead`（技术负责人）审阅者，
-各自写入 `gate-1-review-<角色>.md` 记录文件。技能对最终裁决进行分类
-（通过 | 需要修改 | 拒绝），并将结果追加到简报中。
+**审阅者像角色思考，不像清单运行。** 所有一级审阅者（tech-lead、product-lead、
+cofounder-expert、qa-lead、security-reviewer、db-reviewer、build-lead、
+challenger）都带 Identity & POV 段落 + 命名方法论工具箱 —— 产品有 JTBD /
+RICE / Kano，技术有 CAP / OWASP / 12-factor / Rollback Test，联合创始人有
+three-person test / forcing function / pre-mortem / Deletion Test，等等。
+审阅者有观点和直觉，不是 5 条 bullet 的清单。
+
+**Gate 默认建议性，按需阻断。** 四道关卡（brief / plan / build / ship）默认
+只发裁决；在 `shipflow.config.json` 中可单独翻成 `block` 模式以严格执行。
+跨切审阅（security / DB / cofounder）的 `Verdict: blocking` 会硬阻 `/sf-ship`，
+仅可通过 `--force-risk-acknowledged` 显式覆盖，且覆盖记录会写进发布说明。
+
+**按需调用跨切审阅者。** `/sf-security-review`（7 轮：secrets、auth、
+injection、authz、deps、data、defaults）。`/sf-db-review`（6 轮：schema、
+indexes、migrations、query patterns、data evolution、sync/consistency）。
+`/sf-cofounder-review`（6 个 founder 框架 + 领域 overlay + Founder gut check）。
+
+**在合适的时机自动建议。** `/sf-next` 和 `/sf-check-build` 会扫 build log
+寻找路径信号（migrations / auth / token 等），推荐相关跨切审阅 ——
+solo 开发者自己决定路径信号是否构成真实风险。
+
+**抗 pause 的 session resume。** `UserPromptSubmit` hook 把每个回合写到
+`docs/shipflow/sessions/log-<日期>.md`。`/sf-checkpoint` 在你预感 usage
+快到上限时手动捕获 session intent。下次会话的 SessionStart hook 会自动
+浮出这两份内容 —— Claude Code 撞 usage cap 时不会丢工作上下文。
+
+**工作流完整性检查。** `/sf-lint` 严格检查：frontmatter、悬空的
+`depends_on`、孤立的 `needs-ADR` 标记、断的 brief↔story 链接、`index.md`
+死链接、verdict-vs-status 漂移。
+
+**快速通道。** `/sf-tiny` 处理一文件级琐碎修改（跳过 Discover/Spec）。
+`/sf-hotfix` 处理生产 bug（跳到 Build → Ship）。
 
 ## 约定
 
-- **关卡默认为建议性**（警告，非阻断）。如需更严格的执行，在 `shipflow.config.json`
-  中切换为阻断模式。
-- **所有阶段技能均按需读取** —— 不访问归档，不读取无关简报。
-- **发现阶段角色不提出解决方案。** 那是规格阶段的工作。
-- **代码风格：清晰简洁，优于巧妙抽象。** 适用于智能体提示词、钩子脚本和技能说明。
+- **大小上限。** 智能体 ≤2000 tokens（典型 800-1500；带 Identity 段的
+  审阅者可用满范围），钩子 ≤500 tokens。上限是参考不是红线 ——
+  实质内容比机械压缩重要。
+- **模型由用户控制。** Agent frontmatter 不写 `model:` 字段；subagent 继承
+  用户当前 session 的模型（Opus / Sonnet / Haiku）。
+- **窄读取。** 阶段技能不访问归档，除非显式要求。
+- **发现期角色不提解决方案。** 那是规格阶段的工作。
+- **清晰简洁优于巧妙抽象。** 适用于智能体 prompt、钩子脚本、skill 说明，
+  以及 `/sf-build` 产出的代码（KISS/YAGNI、信任内部边界 + 在边界处加 log、
+  Rule of Three、不留半成品代码、跟随邻居文件风格）。
 
-## 目录结构（执行 `/sf-init` 后）
+## 目录结构（执行 `/sf-init` 之后）
 
 ```
 your-repo/
-├── CLAUDE.md                    # 热层（每次会话自动读取）
-├── shipflow.config.json         # 关卡模式、索引重建频率等配置
+├── CLAUDE.md                    # 热层（每次 session 自动读取）
+├── shipflow.config.json         # gate 模式、cofounder review 模式、归档配置
 └── docs/shipflow/
-    ├── index.md                 # 温层索引（自动重建）
-    ├── stack.md                 # 技术栈参考
-    ├── briefs/                  # 已批准的产品需求简报
-    ├── stories/                 # 活跃故事卡
-    ├── decisions/               # 架构决策记录（ADR）
+    ├── index.md                 # 温层索引（通过 /sf-regen-index 重建）
+    ├── stack.md                 # 技术栈 + 约定
+    ├── briefs/                  # 已批准的产品简报
+    ├── stories/                 # 活跃故事（STORY / TINY / HOTFIX 记录）
+    ├── decisions/               # ADR
     ├── releases/                # 已发布的版本说明
-    ├── retros/                  # 可选的发布后复盘
-    ├── discovery/<slug>/        # 每个想法的对话记录和综合中间文件
-    └── archive/                 # 冷层——已完成工作移至此处
+    ├── retros/                  # 发布后复盘
+    ├── diaries/                 # 每个 agent 的审阅日记
+    ├── discovery/<slug>/        # 每个 idea 的对话 + 综合
+    ├── sessions/                # per-turn 日志 + checkpoints
+    └── archive/                 # 冷层 —— 已发布工作迁移至此
 ```
 
 ## 致谢
 
-- **每智能体日记**（`docs/shipflow/diaries/<agent>.md`）和 **Stop + PreCompact 钩子**
-  是对 [MemPalace](https://github.com/MemPalace/mempalace) 创意的文件化重新实现，
-  无代码共享——ShipFlow 保持零依赖。
-- **多阶段多角色工作流结构** 借鉴了父目录 `workflow-comparison.md` 中记录的先行项目
-  （相关行待首读后填写）。
+- **每 agent 日记 + Stop/PreCompact 钩子** —— 思路借鉴
+  [MemPalace](https://github.com/MemPalace/mempalace)，重新以文件化
+  Markdown 实现（无代码共享）。
+- **cofounder-expert 的命名思维模型 + research-first 协议** —— 受
+  [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) 的人物视角技能启发。
+- **Anthropic 官方 Claude Opus 4.7 prompt engineering best practices** ——
+  影响了 build-lead、cofounder-expert、security-reviewer、db-reviewer 中
+  使用的 XML tag 结构（`<investigate_before_answering>`、
+  `<default_to_action>`、`<coverage_first>`）。
+- **多阶段多角色工作流结构** —— 借鉴了 `../workflow-comparison.md` 中
+  记录的先行项目（BMAD、Agent OS、SuperClaude、Claude-Code-Game-Studios、
+  claude-sub-agent）。
+
+无跨项目代码共享 —— ShipFlow 保持零依赖。
 
 ## 许可证
 

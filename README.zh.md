@@ -17,34 +17,40 @@
 
 ## 状态
 
-- **发现阶段**：已搭建完成，可以试用。
-- **规格 / 构建 / 验证 / 发布**：已完成设计（见 [`shipflow-plan.md`](./shipflow-plan.md)），尚未搭建。
+- **v0.2.16** —— 五个阶段全部搭建完成，已通过 dogfood 验证（发现 → 规格 →
+  构建 → 验证 → 发布）。
+- 20 个智能体（其中 8 个具备 Identity & POV 角色具身化）、21 个技能、4 个钩子。
+  完整列表 + 快速入门见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
+- 跨切审阅者（security、DB、cofounder）的 `Verdict: blocking` 会硬阻
+  `/sf-ship`，仅可通过 `--force-risk-acknowledged` 显式覆盖。
 - **样本 fixture 与测量脚本**：已完成设计，从 Cowork 迁移到 Claude Code 后尚未重建。
 
 当前待办清单见 [`handoff.md`](./handoff.md) 的"下一步"部分。
 
 ## 安装插件
 
-在 Claude Code 中，克隆此仓库后执行：
+启动 Claude Code 时挂载插件目录：
 
 ```bash
-/plugin add ./shipflow
+claude --plugin-dir ./shipflow
 ```
 
 然后在你想使用 ShipFlow 的新仓库中：
 
 ```bash
 /sf-init                          # 一次性初始化
-/sf-discover "你的第一个想法"      # 开始发现对话
+/sf-discover "你的第一个想法"      # 3-4 个角色先研究后提问
 ```
 
-完整快速入门见 [`shipflow/README.md`](./shipflow/README.md)（英文）或 [`shipflow/README.zh.md`](./shipflow/README.zh.md)（中文）。
+或者直接 `/sf-next` —— 它读仓库状态并执行下一步。完整快速入门见
+[`shipflow/README.zh.md`](./shipflow/README.zh.md)。
 
 ## 开发约定
 
 - **简洁清晰，优于巧妙抽象。** 智能体提示词、钩子脚本和技能说明均遵循此原则。
-- **智能体提示词 ≤ 80 行。** 钩子脚本 ≤ 40 行 bash。这不是任意限制——它确保每个组件对人类可读，而不只是对模型可读。
-- **按需读取。** 阶段技能不得访问归档，除非被明确要求。由智能体提示词强制执行；审计钩子已设计但尚未实现。
+- **智能体 ≤ 2000 tokens**（典型 800-1500；带 Identity 段的审阅者可用满范围），
+  钩子 ≤ 500 tokens。Tokens 而非行数，因为模型按 token 计预算。
+- **按需读取。** 阶段技能不得访问归档，除非被明确要求。
 
 ## 致谢
 
