@@ -34,7 +34,7 @@
 在任意 Claude Code 会话中：
 
 ```
-/plugin marketplace add PatrickSun93/shipflow
+/plugin marketplace add https://github.com/PatrickSun93/shipflow
 /plugin install shipflow@shipflow-marketplace
 ```
 

@@ -39,9 +39,13 @@ external services.
 In any Claude Code session:
 
 ```
-/plugin marketplace add PatrickSun93/shipflow
+/plugin marketplace add https://github.com/PatrickSun93/shipflow
 /plugin install shipflow@shipflow-marketplace
 ```
+
+> The `PatrickSun93/shipflow` shorthand defaults to SSH and may fail on
+> machines without `github.com` in `~/.ssh/known_hosts`. The full HTTPS
+> URL above works everywhere for public repos.
 
 Verify:
 

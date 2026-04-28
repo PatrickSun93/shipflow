@@ -37,7 +37,7 @@ punch list.
 In any Claude Code session:
 
 ```
-/plugin marketplace add PatrickSun93/shipflow
+/plugin marketplace add https://github.com/PatrickSun93/shipflow
 /plugin install shipflow@shipflow-marketplace
 ```
 

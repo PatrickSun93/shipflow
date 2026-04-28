@@ -37,9 +37,13 @@ CAP / 三人测试 / Rollback Test⋯），以及在不对劲的时候敢于 pus
 在任意 Claude Code 会话中：
 
 ```
-/plugin marketplace add PatrickSun93/shipflow
+/plugin marketplace add https://github.com/PatrickSun93/shipflow
 /plugin install shipflow@shipflow-marketplace
 ```
+
+> `PatrickSun93/shipflow` 这个 shorthand 默认走 SSH，在 `~/.ssh/known_hosts`
+> 里没有 github.com key 的机器上会失败。上面这个完整 HTTPS URL 对 public
+> repo 任何机器都能用。
 
 验证：
 
