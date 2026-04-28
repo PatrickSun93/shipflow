@@ -1,7 +1,7 @@
 {
   "name": "shipflow",
   "version": "0.2.16",
-  "description": "Solo-dev product workflow for Claude Code: Discover → Spec → Build → Verify → Ship with advisory gates.",
+  "description": "A multi-agent product team in a folder. Solo-dev workflow Discover → Spec → Build → Verify → Ship, coordinated by 20 specialized agents with role embodiment + named methodologies. All artifacts in-repo as markdown.",
   "keywords": [
     "workflow",
     "product-development",

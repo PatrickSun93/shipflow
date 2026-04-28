@@ -11,7 +11,7 @@
     {
       "name": "shipflow",
       "source": "./shipflow",
-      "description": "Solo-dev product workflow: Discover → Spec → Build → Verify → Ship. 20 specialized agents with role embodiment, 21 skills, 4 hooks. All artifacts in-repo as markdown.",
+      "description": "A multi-agent product team in a folder. Solo-dev workflow Discover → Spec → Build → Verify → Ship, coordinated by 20 agents with role embodiment + named methodologies (JTBD / OWASP / CAP / Three-Person Test...). Briefs, stories, ADRs, releases all in-repo as markdown. No SaaS.",
       "version": "0.2.16",
       "author": {
         "name": "Patrick Sun"

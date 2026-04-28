@@ -2,12 +2,19 @@
 
 > **Other languages:** [中文](./README.zh.md)
 
-A Claude Code plugin for solo developers: a multi-agent product-dev workflow
-**Discover → Spec → Build → Verify → Ship**, with four advisory gates and
-cross-cutting reviewers (security, DB, cofounder).
+**A multi-agent product team in a folder.**
 
-All artifacts (briefs, stories, ADRs, releases) live in-repo as markdown.
-No external services required.
+ShipFlow gives solo developers what a startup with 8 people gets: a Tech
+Lead, Product Lead, Cofounder, QA, Security Reviewer, DB Reviewer, plus
+six domain experts (education / fintech / healthcare / ecommerce /
+devtools / social) — all coordinated through a 5-phase workflow:
+**Discover → Spec → Build → Verify → Ship**.
+
+Each agent has a real **point of view**, named methodologies (JTBD /
+RICE / OWASP / CAP / Three-Person Test / Rollback Test...), and the
+patience to push back when something's off. Briefs, stories, ADRs, and
+releases all live in your repo as markdown. No SaaS, no Jira, no
+external services.
 
 ## Status
 
