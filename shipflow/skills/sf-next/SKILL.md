@@ -23,9 +23,15 @@ None. State comes from the repo itself.
    - Briefs under `docs/shipflow/briefs/` — collect by `status:`
      (`draft`, `approved`, `specced`, `shipped`).
    - Stories under `docs/shipflow/stories/` — collect by `status:` and
-     by `brief:` parent. Note any `## Verify report` or `## Security
-     review` blocks present.
+     by `brief:` parent. Note any `## Verify report`, `## Security
+     review`, or `## DB review` blocks present.
    - Latest gate verdicts on the most recent live brief.
+   - For stories in `review` or `done` status, scan their `## Build log`
+     for **path signals** that suggest cross-cutting reviews:
+     - Data signals: `migrations/`, `prisma/`, `schema.`, `*.sql`,
+       `models/`, `db/`, `database/`, `drizzle/`, ORM model file names
+     - Security signals: `auth/`, `*auth*`, `*login*`, `*password*`,
+       `*token*`, `*session*`, `middleware/`, anything user-input-facing
 
 3. **Decide the next step** using this priority (stop at first match):
 
@@ -40,6 +46,8 @@ None. State comes from the repo itself.
    | Any story has `<!-- needs-ADR: ... -->` marker and no ADR link yet | `/sf-adr <STORY-id>` (pick the earliest) | **No** — user picks which to tackle first |
    | Story `status: ready`, all deps `done` | `/sf-build` | Yes |
    | Story `status: review`, no Gate 3 verdict | `/sf-check-build` | Yes |
+   | Story `status: done`, build log shows **data signals**, no `## DB review` | Suggest `/sf-db-review` before `/sf-verify` | **No** — user decides whether DB risk merits the review |
+   | Story `status: done`, build log shows **security signals**, no `## Security review` | Suggest `/sf-security-review` before `/sf-verify` | **No** — same |
    | Story `status: done`, no `## Verify report` | `/sf-verify` | Yes |
    | All stories under live brief `done`, no Gate 4 verdict | `/sf-check-ship` | Yes |
    | All stories `done`, Gate 4 `approve`, brief not `shipped` | `/sf-ship` | **No** — shipping is user-driven |

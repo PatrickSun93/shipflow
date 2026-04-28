@@ -31,7 +31,18 @@ Post-build advisory review.
      invoke it against the story's diff. Skip silently if it isn't
      installed. Findings don't auto-fail — they inform the verdict.
 
-4. **Append a `## Gate 3 verdict`** block to each story:
+4. **Scan the build log for cross-cutting review signals** (don't run
+   the reviews yourself — just flag whether they're recommended):
+   - **Data signals**: build log mentions files under `migrations/`,
+     `prisma/`, `schema.`, `*.sql`, `models/`, `db/`, `database/`, or
+     ORM model files → recommend `/sf-db-review`
+   - **Security signals**: build log mentions `auth/`, `*auth*`,
+     `*login*`, `*password*`, `*token*`, `*session*`, `middleware/`,
+     or any user-input-facing route handler → recommend
+     `/sf-security-review`
+   - These are recommendations only — not blocking. Solo dev decides.
+
+5. **Append a `## Gate 3 verdict`** block to each story:
 
    ```markdown
    ## Gate 3 verdict
@@ -41,6 +52,7 @@ Post-build advisory review.
    - Acceptance: <pass | N unchecked>
    - Tests: <green | red | no-harness>
    - Code review: <clean | N findings | not run>
+   - Cross-cutting reviews recommended: <`/sf-db-review` | `/sf-security-review` | both | none>
    ```
 
 5. **Update each story's frontmatter status:**
