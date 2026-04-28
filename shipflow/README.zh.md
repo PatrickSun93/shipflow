@@ -136,8 +136,18 @@ solo 开发者自己决定路径信号是否构成真实风险。
 `depends_on`、孤立的 `needs-ADR` 标记、断的 brief↔story 链接、`index.md`
 死链接、verdict-vs-status 漂移。
 
-**快速通道。** `/sf-tiny` 处理一文件级琐碎修改（跳过 Discover/Spec）。
-`/sf-hotfix` 处理生产 bug（跳到 Build → Ship）。
+**三种规模 —— 选对入口很重要。** Solo 开发者的工作不是一个 shape；
+ShipFlow 提供三条明确路径，避免为了改个 typo 跑完整 5 阶段流程：
+
+| 规模 | 路径 | 适用 |
+|---|---|---|
+| 🪶 **Tiny** | `/sf-tiny "<修改>"` | 一文件级琐碎：typo、文案、注释 |
+| 🚀 **Quick** | `/sf-quick "<feature 或 fix>"` | **老项目，中等 feature/bug —— 你已经知道 scope。** 跳过 Discover + Spec 流程，直接生成 minimal brief + 1-3 个可立即 build 的 story |
+| 🛠️ **Full** | `/sf-discover "<想法>"` → ... | 全新产品、重要 bet、scope 不清楚 |
+| 🚨 **Hotfix** | `/sf-hotfix "<bug>"` | 生产紧急，跳到 Build → Ship |
+
+老项目你已经 ship 过的，`/sf-quick` 通常是对的入口。一个 2 行的
+bug fix 不需要 18 个 persona 问题。
 
 ## 约定
 

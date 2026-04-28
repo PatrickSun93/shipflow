@@ -147,8 +147,20 @@ next session — work isn't lost when Claude Code hits a usage cap.
 dangling `depends_on`, orphan `needs-ADR` markers, broken brief↔story
 links, dead `index.md` links, and verdict-vs-status drift.
 
-**Fast paths.** `/sf-tiny` for trivial one-file changes (skip Discover /
-Spec). `/sf-hotfix` for prod bugs (skip to Build → Ship).
+**Three sizes — pick the right entry point.** Solo dev work isn't
+all the same shape; ShipFlow has three explicit paths so you don't run
+the full 5-phase flow for a typo fix:
+
+| Size | Path | When |
+|---|---|---|
+| 🪶 **Tiny** | `/sf-tiny "<fix>"` | One-file trivial: typo, copy fix, comment update |
+| 🚀 **Quick** | `/sf-quick "<feature or fix>"` | **Existing project, mid-tier feature/bug — you already know the scope.** Skips Discover + Spec ceremony, generates a minimal brief + 1-3 ready-to-build stories inline. |
+| 🛠️ **Full** | `/sf-discover "<idea>"` → ... | Greenfield product, significant bet, scope is unclear |
+| 🚨 **Hotfix** | `/sf-hotfix "<bug>"` | Production emergency, skip to Build → Ship |
+
+For an existing app where you've already shipped something, `/sf-quick`
+is usually the right answer. The full flow is overkill when you don't
+need 18 persona questions for a 2-line bug fix.
 
 ## Conventions
 

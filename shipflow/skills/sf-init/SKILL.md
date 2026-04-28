@@ -11,7 +11,7 @@ One-time repo setup for ShipFlow.
 
 - `--overwrite` — back up existing `CLAUDE.md` to `CLAUDE.md.pre-shipflow`, then overwrite with the template.
 - `--append` — force append mode even if `CLAUDE.md` is empty or a placeholder.
-- `--existing` — ask the user for a one-paragraph stack description; skip the `stack.md` stub. Use when adopting ShipFlow into a long-running repo.
+- `--existing` — spawn `project-archaeologist` to deeply survey the codebase (languages, frameworks, conventions, recent commit activity) and write a rich, evidence-cited `stack.md`. Use when adopting ShipFlow into a long-running repo so downstream agents inherit real context.
 
 Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwise); `stack.md` written as stub.
 
@@ -40,9 +40,17 @@ Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwi
 3. **Write `docs/shipflow/index.md`** with empty sections: Briefs, Stories, ADRs, Releases.
    Include the comment `<!-- Auto-regenerated. Edit shipflow.config.json to change cadence. -->`.
 
-4. **Write `docs/shipflow/stack.md`.** Default: stub ("Describe your stack here").
-   With `--existing`: pause and ask the user "Describe your stack in a few
-   sentences — languages, frameworks, key paths." Write their reply verbatim.
+4. **Write `docs/shipflow/stack.md`.**
+   - **Default**: stub ("Describe your stack here").
+   - **With `--existing`**: spawn the **`project-archaeologist`** agent
+     to scan the codebase deeply (languages, frameworks, conventions,
+     recent commit activity, key directories, naming style, error
+     handling, async style, DB / API / auth patterns) and write a rich
+     `stack.md` grounded in actual code — so downstream agents inherit
+     real context and don't re-ask the user about basics. Use the Agent
+     tool with `subagent_type: "project-archaeologist"`. After it
+     returns, read the generated `stack.md` and surface the "Known
+     unknowns" section to the user for confirmation.
 
 5. **Write `shipflow.config.json`:**
    ```json
