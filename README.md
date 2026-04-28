@@ -18,10 +18,12 @@ plus the design docs and handoff notes that produced it.
 
 ## Status
 
-- **v0.2.5** — all five phases scaffolded and usable (Discover → Spec →
-  Build → Verify → Ship).
-- 19 agents, 18 skills, 4 hooks. See [`shipflow/README.md`](./shipflow/README.md)
-  for the full list + quick start.
+- **v0.2.16** — all five phases scaffolded and dogfood-validated.
+- 20 agents (8 with role-embodied Identity & POV), 21 skills, 4 hooks.
+  See [`shipflow/README.md`](./shipflow/README.md) for the full list + quick
+  start.
+- Cross-cutting reviewers (security, DB, cofounder) hard-stop `/sf-ship`
+  on `Verdict: blocking` unless explicitly overridden.
 - **Sample fixture + measurement script:** designed, not yet rebuilt after the
   Cowork → Claude Code transition.
 
