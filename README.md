@@ -1,4 +1,4 @@
-# claude-code-project
+# shipflow
 
 > **Other languages:** [中文](./README.zh.md)
 
