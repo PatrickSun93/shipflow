@@ -27,20 +27,29 @@ Post-build advisory review.
    - **Tests.** Run the project test command (named in `stack.md`, or
      inferred from `package.json` scripts / `Makefile`). Any failure →
      `needs-changes`. No test harness → record `no-harness` (not a fail).
-   - **Code review.** If the `engineering:code-review` skill is available,
-     invoke it against the story's diff. Skip silently if it isn't
-     installed. Findings don't auto-fail — they inform the verdict.
+   - **Code review.** Spawn the `code-reviewer` agent (built into
+     ShipFlow, no external skill required) against the story's diff.
+     Findings inform the verdict but don't auto-fail unless the agent
+     returns `Verdict: blocking`.
 
 4. **Scan the build log for cross-cutting review signals** (don't run
-   the reviews yourself — just flag whether they're recommended):
-   - **Data signals**: build log mentions files under `migrations/`,
-     `prisma/`, `schema.`, `*.sql`, `models/`, `db/`, `database/`, or
-     ORM model files → recommend `/sf-db-review`
-   - **Security signals**: build log mentions `auth/`, `*auth*`,
-     `*login*`, `*password*`, `*token*`, `*session*`, `middleware/`,
-     or any user-input-facing route handler → recommend
-     `/sf-security-review`
-   - These are recommendations only — not blocking. Solo dev decides.
+   the reviews yourself — just flag whether they're recommended). Use
+   **strong signals only** to avoid noise on stories where the review
+   would be low-value:
+
+   - **Data signals (strong)**: build log mentions any of
+     `migrations/**`, `**/migrations/**`, `schema.prisma`, `schema.sql`,
+     `*.schema.{prisma,sql}`, raw `*.sql` files at repo root → recommend
+     `/sf-db-review`
+   - **Security signals (strong)**: build log mentions any of `auth/**`,
+     `lib/auth/**`, `src/auth/**`, files literally named `*password*` or
+     `*credential*`, `**/middleware/auth*`, `**/middleware/*csrf*`,
+     `**/middleware/*cors*`, or new login/signup route handlers →
+     recommend `/sf-security-review`
+   - **Skip weak signals** — generic `models/`, `db/`, `*token*`,
+     `*session*`, `middleware/` without an auth/csrf/cors qualifier
+     produce too many false positives. The user can still run reviews
+     manually if their judgment says so.
 
 5. **Append a `## Gate 3 verdict`** block to each story:
 

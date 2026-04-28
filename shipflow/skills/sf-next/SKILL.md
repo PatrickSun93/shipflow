@@ -27,11 +27,15 @@ None. State comes from the repo itself.
      review`, or `## DB review` blocks present.
    - Latest gate verdicts on the most recent live brief.
    - For stories in `review` or `done` status, scan their `## Build log`
-     for **path signals** that suggest cross-cutting reviews:
-     - Data signals: `migrations/`, `prisma/`, `schema.`, `*.sql`,
-       `models/`, `db/`, `database/`, `drizzle/`, ORM model file names
-     - Security signals: `auth/`, `*auth*`, `*login*`, `*password*`,
-       `*token*`, `*session*`, `middleware/`, anything user-input-facing
+     for **strong path signals** that suggest cross-cutting reviews
+     (weak signals like generic `models/` produce false positives —
+     skip them):
+     - Data signals: `migrations/**`, `**/migrations/**`, `schema.prisma`,
+       `schema.sql`, `*.schema.{prisma,sql}`, raw `*.sql` at repo root
+     - Security signals: `auth/**`, `lib/auth/**`, `src/auth/**`,
+       `*password*`, `*credential*`, `**/middleware/auth*`,
+       `**/middleware/*csrf*`, `**/middleware/*cors*`, new login /
+       signup route handlers
 
 3. **Decide the next step** using this priority (stop at first match):
 
