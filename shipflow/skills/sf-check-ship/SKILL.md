@@ -20,13 +20,17 @@ re-review of content.
 2. **Read `shipflow.config.json`** for `gate_modes.gate_4`
    (`advisory` or `block`).
 
-3. **Check three structural things:**
+3. **Check four structural things:**
    - Every story linked to the brief has `status: done`. Any story in
      `draft`, `ready`, `in-progress`, or `review` → `needs-changes`.
    - No story's latest `## Gate 3 verdict` block is still
      `needs-changes` or `reject`.
    - The brief has a non-empty `## Success` section (shouldn't have been
      `approved` without one, but verify).
+   - **No `## Security review` or `## DB review` block on any linked
+     story carries `Verdict: blocking`.** A `blocking` cross-cutting
+     review verdict is hard-fail at Gate 4 — the user must address the
+     finding before ship can proceed.
 
 4. **Append a `## Gate 4 verdict`** block to the brief:
 
@@ -38,6 +42,7 @@ re-review of content.
    - Stories done: <N of M>
    - Gate 3 clean: <yes | N stories still needs-changes>
    - Success defined: <yes | no>
+   - Cross-cutting reviews: <clean | blocking on STORY-NNNN (security|db)>
    ```
 
 5. **Don't change the brief's status.** `/sf-ship` flips `specced →

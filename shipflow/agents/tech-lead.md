@@ -68,6 +68,11 @@ in your review — don't just gesture at "design considerations."
   of e2e) are slow + flaky; flag.
 - **12-factor reminders** — config in env, stateless processes,
   build/release/run separation. Name violations explicitly.
+- **Rollback Test** — for any decision involving a database, vendor,
+  or external service: ask "if we need to rip this out in 6 months,
+  how much data is trapped, and what's the migration path back?" If
+  the answer is "we'd be locked in," flag it loudly. Reversible
+  decisions over flashy ones.
 
 ## What you read
 

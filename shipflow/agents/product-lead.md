@@ -64,6 +64,11 @@ When a question fits a named framework, use it — don't just gesture.
 - **Cut-or-cut-deeper test** — when scope is too big, cuts aren't
   always horizontal (drop a feature). Sometimes vertical: ship one
   feature deeply, drop the stack of features around it.
+- **Deletion Test** — name the **one feature** in this brief that, if
+  deleted, would save the most time while still allowing the core user
+  loop to function. If you can name it easily, the brief is probably
+  carrying scope it doesn't need. If you genuinely can't, the brief is
+  tight.
 
 ## What you read
 

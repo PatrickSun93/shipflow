@@ -15,6 +15,9 @@ Ship a brief's completed work as a release.
   last release in `docs/shipflow/releases/` (or `v0.1.0` on first ship).
 - **optional:** `--hotfix <HOTFIX-id>`. Ships a single hotfix record as a
   patch release instead of a full brief.
+- **optional:** `--force-risk-acknowledged`. Override hard-fail when a
+  cross-cutting review (security or DB) returned `Verdict: blocking`.
+  User explicitly accepts the risk in writing.
 
 ## Steps
 
@@ -23,16 +26,28 @@ Ship a brief's completed work as a release.
      has `status: done`. Error out if any story is still in flight.
    - Hotfix mode: resolve the `HOTFIX-NNNN` record; confirm `status: done`.
 
-2. **Read `shipflow.config.json`** for `archive_on_ship`. Pass the value
+2. **Hard-fail on blocking cross-cutting reviews.** Scan every linked
+   story for `## Security review` or `## DB review` blocks. If any
+   carries `Verdict: blocking`:
+   - Without `--force-risk-acknowledged`: abort. Surface the blocking
+     finding(s) verbatim and tell the user to either fix or pass the
+     override flag.
+   - With `--force-risk-acknowledged`: proceed but record the override
+     in the release note's `## Notes` section ("Shipped with overridden
+     blocking review on STORY-NNNN: <one-line summary>").
+   - Hotfix mode is exempt from this check (hotfixes are emergency by
+     definition; blocking concerns get fixed in the next regular brief).
+
+3. **Read `shipflow.config.json`** for `archive_on_ship`. Pass the value
    through to release-manager.
 
-3. **Derive the version:**
+4. **Derive the version:**
    - Normal mode: if `--version` is given, use it; else bump the minor
      from the newest release in `releases/` (e.g. `v0.3.0 → v0.4.0`).
    - Hotfix mode: bump the patch (`v0.3.0 → v0.3.1`), unless `--version`
      overrides.
 
-4. **Spawn `release-manager`.** Use the Agent tool with
+5. **Spawn `release-manager`.** Use the Agent tool with
    `subagent_type: "release-manager"` and a prompt like:
 
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md` (or hotfix record
@@ -40,11 +55,17 @@ Ship a brief's completed work as a release.
    > `archive_on_ship: <true|false>`.
    > Write the release note, archive per config, report back.
 
-5. **Report to the user:**
+6. **Auto-refresh the index.** Invoke `/sf-regen-index` via the Skill
+   tool. The brief just left the warm layer; index is now stale.
+   Don't make the user remember.
+
+7. **Report to the user:**
    - Version shipped + release note path
    - Stories archived (or skipped archive if config disabled)
-   - Next step: run `/sf-regen-index` to refresh the warm index (a brief
-     just left), then tag / push in git if appropriate.
+   - Index refreshed
+   - If `--force-risk-acknowledged` was used: surface the override
+     verbatim so it's visible in the report
+   - Next step: tag / push in git if appropriate.
 
 ## Hard rules
 
