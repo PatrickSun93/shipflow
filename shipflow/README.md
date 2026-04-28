@@ -25,18 +25,38 @@ No external services required.
   reviews (`/sf-security-review`, `/sf-db-review`, `/sf-cofounder-review`).
 - **4 hooks** — SessionStart, Stop, PreCompact, UserPromptSubmit.
 
-## Install (local / dev)
+## Install
 
-Start Claude Code with the plugin dir mounted:
+### Recommended — via Claude Code marketplace
 
-```bash
-claude --plugin-dir ./shipflow
+In any Claude Code session:
+
+```
+/plugin marketplace add PatrickSun93/shipflow
+/plugin install shipflow@shipflow-marketplace
 ```
 
-Or add a shell alias:
+Verify:
+
+```
+/help
+```
+
+You should see `/sf-init`, `/sf-discover`, `/sf-next`, `/sf-build`, etc.
+
+To update later:
+
+```
+/plugin update shipflow@shipflow-marketplace
+```
+
+### Alternative — local / dev
+
+For working on the plugin source itself:
 
 ```bash
-alias claude-sf='claude --plugin-dir /path/to/shipflow'
+git clone https://github.com/PatrickSun93/shipflow.git
+claude --plugin-dir ./shipflow/shipflow
 ```
 
 After editing plugin source, hot-reload in-session:

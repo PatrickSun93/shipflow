@@ -1,0 +1,34 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace-schema.json",
+  "name": "shipflow-marketplace",
+  "owner": {
+    "name": "Patrick Sun",
+    "email": "peidongsunlzu@gmail.com"
+  },
+  "description": "ShipFlow — multi-agent product-dev workflow plugin for Claude Code",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "shipflow",
+      "source": "./shipflow",
+      "description": "Solo-dev product workflow: Discover → Spec → Build → Verify → Ship. 20 specialized agents with role embodiment, 21 skills, 4 hooks. All artifacts in-repo as markdown.",
+      "version": "0.2.16",
+      "author": {
+        "name": "Patrick Sun"
+      },
+      "homepage": "https://github.com/PatrickSun93/shipflow#readme",
+      "repository": "https://github.com/PatrickSun93/shipflow",
+      "license": "MIT",
+      "keywords": [
+        "workflow",
+        "product-development",
+        "solo-dev",
+        "multi-agent",
+        "discovery",
+        "spec-driven",
+        "agents",
+        "skills"
+      ]
+    }
+  ]
+}

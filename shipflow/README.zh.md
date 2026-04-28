@@ -25,18 +25,38 @@
   （`/sf-security-review`、`/sf-db-review`、`/sf-cofounder-review`）。
 - **4 个钩子** —— SessionStart、Stop、PreCompact、UserPromptSubmit。
 
-## 安装（本地 / 开发模式）
+## 安装
 
-启动 Claude Code 时挂载插件目录：
+### 推荐方式 —— 通过 Claude Code marketplace
 
-```bash
-claude --plugin-dir ./shipflow
+在任意 Claude Code 会话中：
+
+```
+/plugin marketplace add PatrickSun93/shipflow
+/plugin install shipflow@shipflow-marketplace
 ```
 
-或者添加 shell 别名：
+验证：
+
+```
+/help
+```
+
+应该能看到 `/sf-init`、`/sf-discover`、`/sf-next`、`/sf-build` 等。
+
+后续更新：
+
+```
+/plugin update shipflow@shipflow-marketplace
+```
+
+### 备选 —— 本地 / 开发模式
+
+如果你要修改插件源代码本身：
 
 ```bash
-alias claude-sf='claude --plugin-dir /path/to/shipflow'
+git clone https://github.com/PatrickSun93/shipflow.git
+claude --plugin-dir ./shipflow/shipflow
 ```
 
 修改插件源代码后，会话内热加载：

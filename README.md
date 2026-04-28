@@ -32,15 +32,16 @@ punch list.
 
 ## Installing the plugin
 
-Start Claude Code with the plugin directory mounted:
+In any Claude Code session:
 
-```bash
-claude --plugin-dir ./shipflow
+```
+/plugin marketplace add PatrickSun93/shipflow
+/plugin install shipflow@shipflow-marketplace
 ```
 
 Then in a fresh repo where you want to use ShipFlow:
 
-```bash
+```
 /sf-init                        # one-time setup
 /sf-discover "your first idea"  # 3–4 personas research + ask questions
 ```

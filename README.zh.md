@@ -29,15 +29,16 @@
 
 ## 安装插件
 
-启动 Claude Code 时挂载插件目录：
+在任意 Claude Code 会话中：
 
-```bash
-claude --plugin-dir ./shipflow
+```
+/plugin marketplace add PatrickSun93/shipflow
+/plugin install shipflow@shipflow-marketplace
 ```
 
 然后在你想使用 ShipFlow 的新仓库中：
 
-```bash
+```
 /sf-init                          # 一次性初始化
 /sf-discover "你的第一个想法"      # 3-4 个角色先研究后提问
 ```
