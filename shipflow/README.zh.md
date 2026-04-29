@@ -31,8 +31,9 @@ CAP / 三人测试 / Rollback Test⋯），以及在不对劲的时候敢于 pus
 - **5 个 specialty / 协调者** —— `discovery-moderator`、`spec-author`、
   `release-manager`、`project-archaeologist`，加上 challenger（也算在审阅者）
 
-**23 个技能** —— init、discover、brief、spec、adr、build、tiny、quick、
-hotfix、verify、ship、regen-index、resurvey、next、checkpoint、lint、grill，
+**24 个技能** —— init、discover、brief、spec、adr、build（带 `--tdd`
+red-green-refactor 模式 + `--all` 批量扫模式）、tiny、quick、hotfix、verify、
+ship、regen-index、resurvey、next、checkpoint、lint、grill、diagnose，
 外加四道 gate（`/sf-check-{brief,plan,build,ship}`）和三个跨切审阅
 （`/sf-security-review`、`/sf-db-review`、`/sf-cofounder-review`）。
 

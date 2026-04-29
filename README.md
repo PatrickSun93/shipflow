@@ -22,7 +22,7 @@ gets: Tech Lead, Product Lead, Cofounder, QA, Security + DB reviewers, plus
 
 - **v0.2.21** — all five phases scaffolded and dogfood-validated.
 - **22 agents** (8 reviewers + 3 Discovery personas with Identity & POV;
-  6 domain experts; 5 coordinator/specialty), 23 skills, 4 hooks.
+  6 domain experts; 5 coordinator/specialty), 24 skills, 4 hooks.
   See [`shipflow/README.md`](./shipflow/README.md) for the honest breakdown.
 - Cross-cutting reviewers (security, DB, cofounder) hard-stop `/sf-ship`
   on `Verdict: blocking` unless explicitly overridden.

@@ -34,11 +34,12 @@ external services.
   `spec-author`, `release-manager`, `project-archaeologist`, plus
   challenger (also counted above as a reviewer)
 
-**23 skills** — init, discover, brief, spec, adr, build, tiny, quick,
+**24 skills** — init, discover, brief, spec, adr, build (with `--tdd`
+hard red-green-refactor mode and `--all` sweep mode), tiny, quick,
 hotfix, verify, ship, regen-index, resurvey, next, checkpoint, lint,
-grill, plus four gates (`/sf-check-{brief,plan,build,ship}`) and three
-cross-cutting reviews (`/sf-security-review`, `/sf-db-review`,
-`/sf-cofounder-review`).
+grill, diagnose, plus four gates (`/sf-check-{brief,plan,build,ship}`)
+and three cross-cutting reviews (`/sf-security-review`,
+`/sf-db-review`, `/sf-cofounder-review`).
 
 **4 hooks** — SessionStart, Stop, PreCompact, UserPromptSubmit.
 
