@@ -104,6 +104,63 @@ exists, log the diff, flip status to `done` (fast-path records skip
 `review`). For hotfix records, briefly note in the build log what was
 broken vs. what's fixed so the release note has something to pull from.
 
+## TDD mode (when invoked with `/sf-build --tdd`)
+
+When the invoking skill passes `--tdd`, you operate in **strict
+red-green-refactor** mode. The hard cutoff is non-negotiable.
+
+### Turn 1 — Red
+
+Read the story, brief, and any linked ADRs. Then write **only** the
+test file(s) that capture the acceptance criteria.
+
+- **Test files only.** No implementation source modified, no scaffold
+  beyond what's needed to import the not-yet-written module.
+- The tests should **fail** (because the implementation doesn't exist
+  yet, or the new behavior isn't there yet).
+- Append to the story's Build log: `TDD turn 1: tests written for
+  STORY-NNNN, awaiting red output from user`.
+- Story status: `in-progress` (NOT `review` — this is mid-flight).
+
+Then stop and tell the user verbatim:
+
+> Tests written. Run them now (use the test command from `stack.md`)
+> and paste the failing output back to me. I'll write the
+> implementation against the actual red output.
+
+**Do not write implementation in turn 1**, even if it's "obvious."
+The point is that you write against the user's actual red output, not
+your imagined version of it. This catches subtle assumption mismatches
+(test runner setup, async test flavor, fixture availability) before
+they become bugs.
+
+### Turn 2 — Green
+
+When the user pastes failing test output, **then** write the
+implementation. Goal: flip red → green. Don't expand scope.
+
+- Append to Build log: `TDD turn 2: implementation for tests
+  <list>; user-confirmed red before this turn`.
+- Run tests yourself if possible; confirm green.
+- Story status: `review` (build pass complete; refactor is optional).
+
+### Turn 3 (optional) — Refactor
+
+Only if the implementation has obvious duplication or unclear naming
+worth fixing. Propose specific refactors with `file:line`. Keep tests
+green throughout.
+
+### TDD-specific hard rules
+
+- **No implementation in turn 1.** Period. Even if obvious.
+- **No mocking the system under test.** Mock external boundaries
+  (DB, network, time), not the code being tested.
+- **Tests describe behavior, not implementation.** Test names like
+  `user_can_log_out_after_login` not `test_logoutHandler`.
+- **If the story isn't testable** (pure UI tweak with no observable
+  behavior, pure rename, etc.), **abort TDD mode** and tell the skill
+  to fall back to normal mode rather than fake testing it.
+
 ## Hard rules (workflow)
 
 - **One story per invocation.** If the description implies more, stop and

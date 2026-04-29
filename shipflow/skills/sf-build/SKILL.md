@@ -13,11 +13,18 @@ Build one story or sweep all eligible ones.
 - **optional flag:** `--all`. Sweep mode — build every eligible `ready`
   story sequentially, respecting `depends_on`, until the queue is empty
   or one fails.
+- **optional flag:** `--tdd`. Strict red-green-refactor mode — build-lead
+  writes only failing tests in turn 1, stops, waits for the user to
+  paste the red output, then implements in turn 2 (per build-lead's
+  TDD mode contract). Use for stories where regression-resistance
+  matters more than shipping speed.
 - **default** (no args): auto-pick the oldest single story with
   `status: ready` whose `depends_on` are all `done`. One story per
   invocation, classic behavior.
 
 `--all` and a story id are mutually exclusive — pass one or the other.
+`--tdd` is mutually exclusive with `--all` (you don't sweep TDD work;
+TDD is concentrated, story-by-story).
 
 ## Steps
 
@@ -41,7 +48,10 @@ Build one story or sweep all eligible ones.
    > Story: `docs/shipflow/stories/STORY-<NNNN>-<slug>.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Linked ADRs: <comma-separated paths, or "none">.
-   > Implement the story end-to-end. Flip status through
+   > <If --tdd was passed:> Mode: TDD. Per your TDD-mode contract,
+   > write tests only in turn 1, stop, await user's red output before
+   > implementing in turn 2.
+   > <Else:> Implement the story end-to-end. Flip status through
    > `in-progress` to `review` per your agent prompt's contract.
 
 5. **Verify the handoff.** Read the story back; confirm
