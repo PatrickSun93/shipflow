@@ -12,7 +12,8 @@
 | 路径 | 说明 |
 |------|------|
 | [`shipflow/`](./shipflow/) | 插件本体，可安装到 Claude Code 中。 |
-| [`handoff.md`](./handoff.md) | 已锁定的设计决策和待办清单的持续记录。记录了事情为何如此设计的权威依据。 |
+| [`DESIGN.md`](./DESIGN.md) | **诚实的设计 rationale**，包括未经验证的假设和我们凭直觉而非证据做的 trade-off。README 是销售；这份是解释。 |
+| [`handoff.md`](./handoff.md) | 已锁定的设计决策和待办清单的持续记录。 |
 | [`shipflow-plan.md`](./shipflow-plan.md) | 各阶段的详细设计——智能体、技能、关卡、权衡与横切关注点。 |
 | [`shipflow-memory-measurement.md`](./shipflow-memory-measurement.md) | 三层内存模型及预算验证方法。 |
 | [`workflow-comparison.md`](./workflow-comparison.md) | 与同类项目的对比分析（BMAD、Agent OS、SuperClaude、Claude-Code-Game-Studios、claude-sub-agent）。 |

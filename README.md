@@ -13,7 +13,8 @@ gets: Tech Lead, Product Lead, Cofounder, QA, Security + DB reviewers, plus
 | Path | What it is |
 |------|------------|
 | [`shipflow/`](./shipflow/) | The plugin itself. Installable in Claude Code. |
-| [`handoff.md`](./handoff.md) | Running log of locked design decisions and the punch list of next steps. The authoritative record of *why* things are the way they are. |
+| [`DESIGN.md`](./DESIGN.md) | **Honest design rationale** including unverified assumptions and trade-offs we made on intuition rather than evidence. The README sells; this explains. |
+| [`handoff.md`](./handoff.md) | Running log of locked design decisions and the punch list of next steps. |
 | [`shipflow-plan.md`](./shipflow-plan.md) | Detailed per-phase design — agents, skills, gates, trade-offs, cross-cutting concerns. |
 | [`shipflow-memory-measurement.md`](./shipflow-memory-measurement.md) | The 3-layer memory model and how to verify budgets hold. |
 | [`workflow-comparison.md`](./workflow-comparison.md) | Prior-art comparison (BMAD, Agent OS, SuperClaude, Claude-Code-Game-Studios, claude-sub-agent). |
