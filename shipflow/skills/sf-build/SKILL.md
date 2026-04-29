@@ -42,9 +42,10 @@ TDD is concentrated, story-by-story).
    and any ADR links in the story's `## Notes`. Pass through in the
    prompt.
 
-4. **Spawn `build-lead`.** Use the Agent tool with
-   `subagent_type: "build-lead"` and a prompt like:
+4. **Spawn `build-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: build-lead. Adopt the role defined in `shipflow/agents/build-lead.md`.
    > Story: `docs/shipflow/stories/STORY-<NNNN>-<slug>.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Linked ADRs: <comma-separated paths, or "none">.

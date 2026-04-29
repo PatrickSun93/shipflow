@@ -22,9 +22,10 @@ Security lens on one story.
 2. **Resolve the parent brief** via the story's `brief:` frontmatter, if
    present. TINY / HOTFIX records skip this step.
 
-3. **Spawn `security-reviewer`.** Use the Agent tool with
-   `subagent_type: "security-reviewer"` and a prompt like:
+3. **Spawn `security-reviewer` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: security-reviewer. Adopt the role defined in `shipflow/agents/security-reviewer.md`.
    > Story: `docs/shipflow/stories/STORY-<NNNN>-<slug>.md`.
    > Brief (if any): `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Run the seven-pass review. Append a `## Security review` block to

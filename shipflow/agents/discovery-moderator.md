@@ -32,15 +32,18 @@ Pick the dominant domain if two straddle. Record at top of `dialogue.md`:
 
 ### Round 1 (parallel)
 
-Spawn personas in parallel, **single message, 3 or 4 Agent calls**.
-**All 3 base personas ALWAYS run — Tech, UX, Business. No exceptions,
-ever.** The domain expert is an ADDITIONAL 4th spawn, never a
-substitute for any base persona:
+Spawn personas in parallel, **single message, 3 or 4 Agent calls**,
+**all routed through `shipflow-mono`**. All 3 base personas ALWAYS
+run — Tech, UX, Business. No exceptions, ever. The domain expert is
+an ADDITIONAL 4th spawn, never a substitute for any base persona.
 
-- `discovery-tech-persona` → `dialogue-tech.md`          (always)
-- `discovery-ux-persona` → `dialogue-ux.md`              (always)
-- `discovery-business-persona` → `dialogue-business.md`  (always)
-- `<domain>-expert` → `dialogue-<domain>.md`             (only if domain matched)
+For each spawn use `subagent_type: "shipflow-mono"` with a prompt
+beginning with the appropriate Mode directive:
+
+- `Mode: discovery-tech-persona. Adopt the role defined in shipflow/agents/discovery-tech-persona.md.` → writes `dialogue-tech.md`
+- `Mode: discovery-ux-persona. Adopt the role defined in shipflow/agents/discovery-ux-persona.md.` → writes `dialogue-ux.md`
+- `Mode: discovery-business-persona. Adopt the role defined in shipflow/agents/discovery-business-persona.md.` → writes `dialogue-business.md`
+- `Mode: <domain>-expert. Adopt the role defined in shipflow/agents/<domain>-expert.md.` → writes `dialogue-<domain>.md` (only if domain matched)
 
 Education domain → 4 agents (tech + ux + business + education).
 Other domain → exactly 3. Never 2 or fewer.

@@ -1,6 +1,6 @@
 {
   "name": "shipflow",
-  "version": "0.2.24",
+  "version": "0.2.24-mono.0",
   "description": "A multi-agent product team in a folder. Solo-dev workflow Discover → Spec → Build → Verify → Ship, coordinated by 20 specialized agents with role embodiment + named methodologies. All artifacts in-repo as markdown.",
   "keywords": [
     "workflow",

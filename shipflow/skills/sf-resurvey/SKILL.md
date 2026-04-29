@@ -25,8 +25,10 @@ None. Operates on the current repo.
 1. **Check init.** If `docs/shipflow/` doesn't exist, error out — run
    `/sf-init` first.
 
-2. **Spawn `project-archaeologist`** via the Agent tool with
-   `subagent_type: "project-archaeologist"`. The archaeologist will:
+2. **Spawn `project-archaeologist` (via mono)** via the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt starting with
+   `Mode: project-archaeologist. Adopt the role defined in shipflow/agents/project-archaeologist.md.`
+   The archaeologist (in mono mode) will:
    - Survey the codebase broadly (manifests, configs, sample source
      files, recent git activity)
    - Verify every claim against actual code

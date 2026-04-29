@@ -27,8 +27,9 @@ Post-build advisory review.
    - **Tests.** Run the project test command (named in `stack.md`, or
      inferred from `package.json` scripts / `Makefile`). Any failure →
      `needs-changes`. No test harness → record `no-harness` (not a fail).
-   - **Code review.** Spawn the `code-reviewer` agent (built into
-     ShipFlow, no external skill required) against the story's diff.
+   - **Code review.** Spawn `code-reviewer` (via mono) using
+     `subagent_type: "shipflow-mono"` with prompt prefix
+     `Mode: code-reviewer. Adopt the role defined in shipflow/agents/code-reviewer.md.`
      Findings inform the verdict but don't auto-fail unless the agent
      returns `Verdict: blocking`.
 

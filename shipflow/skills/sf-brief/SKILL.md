@@ -26,28 +26,33 @@ Turn a completed discovery dialogue into a brief.
    If one exists, include its expert in the synthesis spawn — its slug
    is the one written to `dialogue.md`'s `_Domain: <name>_` line.
 
-4. **Spawn 3 or 4 personas in parallel (single message).** Each uses the
-   persona's `subagent_type` with a synthesis-mode prompt:
+4. **Spawn 3 or 4 personas in parallel (single message), all routed
+   through shipflow-mono.** Each call uses
+   `subagent_type: "shipflow-mono"` with a Mode directive:
 
-   - `discovery-tech-persona` — prompt:
+   - Mode: discovery-tech-persona — prompt:
+     > Mode: discovery-tech-persona. Adopt the role defined in `shipflow/agents/discovery-tech-persona.md`.
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-tech.md`, `answers.md`.
      > Write `slice-tech.md` with `## Constraints` and `## Risks`.
 
-   - `discovery-ux-persona` — prompt:
+   - Mode: discovery-ux-persona — prompt:
+     > Mode: discovery-ux-persona. Adopt the role defined in `shipflow/agents/discovery-ux-persona.md`.
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-ux.md`, `answers.md`.
      > Write `slice-ux.md` with `## Who` and `## Open questions`.
 
-   - `discovery-business-persona` — prompt:
+   - Mode: discovery-business-persona — prompt:
+     > Mode: discovery-business-persona. Adopt the role defined in `shipflow/agents/discovery-business-persona.md`.
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-business.md`, `answers.md`.
      > Write `slice-business.md` with `## Why now`, `## Success`, `## Non-goals`.
 
-   - (optional, only if domain expert is active) `<domain>-expert`:
+   - (optional, only if domain expert is active) Mode: `<domain>-expert`:
+     > Mode: <domain>-expert. Adopt the role defined in `shipflow/agents/<domain>-expert.md`.
      > Synthesis mode. Working dir: `docs/shipflow/discovery/<slug>/`.
      > Read `seed.md`, `dialogue-<domain>.md`, `answers.md`.
-     > Write `slice-<domain>.md` per your agent prompt's contract.
+     > Write `slice-<domain>.md` per the role's contract.
 
 5. **Derive the next brief id.** Scan `docs/shipflow/briefs/` for existing
    `BRIEF-NNN-*.md` filenames, take the max NNN, add 1. Zero-pad to 3 digits.
@@ -71,9 +76,10 @@ Turn a completed discovery dialogue into a brief.
 
 7. **Update `docs/shipflow/index.md`** by adding the new brief to the Briefs section.
 
-8. **Spawn the challenger.** Use the Agent tool with `subagent_type: "challenger"`
-   and a prompt like:
+8. **Spawn the challenger (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: challenger. Adopt the role defined in `shipflow/agents/challenger.md`.
    > Working directory: `docs/shipflow/discovery/<slug>/`.
    > Brief path: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Read seed, answers, and the brief. Run your challenge loop (soft cap —

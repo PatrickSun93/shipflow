@@ -22,9 +22,10 @@ Verify one story against brief intent.
    if the story is a TINY record (tinies have no brief and no Success
    criterion to verify against).
 
-3. **Spawn `qa-lead`.** Use the Agent tool with
-   `subagent_type: "qa-lead"` and a prompt like:
+3. **Spawn `qa-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: qa-lead. Adopt the role defined in `shipflow/agents/qa-lead.md`.
    > Story: `docs/shipflow/stories/STORY-<NNNN>-<slug>.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Verify the story delivers its piece of the brief's Success. Append

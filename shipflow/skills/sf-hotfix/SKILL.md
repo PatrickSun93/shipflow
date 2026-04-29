@@ -43,9 +43,10 @@ Fast path for production bugs.
    - **Expected:** <correct behavior>
    ```
 
-4. **Spawn `build-lead`.** Use the Agent tool with
-   `subagent_type: "build-lead"` and a prompt like:
+4. **Spawn `build-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: build-lead. Adopt the role defined in `shipflow/agents/build-lead.md`.
    > Fast-path mode. Record:
    > `docs/shipflow/stories/HOTFIX-<NNNN>-<slug>.md`.
    > Description: "<description>". Target file (if given): <path>.

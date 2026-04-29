@@ -20,14 +20,17 @@ Advisory review between Discover and Spec.
 2. **Read `shipflow.config.json`** to determine `gate_modes.gate_1`
    (`advisory` or `block`).
 
-3. **Spawn both reviewers in parallel (single message, two Agent calls):**
+3. **Spawn both reviewers in parallel (single message, two Agent calls,
+   both routed through shipflow-mono):**
 
-   - `product-lead` — prompt:
+   - `subagent_type: "shipflow-mono"`, prompt:
+     > Mode: product-lead. Adopt the role defined in `shipflow/agents/product-lead.md`.
      > Gate 1 review. Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
      > Write verdict to `docs/shipflow/discovery/<slug>/gate-1-review-product-lead.md`.
      > First line: `Verdict: approve` (or `needs-changes` or `reject`). Then reasons.
 
-   - `tech-lead` — prompt:
+   - `subagent_type: "shipflow-mono"`, prompt:
+     > Mode: tech-lead. Adopt the role defined in `shipflow/agents/tech-lead.md`.
      > Gate 1 review. Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
      > Write verdict to `docs/shipflow/discovery/<slug>/gate-1-review-tech-lead.md`.
      > First line: `Verdict: approve` (or `needs-changes` or `reject`). Then reasons.

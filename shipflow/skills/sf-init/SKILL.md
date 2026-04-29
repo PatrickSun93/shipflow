@@ -48,9 +48,10 @@ Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwi
      handling, async style, DB / API / auth patterns) and write a rich
      `stack.md` grounded in actual code — so downstream agents inherit
      real context and don't re-ask the user about basics. Use the Agent
-     tool with `subagent_type: "project-archaeologist"`. After it
-     returns, read the generated `stack.md` and surface the "Known
-     unknowns" section to the user for confirmation.
+     tool with `subagent_type: "shipflow-mono"` and prompt prefix:
+     `Mode: project-archaeologist. Adopt the role defined in shipflow/agents/project-archaeologist.md.`
+     After it returns, read the generated `stack.md` and surface the
+     "Known unknowns" section to the user for confirmation.
 
 4b. **Write `docs/shipflow/glossary.md`** from
     `${CLAUDE_PLUGIN_ROOT}/references/glossary-template.md`. Substitute

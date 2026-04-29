@@ -21,9 +21,10 @@ Per-story advisory review between Spec and Build.
 2. **Read `shipflow.config.json`** to determine `gate_modes.gate_2`
    (`advisory` or `block`).
 
-3. **Spawn `tech-lead`.** Use the Agent tool with
-   `subagent_type: "tech-lead"` and a prompt like:
+3. **Spawn `tech-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: tech-lead. Adopt the role defined in `shipflow/agents/tech-lead.md`.
    > Gate 2 review. Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Stories under review: <comma-separated list of story paths>.
    > For each story, append a `## Gate 2 verdict` block at the end:

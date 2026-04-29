@@ -22,9 +22,10 @@ and feasibility; this asks whether the bet itself is the right bet.
 2. **Read `shipflow.config.json`** for `cofounder_review_mode`
    (`advisory` or `block`). Default: `advisory`.
 
-3. **Spawn `cofounder-expert`.** Use the Agent tool with
-   `subagent_type: "cofounder-expert"` and a prompt like:
+3. **Spawn `cofounder-expert` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: cofounder-expert. Adopt the role defined in `shipflow/agents/cofounder-expert.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Apply the six founder frameworks and append a `## Cofounder
    > review` block to the brief per your agent prompt's contract.

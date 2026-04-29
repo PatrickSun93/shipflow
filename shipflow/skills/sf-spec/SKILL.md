@@ -18,9 +18,10 @@ Turn an approved brief into a working set of stories.
    `docs/shipflow/briefs/`. Error out if none exists — Spec needs an approved
    brief.
 
-2. **Spawn `spec-author`.** Use the Agent tool with
-   `subagent_type: "spec-author"` and a prompt like:
+2. **Spawn `spec-author` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: spec-author. Adopt the role defined in `shipflow/agents/spec-author.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Slice it into 5–10 stories under `docs/shipflow/stories/` using
    > `references/story-template.md`. Link each back with

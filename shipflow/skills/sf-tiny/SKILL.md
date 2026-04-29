@@ -38,9 +38,10 @@ Fire-and-forget fast path for changes too small to warrant a full brief.
    <description, one line>
    ```
 
-4. **Spawn `build-lead`.** Use the Agent tool with
-   `subagent_type: "build-lead"` and a prompt like:
+4. **Spawn `build-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: build-lead. Adopt the role defined in `shipflow/agents/build-lead.md`.
    > Tiny mode. Record: `docs/shipflow/stories/TINY-<NNNN>-<slug>.md`.
    > Description: "<description>". Target file (if given): <path>.
    > Make the change. If `stack.md` names a test command, run it.

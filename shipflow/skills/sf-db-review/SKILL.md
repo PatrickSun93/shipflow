@@ -24,9 +24,10 @@ Data lens on one story or brief.
 2. **Resolve the parent brief** via the story's `brief: BRIEF-<NNN>`
    frontmatter (skip if target IS a brief, or for TINY/HOTFIX records).
 
-3. **Spawn `db-reviewer`.** Use the Agent tool with
-   `subagent_type: "db-reviewer"` and a prompt like:
+3. **Spawn `db-reviewer` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: db-reviewer. Adopt the role defined in `shipflow/agents/db-reviewer.md`.
    > Target: `<path to story or brief>`.
    > Brief (if any): `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Run the six-pass review (schema, indexes, migrations, query

@@ -47,9 +47,10 @@ Ship a brief's completed work as a release.
    - Hotfix mode: bump the patch (`v0.3.0 → v0.3.1`), unless `--version`
      overrides.
 
-5. **Spawn `release-manager`.** Use the Agent tool with
-   `subagent_type: "release-manager"` and a prompt like:
+5. **Spawn `release-manager` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: release-manager. Adopt the role defined in `shipflow/agents/release-manager.md`.
    > Brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md` (or hotfix record
    > path in hotfix mode). Version: `<version>`.
    > `archive_on_ship: <true|false>`.

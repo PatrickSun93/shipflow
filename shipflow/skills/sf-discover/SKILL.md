@@ -34,9 +34,10 @@ Kick off a Discover-phase dialogue for a new idea.
    <the raw idea string, verbatim>
    ```
 
-4. **Spawn the discovery-moderator agent.** Use the Agent tool with
-   `subagent_type: "discovery-moderator"` and a prompt like:
+4. **Spawn the discovery-moderator (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: discovery-moderator. Adopt the role defined in `shipflow/agents/discovery-moderator.md`.
    > Working directory: `docs/shipflow/discovery/<slug>/`.
    > Run the full 2-round dialogue with the three personas (tech, ux, business).
    > Converge to `questions.md` and a stitched `dialogue.md`.

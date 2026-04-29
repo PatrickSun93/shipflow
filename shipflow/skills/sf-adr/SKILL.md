@@ -23,9 +23,10 @@ Draft one ADR to unblock a flagged story.
 3. **Derive a slug for the ADR** from the needs-ADR reason text (kebab-case,
    ≤40 chars, trimmed at word boundary).
 
-4. **Spawn `tech-lead`.** Use the Agent tool with
-   `subagent_type: "tech-lead"` and a prompt like:
+4. **Spawn `tech-lead` (via mono).** Use the Agent tool with
+   `subagent_type: "shipflow-mono"` and a prompt like:
 
+   > Mode: tech-lead. Adopt the role defined in `shipflow/agents/tech-lead.md`.
    > ADR draft. Story: `docs/shipflow/stories/STORY-<NNNN>-<slug>.md`.
    > Parent brief: `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`.
    > Reason flagged: "<reason from the marker>".
