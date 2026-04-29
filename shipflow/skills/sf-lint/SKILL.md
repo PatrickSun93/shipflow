@@ -66,7 +66,25 @@ descends into `archive/`).
      `status: approved` → `error` (block flag should have flipped to
      `draft`).
 
-9. **Report:**
+9. **Stale verdict / content-vs-verdict drift** — detect cases where
+   the user manually edited an artifact after a verdict was written
+   (the verdict no longer reflects the current content):
+   - For each brief with a `## Gate 1 verdict` block: compare the
+     brief's `updated` frontmatter date against the verdict block's
+     mtime / date. If `updated` > verdict date → `warning: stale
+     verdict — re-run /sf-check-brief`.
+   - For each story with `## Gate 2 verdict`, `## Gate 3 verdict`,
+     `## Verify report`, `## Security review`, `## DB review`, or
+     `## Code review`: same comparison against the story's `updated`
+     frontmatter or file mtime.
+   - If file mtime exceeds the most recent verdict's recorded
+     timestamp by > 1 hour, flag the verdict as potentially stale.
+     The 1-hour buffer absorbs same-session edits to formatting.
+   - Stale verdicts don't auto-block but they should be visible to
+     `/sf-next` (which can pair this with the existing
+     "verdict was needs-changes AND mtime > verdict mtime" rule).
+
+10. **Report:**
 
    ```markdown
    # /sf-lint report — <yyyy-mm-dd hh:mm>

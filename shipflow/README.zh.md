@@ -16,19 +16,27 @@ CAP / 三人测试 / Rollback Test⋯），以及在不对劲的时候敢于 pus
 
 ## 状态
 
-**v0.2.16** —— 五个阶段全部搭建完成，已通过 dogfood 验证。
+**v0.2.21** —— 五个阶段全部搭建完成，已通过 dogfood 验证。
 
-- **20 个智能体** —— 2 个一级审阅者（product-lead、tech-lead），4 个发现期
-  角色（moderator + tech/ux/business），1 个 challenger，6 个领域专家
-  （education / fintech / healthcare / ecommerce / devtools / social），
-  7 个阶段 + 跨切审阅者（spec-author、build-lead、qa-lead、release-manager、
-  security-reviewer、db-reviewer、cofounder-expert）。其中 8 个具备
-  Identity & POV 段落（角色具身化，不止是岗位说明书）。
-- **21 个技能** —— init、discover、brief、spec、adr、build、tiny、hotfix、
-  verify、ship、regen-index、next、checkpoint、lint，外加四道 gate
-  （`/sf-check-brief` / `-plan` / `-build` / `-ship`）和三个跨切审阅
-  （`/sf-security-review`、`/sf-db-review`、`/sf-cofounder-review`）。
-- **4 个钩子** —— SessionStart、Stop、PreCompact、UserPromptSubmit。
+**诚实统计：22 个智能体，结构如下：**
+- **8 个带 Identity & POV 的具身化审阅者** —— `tech-lead`、`product-lead`、
+  `cofounder-expert`、`qa-lead`、`security-reviewer`、`db-reviewer`、
+  `code-reviewer`、`build-lead`、`challenger`
+- **3 个带 Identity & POV 的发现期 persona** —— `discovery-tech-persona`、
+  `discovery-ux-persona`、`discovery-business-persona`（v0.2.21 加上
+  Identity 段，之前是单纯任务规格）
+- **6 个领域专家**（在 Discovery 中根据 domain 自动激活）—— education、
+  fintech、healthcare、ecommerce、devtools、social。专注领域专属关注点，
+  Identity 比上述 8+3 个浅
+- **5 个 specialty / 协调者** —— `discovery-moderator`、`spec-author`、
+  `release-manager`、`project-archaeologist`，加上 challenger（也算在审阅者）
+
+**23 个技能** —— init、discover、brief、spec、adr、build、tiny、quick、
+hotfix、verify、ship、regen-index、resurvey、next、checkpoint、lint、grill，
+外加四道 gate（`/sf-check-{brief,plan,build,ship}`）和三个跨切审阅
+（`/sf-security-review`、`/sf-db-review`、`/sf-cofounder-review`）。
+
+**4 个钩子** —— SessionStart、Stop、PreCompact、UserPromptSubmit。
 
 ## 安装
 

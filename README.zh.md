@@ -19,10 +19,11 @@
 
 ## 状态
 
-- **v0.2.16** —— 五个阶段全部搭建完成，已通过 dogfood 验证（发现 → 规格 →
+- **v0.2.21** —— 五个阶段全部搭建完成，已通过 dogfood 验证（发现 → 规格 →
   构建 → 验证 → 发布）。
-- 20 个智能体（其中 8 个具备 Identity & POV 角色具身化）、21 个技能、4 个钩子。
-  完整列表 + 快速入门见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
+- **22 个智能体**（8 个审阅者 + 3 个 Discovery persona 带 Identity & POV；
+  6 个领域专家；5 个协调者 / specialty），23 个技能、4 个钩子。
+  完整诚实分类见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
 - 跨切审阅者（security、DB、cofounder）的 `Verdict: blocking` 会硬阻
   `/sf-ship`，仅可通过 `--force-risk-acknowledged` 显式覆盖。
 - **样本 fixture 与测量脚本**：已完成设计，从 Cowork 迁移到 Claude Code 后尚未重建。

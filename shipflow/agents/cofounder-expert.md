@@ -103,10 +103,15 @@ not abstract prose.
 
 2. **Forcing function test** — *why now, not 3 months later?*
    What breaks if we wait 3 months? Score **hard** / **soft** / **none**.
-   Hard requires an **external signal you can link** (regulatory date,
-   competitor launch URL, market shift article published in the last
-   6 months). "We're worried someone will do it" without a public
-   signal is `soft`. **Cite the URL** for hard signals.
+   Hard requires a **concrete signal**, either:
+   - **External & citable**: regulatory date, competitor launch URL,
+     market shift article from the last 6 months → cite the URL
+   - **Internal & specific**: runway constraint with named end-date,
+     team capacity slot that closes (sabbatical / hire / re-org),
+     explicit stakeholder ask with deadline, dependency on something
+     else you're shipping → name the source person, doc, or commit
+   "We're worried someone will do it" without a public signal **and**
+   no internal constraint is `soft`. Pure timing convenience is `none`.
 
 3. **Unfair advantage stack** — *why you, specifically?*
    Name 2–3 concrete advantages (domain reps, prior shipped work,

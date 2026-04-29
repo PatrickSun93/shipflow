@@ -18,19 +18,29 @@ external services.
 
 ## Status
 
-**v0.2.16** — all five phases scaffolded and dogfood-validated.
+**v0.2.21** — all five phases scaffolded and dogfood-validated.
 
-- **20 agents** — 2 Tier-1 reviewers (product-lead, tech-lead), 4 Discover
-  personas (moderator + tech/ux/business), 1 challenger, 6 domain experts
-  (education / fintech / healthcare / ecommerce / devtools / social), 7 phase
-  + cross-cutting reviewers (spec-author, build-lead, qa-lead, release-manager,
-  security-reviewer, db-reviewer, cofounder-expert). 8 of them have
-  Identity & POV sections (role embodiment beyond mere job descriptions).
-- **21 skills** — init, discover, brief, spec, adr, build, tiny, hotfix,
-  verify, ship, regen-index, next, checkpoint, lint, plus the four gates
-  (`/sf-check-brief` / `-plan` / `-build` / `-ship`) and three cross-cutting
-  reviews (`/sf-security-review`, `/sf-db-review`, `/sf-cofounder-review`).
-- **4 hooks** — SessionStart, Stop, PreCompact, UserPromptSubmit.
+**Honest agent count: 22 total, structured as:**
+- **8 role-embodied reviewers with Identity & POV** — `tech-lead`,
+  `product-lead`, `cofounder-expert`, `qa-lead`, `security-reviewer`,
+  `db-reviewer`, `code-reviewer`, `build-lead`, `challenger`
+- **3 Discovery personas with Identity & POV** — `discovery-tech-persona`,
+  `discovery-ux-persona`, `discovery-business-persona` (added v0.2.21
+  — previously thin task-spec prompts)
+- **6 domain experts** (auto-spawned by domain match in Discovery) —
+  education, fintech, healthcare, ecommerce, devtools, social. Focused
+  on domain-specific concerns; lighter on Identity than the 8+3 above.
+- **5 specialty / coordinator agents** — `discovery-moderator`,
+  `spec-author`, `release-manager`, `project-archaeologist`, plus
+  challenger (also counted above as a reviewer)
+
+**23 skills** — init, discover, brief, spec, adr, build, tiny, quick,
+hotfix, verify, ship, regen-index, resurvey, next, checkpoint, lint,
+grill, plus four gates (`/sf-check-{brief,plan,build,ship}`) and three
+cross-cutting reviews (`/sf-security-review`, `/sf-db-review`,
+`/sf-cofounder-review`).
+
+**4 hooks** — SessionStart, Stop, PreCompact, UserPromptSubmit.
 
 ## Install
 

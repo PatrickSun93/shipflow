@@ -37,32 +37,50 @@ None. State comes from the repo itself.
        `**/middleware/*csrf*`, `**/middleware/*cors*`, new login /
        signup route handlers
 
-3. **Decide the next step** using this priority (stop at first match):
+3. **Pre-step: pick the live brief.** A "live brief" is one with
+   `status` in `{draft, approved, specced}` (not `shipped`). Sort
+   live briefs by `updated` descending. Cases:
+   - **0 live briefs**: skip brief-related rows, jump to TINY/HOTFIX
+     or idle.
+   - **1 live brief**: that's the target.
+   - **2+ live briefs**: surface them all to the user with one-line
+     status summaries, ask which to advance. Don't auto-pick. (Hard
+     rule: don't guess at scope.)
+
+4. **Decide the next step** using this priority (stop at first match).
+   Rows are evaluated against the live brief from step 3 (when it
+   exists) plus any TINY/HOTFIX records (which are brief-less):
 
    | State | Next step | Auto-run? |
    |---|---|---|
    | Discovery dir with `questions.md` but no `answers.md` | Remind user to answer, then `/sf-brief` | **No** — user input needed |
    | Discovery dir with `answers.md` but no matching brief | `/sf-brief` | Yes |
-   | Brief with `status: draft`, no `## Gate 1 verdict` | `/sf-check-brief` | Yes |
-   | Brief `status: draft`, last verdict was `needs-changes` or `reject` | Surface the verdict, ask user to revise | **No** |
+   | Brief `status: draft`, no `## Gate 1 verdict` | `/sf-check-brief` | Yes |
+   | Brief `status: draft`, last Gate 1 verdict was `needs-changes` / `reject` AND brief mtime > verdict mtime (user revised) | `/sf-check-brief` (re-run on revised brief) | Yes |
+   | Brief `status: draft`, last Gate 1 verdict was `needs-changes` / `reject` AND brief unchanged | Surface the verdict, ask user to revise | **No** |
    | Brief `status: approved`, no stories link to it | `/sf-spec` | Yes |
    | Stories `status: draft`, brief `status: specced`, no Gate 2 verdicts on them | `/sf-check-plan` | Yes |
+   | Story `status: draft`, last Gate 2 verdict was `needs-changes` / `reject` AND story mtime > verdict mtime (user revised) | `/sf-check-plan` (re-run on that story) | Yes |
    | Any story has `<!-- needs-ADR: ... -->` marker and no ADR link yet | `/sf-adr <STORY-id>` (pick the earliest) | **No** — user picks which to tackle first |
-   | Story `status: ready`, all deps `done` | `/sf-build` | Yes |
+   | Story `status: ready`, all `depends_on` `done` | `/sf-build` | Yes |
    | Story `status: review`, no Gate 3 verdict | `/sf-check-build` | Yes |
    | Story `status: done`, build log shows **data signals**, no `## DB review` | Suggest `/sf-db-review` before `/sf-verify` | **No** — user decides whether DB risk merits the review |
    | Story `status: done`, build log shows **security signals**, no `## Security review` | Suggest `/sf-security-review` before `/sf-verify` | **No** — same |
    | Story `status: done`, no `## Verify report` | `/sf-verify` | Yes |
+   | **TINY** record (`type: tiny`) `status: draft` | Remind user this is a fast-path; recommend `/sf-tiny` if the description came from them, or `/sf-build` to implement directly | **No** — user-context-dependent |
+   | **HOTFIX** record (`type: hotfix`) `status: draft` | Same as TINY, but biased toward `/sf-build` (hotfix is emergency) | **No** |
+   | TINY or HOTFIX `status: done`, no release | Recommend `/sf-ship --hotfix <id>` if hotfix; else continue (TINY rides next regular ship) | **No** |
+   | Live brief has stories in **mixed** statuses (e.g. some `done`, some `ready`, some `draft`), brief `status: specced` | Continue building the next eligible `ready` story (highest-priority match in this same table); after each `/sf-build`, re-run `/sf-next` | Yes |
    | All stories under live brief `done`, no Gate 4 verdict | `/sf-check-ship` | Yes |
    | All stories `done`, Gate 4 `approve`, brief not `shipped` | `/sf-ship` | **No** — shipping is user-driven |
    | Brief `shipped` but `index.md` mtime older than any story/brief/ADR | `/sf-regen-index` | Yes |
-   | None of the above | Report "workflow idle" with a one-line state summary | — |
+   | None of the above | Report "workflow idle" with a one-line state summary; suggest `/sf-discover "<idea>"` for new work | — |
 
-4. **When auto-run is Yes**, invoke the resolved skill via the Skill
+5. **When auto-run is Yes**, invoke the resolved skill via the Skill
    tool with any defaults the skill itself supports. Pass through the
    target slug / story id the scan surfaced.
 
-5. **When auto-run is No**, report to the user:
+6. **When auto-run is No**, report to the user:
    - Current state (one line)
    - The recommended next command
    - Why it's not auto-running (user input needed / judgment call / etc.)
