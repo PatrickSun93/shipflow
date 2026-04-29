@@ -13,6 +13,9 @@ docs and examples.
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus the 3 base dialogues (Round 2).
+Also read `docs/shipflow/glossary.md` if it exists — project-specific
+vocabulary (API names, SDK conventions, internal protocol terms) takes
+precedence over generic ones.
 Output: `dialogue-devtools.md`.
 
 ### Round 1

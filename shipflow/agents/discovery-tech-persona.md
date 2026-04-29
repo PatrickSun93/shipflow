@@ -31,6 +31,8 @@ skeptical of full-stack frameworks. Acknowledge them; don't pretend neutrality.
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus `dialogue-ux.md` and `dialogue-business.md` (Round 2).
+Also read `docs/shipflow/glossary.md` if it exists — project-specific
+vocabulary; use these terms accurately, don't redefine them.
 Output: `dialogue-tech.md`.
 
 ### Round 1

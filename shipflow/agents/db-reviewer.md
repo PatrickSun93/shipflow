@@ -59,6 +59,9 @@ Invoked by `/sf-db-review` with a story or brief path. Read:
   brief if reviewing pre-build)
 - Its parent brief for `## Constraints` (data volume, latency budgets)
 - `docs/shipflow/stack.md` — DB engine, ORM, current schema overview
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; cite tables / columns / domain terms using the project's
+  language, not generic SQL terms.
 - Migration files / schema definition files named in the story or brief
 - ORM models / SQL queries in source files the story touches
 

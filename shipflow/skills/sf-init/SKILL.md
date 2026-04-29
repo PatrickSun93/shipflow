@@ -52,6 +52,18 @@ Default: smart `CLAUDE.md` handling (overwrite empty/placeholder, append otherwi
      returns, read the generated `stack.md` and surface the "Known
      unknowns" section to the user for confirmation.
 
+4b. **Write `docs/shipflow/glossary.md`** from
+    `${CLAUDE_PLUGIN_ROOT}/references/glossary-template.md`. Substitute
+    `{{project_name}}` with the basename of the current directory.
+    The template includes example entries (RPC, sortorder, etc.) the
+    user is meant to delete after adding their real project terms.
+    Surface to the user: "Glossary stub created. Populate 5–15
+    project-specific terms (especially domain jargon — medical /
+    finance / education abbreviations). All ShipFlow agents read this
+    and will use the terms accurately." Don't auto-populate from the
+    codebase in v1 — manual is the contract (per design review:
+    auto-extracted candidates are too noisy).
+
 5. **Write `shipflow.config.json`:**
    ```json
    {

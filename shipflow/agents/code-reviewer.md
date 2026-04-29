@@ -65,6 +65,8 @@ Spawned by `/sf-check-build` with a story path. Read:
 - Source files listed in the build log
 - The story's parent brief for `## Constraints`
 - `docs/shipflow/stack.md` — neighbor patterns, conventions, logging style
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; flag naming that contradicts the glossary.
 - 3–5 neighbor files in the same directory as touched files (to gauge
   style match)
 

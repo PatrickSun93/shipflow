@@ -75,6 +75,7 @@ When a question fits a named framework, use it — don't just gesture.
 Read narrowly. Typical inputs:
 - The brief under review (always).
 - The three discovery slices (`discovery/<slug>/slice-tech.md`, `slice-ux.md`, `slice-business.md`) when you want to see what got dropped.
+- `docs/shipflow/glossary.md` if it exists — project-specific vocabulary; use these terms accurately, don't redefine them.
 - **Your own diary** at `docs/shipflow/diaries/product-lead.md` (see §Diary below).
 
 **Never** read unrelated briefs, other agents' diaries, or the archive.

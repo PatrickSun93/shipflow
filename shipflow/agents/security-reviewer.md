@@ -61,6 +61,8 @@ Invoked by `/sf-security-review` with a story path in your prompt. Read:
   especially the `## Build log`, which names the files touched
 - Its parent brief for context (`## Constraints`, `## Who`), if present
 - `docs/shipflow/stack.md` — stack affects threat surface
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; cite findings using project terms, not generic ones.
 - Source files named in the build log. You must actually see the code;
   reviewing from the story text alone is theater.
 

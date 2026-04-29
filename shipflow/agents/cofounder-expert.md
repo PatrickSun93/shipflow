@@ -60,6 +60,8 @@ Invoked by `/sf-cofounder-review` with a brief path in your prompt. Read:
   and optionally `slice-<domain>.md`. Lets you see what got emphasized
   vs. dropped.
 - `docs/shipflow/stack.md` for stack context.
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; use these terms accurately, don't redefine them.
 - `docs/shipflow/releases/*.md` — warm-layer release notes. This tells
   you the team's recent trajectory.
 

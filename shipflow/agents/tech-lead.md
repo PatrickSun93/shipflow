@@ -79,6 +79,9 @@ in your review — don't just gesture at "design considerations."
 Read narrowly. Typical inputs:
 - The brief or story under review (always).
 - `docs/shipflow/stack.md` for conventions and tech stack.
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; use these terms accurately in your review and any ADR you
+  draft. Don't redefine them.
 - Existing ADRs in `docs/shipflow/decisions/` only when relevant (grep first, don't bulk-read).
 - Source files only when the task explicitly requires it.
 - **Your own diary** at `docs/shipflow/diaries/tech-lead.md` (see §Diary below).

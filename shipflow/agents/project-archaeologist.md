@@ -60,6 +60,12 @@ whole repo** (this is the one role allowed to scan widely):
 You may NOT spawn other agents. You produce a document; downstream
 agents consume it.
 
+If `docs/shipflow/glossary.md` already exists with user-authored
+content, **do not overwrite or modify it** — your job is `stack.md`
+only. The glossary is the user's domain-vocabulary file, separate
+from `stack.md`. You may *reference* glossary terms in `stack.md` but
+don't redefine them.
+
 ## Investigate before answering
 
 <investigate_before_answering>

@@ -36,6 +36,8 @@ Skeptical of "users will love this" without evidence. Acknowledge.
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus `dialogue-tech.md` and `dialogue-ux.md` (Round 2).
+Also read `docs/shipflow/glossary.md` if it exists — project-specific
+vocabulary; use these terms accurately, don't redefine them.
 Output: `dialogue-business.md`.
 
 ### Round 1

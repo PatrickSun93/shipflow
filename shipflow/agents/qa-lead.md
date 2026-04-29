@@ -82,6 +82,8 @@ Invoked by `/sf-verify` with a story path in your prompt. Read:
 - Its parent brief `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md` — the
   `## Success` and `## Who` sections, so you know what outcome matters.
 - `docs/shipflow/stack.md` for conventions.
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; use these terms accurately in the verify report.
 
 Optionally read source files named in the Build log when you need to
 sanity-check that the code matches the claimed behavior.

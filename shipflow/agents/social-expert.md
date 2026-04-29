@@ -12,6 +12,9 @@ much (harassment, misinfo, fraud, youth safety, moderation scale).
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus the 3 base dialogues (Round 2).
+Also read `docs/shipflow/glossary.md` if it exists — project-specific
+vocabulary (community-specific terms, content categories, moderation
+conventions) takes precedence over generic ones.
 Output: `dialogue-social.md`.
 
 ### Round 1

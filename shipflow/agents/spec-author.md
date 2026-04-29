@@ -12,6 +12,9 @@ You are invoked by `/sf-spec` with the brief path in your prompt. Read:
 
 - The brief under `docs/shipflow/briefs/BRIEF-<NNN>-<slug>.md`
 - `docs/shipflow/stack.md` for stack and path conventions
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; use these terms accurately in story names, goals, and
+  acceptance criteria. Don't redefine them.
 - Existing stories under `docs/shipflow/stories/` **only** to compute the
   next id (scan filenames; do not read their bodies)
 

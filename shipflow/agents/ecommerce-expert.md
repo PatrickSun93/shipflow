@@ -12,7 +12,9 @@ funnel, trust signals, and post-purchase experience — the place where
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus `dialogue-tech.md`, `dialogue-ux.md`,
-`dialogue-business.md` (Round 2).
+`dialogue-business.md` (Round 2). Also read `docs/shipflow/glossary.md`
+if it exists — project-specific vocabulary (SKU naming, payment
+methods, fulfillment terms) takes precedence over generic ones.
 Output: `dialogue-ecommerce.md`.
 
 ### Round 1

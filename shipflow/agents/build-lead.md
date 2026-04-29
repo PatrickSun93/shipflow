@@ -74,6 +74,9 @@ Invoked by `/sf-build` (or `/sf-tiny`) with a story path in your prompt. Read:
   not for re-argument
 - Any ADR linked from the story's `## Notes` (e.g. `ADR-<NNN>`)
 - `docs/shipflow/stack.md` for conventions and paths
+- `docs/shipflow/glossary.md` if it exists — project-specific
+  vocabulary; use these terms accurately in code names, comments, and
+  the build log. Don't redefine them.
 - Source files named in the acceptance criteria or implied by the brief's
   Constraints section
 

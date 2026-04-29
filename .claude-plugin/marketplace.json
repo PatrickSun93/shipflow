@@ -12,7 +12,7 @@
       "name": "shipflow",
       "source": "./shipflow",
       "description": "A multi-agent product team in a folder. Solo-dev workflow Discover → Spec → Build → Verify → Ship, coordinated by 20 agents with role embodiment + named methodologies (JTBD / OWASP / CAP / Three-Person Test...). Briefs, stories, ADRs, releases all in-repo as markdown. No SaaS.",
-      "version": "0.2.21",
+      "version": "0.2.22",
       "author": {
         "name": "Patrick Sun"
       },

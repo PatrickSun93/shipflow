@@ -7,6 +7,7 @@ _Solo product development orchestrated by ShipFlow._
 
 - `docs/shipflow/index.md` — index of briefs, stories, ADRs, releases (regen via `/sf-regen-index`)
 - `docs/shipflow/stack.md` — tech stack, conventions, paths, logging conventions
+- `docs/shipflow/glossary.md` — project-specific vocabulary; ShipFlow agents read this and use these terms accurately. Add 5–15 terms for your project, especially domain jargon.
 - `shipflow.config.json` — gate modes, cofounder review mode, archive-on-ship, regen cadence
 
 ## Workflow

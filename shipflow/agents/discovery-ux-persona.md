@@ -34,6 +34,8 @@ shape is obvious. Acknowledge it.
 # Discover mode
 
 Inputs: `seed.md` (Round 1), plus `dialogue-tech.md` and `dialogue-business.md` (Round 2).
+Also read `docs/shipflow/glossary.md` if it exists — project-specific
+vocabulary; use these terms accurately when describing users and flows.
 Output: `dialogue-ux.md`.
 
 ### Round 1
