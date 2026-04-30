@@ -1,6 +1,18 @@
-# shipflow
+# shipflow — `experiment/mono-agent` branch
 
 > **Other languages:** [中文](./README.zh.md)
+>
+> ⚠️ **You are on the single-agent experimental branch.** This is the
+> mono-agent variant created to A/B test whether 22 specialized agents
+> are genuinely necessary. For the production multi-agent plugin, check
+> out `main` or install via marketplace.
+>
+> See [`EXPERIMENT.md`](./EXPERIMENT.md) for the hypothesis, comparison
+> protocol, and merge contract. See
+> [`shipflow/README.md`](./shipflow/README.md) for the plugin-level
+> details of this variant.
+
+---
 
 This repo houses **ShipFlow** — *a multi-agent product team in a folder*. A
 Claude Code plugin that gives solo developers what a startup with 8 people

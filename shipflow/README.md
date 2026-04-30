@@ -1,6 +1,86 @@
-# ShipFlow
+# ShipFlow — `experiment/mono-agent` branch
 
 > **Other languages:** [中文](./README.zh.md)
+>
+> ⚠️ **This is the single-agent experimental variant.** For the
+> production multi-agent plugin, switch to `main` or install via
+> marketplace (see "Don't install this branch" below).
+
+## What this branch is
+
+The `experiment/mono-agent` variant of ShipFlow. **Same workflow,
+same artifacts, same skills — but ONE agent instead of 22.**
+
+It exists to A/B test the question: *"Are 22 specialized agents
+genuinely needed, or could one parameterized agent do the same work?"*
+That question was admitted as unverified in
+[`DESIGN.md`](../DESIGN.md). This branch is the experiment.
+
+See [`EXPERIMENT.md`](../EXPERIMENT.md) at the repo root for the full
+hypothesis, comparison protocol, and acceptance criteria.
+
+## Architecture difference (the only variable changed)
+
+| | `main` (multi-agent) | `experiment/mono-agent` (this branch) |
+|---|---|---|
+| Agent count | 22 specialized agents | **1 `shipflow-mono` agent** |
+| Spawn pathway | `subagent_type: "<role>"` direct | `subagent_type: "shipflow-mono"` + `Mode: <role>` directive |
+| Role content delivery | System prompt of specialized agent | Read-tool result of `shipflow/agents/<role>.md` |
+| Workflow / artifacts / skills | identical | identical |
+| Per-spawn fresh context | identical (Claude Code runtime) | identical (Claude Code runtime) |
+
+The 22 specialized agent files **are still in this branch** under
+`shipflow/agents/<role>.md` — they serve as **role references** the
+mono agent reads on first turn. Their content is unchanged.
+
+## Don't install this branch via marketplace
+
+The marketplace (`/plugin marketplace add ...`) points at `main`.
+This branch is **never** auto-installed; users on `main` are
+unaffected.
+
+To run this variant for the experiment, install **locally**:
+
+```bash
+git clone https://github.com/PatrickSun93/shipflow.git shipflow-mono
+cd shipflow-mono
+git checkout experiment/mono-agent
+claude --plugin-dir ./shipflow
+```
+
+Or with the plugin dir flag:
+
+```bash
+claude --plugin-dir /path/to/shipflow-mono/shipflow --dangerously-skip-permissions
+```
+
+## Don't merge this branch
+
+Per the contract in [`EXPERIMENT.md`](../EXPERIMENT.md):
+
+> Don't merge unless the experiment produces a clear answer AND the
+> decision (collapse or keep) is made deliberately.
+
+If the experiment shows mono ≥ multi on quality + cost, the path
+forward is a deliberate v0.3 collapse, not a fast-merge of this
+branch.
+
+## Version on this branch
+
+`shipflow/.claude-plugin/plugin.json` shows `"version":
+"0.2.24-mono.0"`. The `-mono.0` suffix marks the experimental status
+and is your visual confirmation you're running the mono variant.
+
+`marketplace.json` is **deliberately unchanged** on this branch
+(stays at `0.2.24` pointing at the multi-agent main version) so users
+doing `/plugin update` from the marketplace catalog stay clean on
+main.
+
+---
+
+# Below is the multi-agent README (preserved verbatim for reference)
+
+## What ShipFlow is
 
 **A multi-agent product team in a folder.**
 

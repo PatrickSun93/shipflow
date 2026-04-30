@@ -1,6 +1,81 @@
-# ShipFlow
+# ShipFlow —— `experiment/mono-agent` 分支
 
 > **其他语言：** [English](./README.md)
+>
+> ⚠️ **这是单 agent 的实验性变体。** 生产用的多 agent 插件请切到
+> `main` 分支，或通过 marketplace 安装（详见下方 "不要从 marketplace
+> 安装本分支"）。
+
+## 这个分支是什么
+
+ShipFlow 的 `experiment/mono-agent` 变体。**工作流相同、产物相同、
+技能相同 —— 但只用 1 个 agent，而不是 22 个。**
+
+它存在的目的，是 A/B 验证一个问题：*"22 个专门化 agent 真的有必要，
+还是一个参数化 agent 就能做同样的事？"* 这个问题在
+[`DESIGN.md`](../DESIGN.md) 中被坦白列为未经验证的假设。本分支就是
+那个实验。
+
+完整的假设、对比协议和验收标准见仓库根目录的
+[`EXPERIMENT.md`](../EXPERIMENT.md)。
+
+## 架构差异（唯一被改变的变量）
+
+| | `main`（多 agent） | `experiment/mono-agent`（本分支） |
+|---|---|---|
+| Agent 数量 | 22 个专门化 agent | **1 个 `shipflow-mono` agent** |
+| 派生路径 | `subagent_type: "<role>"` 直接派生 | `subagent_type: "shipflow-mono"` + `Mode: <role>` 指令 |
+| 角色内容来源 | 专门化 agent 的 system prompt | 通过 Read 工具读取 `shipflow/agents/<role>.md` |
+| 工作流 / 产物 / 技能 | 完全相同 | 完全相同 |
+| 每次派生的全新上下文 | 相同（Claude Code runtime） | 相同（Claude Code runtime） |
+
+22 个专门化 agent 文件**仍然保留**在本分支的
+`shipflow/agents/<role>.md` —— 它们作为**角色参考文档**供 mono agent
+在首轮读取。内容未做任何修改。
+
+## 不要从 marketplace 安装本分支
+
+Marketplace（`/plugin marketplace add ...`）指向的是 `main`。
+本分支**永远**不会被自动安装；`main` 上的用户不受任何影响。
+
+要本地运行本变体做实验，请用**本地安装**：
+
+```bash
+git clone https://github.com/PatrickSun93/shipflow.git shipflow-mono
+cd shipflow-mono
+git checkout experiment/mono-agent
+claude --plugin-dir ./shipflow
+```
+
+或通过插件目录参数：
+
+```bash
+claude --plugin-dir /path/to/shipflow-mono/shipflow --dangerously-skip-permissions
+```
+
+## 不要合并本分支
+
+依据 [`EXPERIMENT.md`](../EXPERIMENT.md) 中的契约：
+
+> 除非实验得出明确结论 **且** 已审慎做出决策（合并或保留并行），
+> 否则不要合并本分支。
+
+如果实验显示 mono ≥ multi（质量 + 成本两项），前进路径应当是审慎的
+v0.3 collapse，而不是直接 fast-merge 这个分支。
+
+## 本分支的版本号
+
+`shipflow/.claude-plugin/plugin.json` 显示
+`"version": "0.2.24-mono.0"`。`-mono.0` 后缀标识实验状态，是你视觉
+上确认正在跑 mono 变体的标记。
+
+`marketplace.json` 在本分支**故意保持不变**（仍为 `0.2.24` 指向多
+agent 的 main 版本），以便从 marketplace catalog 做 `/plugin update`
+的用户保持在 main 上不受干扰。
+
+---
+
+# 以下是多 agent 版本的 README（原样保留供参考）
 
 **一个装在文件夹里的产品团队。**
 

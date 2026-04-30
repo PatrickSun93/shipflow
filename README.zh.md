@@ -1,6 +1,15 @@
-# claude-code-project
+# claude-code-project —— `experiment/mono-agent` 分支
 
 > **其他语言：** [English](./README.md)
+>
+> ⚠️ **你正处于单 agent 实验分支。** 这是为 A/B 验证 "22 个专门化
+> agent 是否真的必要" 而创建的 mono-agent 变体。生产用的多 agent
+> 插件请切到 `main` 分支或通过 marketplace 安装。
+>
+> 实验的假设、对比协议和合并契约见 [`EXPERIMENT.md`](./EXPERIMENT.md)。
+> 本变体的插件级细节见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
+
+---
 
 这个仓库包含 **ShipFlow** —— *一个装在文件夹里的产品团队*。一个 Claude Code 插件，
 给独立开发者提供 8 人创业团队的配置：技术负责人、产品负责人、联合创始人、QA、
