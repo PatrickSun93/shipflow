@@ -14,7 +14,13 @@ class ShipflowOrchestrator:
         :param shipflow_repo_path: Path to the shipflow source code (to read agents/skills).
         """
         self.target_dir = Path(target_dir).resolve()
-        self.shipflow_repo_path = Path(shipflow_repo_path).resolve()
+        # If shipflow_repo_path is not provided or invalid, assume agents are bundled inside the orchestrator project
+        provided_path = Path(shipflow_repo_path).resolve() if shipflow_repo_path else None
+        if provided_path and (provided_path / "agents").exists():
+            self.shipflow_repo_path = provided_path
+        else:
+            # Fallback to local 'agents' folder relative to this file
+            self.shipflow_repo_path = Path(__file__).resolve().parent.parent
 
         # We assume the user wants the CLI to run in the target_dir
         self.runner = ClaudeRunner(cwd=str(self.target_dir))
@@ -201,4 +207,67 @@ class ShipflowOrchestrator:
             "Write an advisory review. Append a Verdict per-story."
         )
         logger.info("Spawning tech-lead for per-story review...")
+        self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
+
+    def sf_build(self, story_file: str):
+        """
+        Implement one story at a time.
+        """
+        logger.info(f"Running /sf-build for {story_file}")
+        agent_path = self._get_agent_path("build-lead")
+        task_prompt = (
+            f"Implement the story `{story_file}`.\n"
+            "Ensure the code runs, tests pass, and acceptance criteria are met."
+        )
+        logger.info("Spawning build-lead...")
+        self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
+
+    def sf_check_build(self):
+        """
+        Gate 3: advisory. Runs tests, checks acceptance criteria, invokes code review.
+        """
+        logger.info("Running /sf-check-build")
+        agent_path = self._get_agent_path("code-reviewer")
+        task_prompt = (
+            "Review the built changes against the story acceptance criteria.\n"
+            "Write an advisory review with a Verdict."
+        )
+        logger.info("Spawning code-reviewer for build review...")
+        self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
+
+    def sf_verify(self, story_file: str):
+        """
+        Confirm the built story actually satisfies the brief's intent.
+        """
+        logger.info(f"Running /sf-verify for {story_file}")
+        agent_path = self._get_agent_path("qa-lead")
+        task_prompt = (
+            f"Review the implementation of `{story_file}` against its acceptance criteria AND the parent brief's success criteria.\n"
+            "Produce a verify report appended to the story."
+        )
+        logger.info("Spawning qa-lead...")
+        self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
+
+    def sf_check_ship(self):
+        """
+        Gate 4: advisory last-chance review before shipping.
+        """
+        logger.info("Running /sf-check-ship")
+        agent_path = self._get_agent_path("tech-lead")
+        task_prompt = (
+            "Check that all acceptance criteria are met, no open Gate 3 flags remain, and version is bumped."
+        )
+        logger.info("Spawning tech-lead for ship review...")
+        self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
+
+    def sf_ship(self):
+        """
+        Cut a release, archive shipped work.
+        """
+        logger.info("Running /sf-ship")
+        agent_path = self._get_agent_path("release-manager")
+        task_prompt = (
+            "Author the release note, orchestrate archiving, and update `index.md`."
+        )
+        logger.info("Spawning release-manager...")
         self.runner.spawn_subagent(agent_file_path=agent_path, task_prompt=task_prompt)
