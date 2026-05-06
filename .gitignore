@@ -26,3 +26,4 @@ node_modules/
 
 # ShipFlow CLAUDE.md backup (sf-init --overwrite creates this)
 CLAUDE.md.pre-shipflow
+__pycache__/
