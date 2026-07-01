@@ -21,6 +21,23 @@ benefits over single-agent in:
   frameworks more consistently than a generalist)
 - (d) build-lead code quality (specialized prompt produces fewer of
   the 5-rule violations than a generalist)
+- (e) Cross-artifact template adherence consistency (specialized agents
+  each learn one artifact template and stay steady; a single agent
+  drifts between templates depending on which was prompted last).
+  Added 2026-05-05 after the first comparison run surfaced this:
+  mono followed the ADR template strictly but freestyled the story
+  template; multi did the inverse — strict on stories, methodology-rich
+  on ADRs. See `docs/experiment-results.md`.
+- (f) Founder-context extraction depth (multi's independent fresh-context
+  personas pull more concrete, falsifiable facts out of the founder
+  than mono's converging single-buffer dialogue). Added 2026-05-06
+  after diffing the two `answers.md` files: multi extracted "rack store
+  on Amazon, Chino CA, ~20 SKUs, beddings planned" as customer-zero
+  grounding; mono never asked, so its brief had to abstract to generic
+  "local mom-and-pop." The first run's two-different-products outcome
+  is largely downstream of this — different questions produced different
+  answers, which produced different briefs. See
+  `docs/experiment-results.md`.
 
 If H1 is true, the multi-agent architecture is justified.
 If H0 holds, the 22 agents are mostly redundant — and v0.3 should
@@ -80,6 +97,39 @@ file from `agents/<role>.md` (existing) and adopts that role.
    | Gate 1 verdict (approve/needs-changes/reject) | _recorded_ | _recorded_ | |
    | Build-lead 5-rule violations | _count_ | _count_ | |
    | Wall time | _record_ | _record_ | |
+   | Template deviations per artifact type (for hypothesis (e)) | _count_ | _count_ | |
+   | Concrete founder-context facts extracted (for hypothesis (f)) | _count_ | _count_ | |
+
+   For the template-deviation count: diff each produced artifact against
+   its template in `shipflow/references/{adr,brief,story}-template.md`
+   and count missing required sections, extra non-template fields, and
+   ID-format violations. Score per-artifact-type so you can see whether
+   adherence is *consistent* across types (multi prediction) or *drifts*
+   (mono prediction).
+
+   For the founder-context-extraction count: read each variant's
+   `answers.md` and count *concrete falsifiable facts the founder
+   volunteered or confirmed* — names of existing businesses, specific
+   SKU counts, location/warehouse details, dollar budgets, named prior
+   customers, named competitors used personally, etc. Abstract
+   preferences ("cheaper than Shopify", "I want fast support") don't
+   count. The hypothesis predicts multi extracts more.
+
+### Optional follow-up: same-answers controlled experiment
+
+To isolate whether mono's gap is in *question generation* (hypothesis (f))
+or also in *brief authoring*, run this controlled experiment **after**
+the standard comparison:
+
+1. Pick the variant whose `answers.md` is more detailed (likely multi
+   per (f)).
+2. Copy that exact `answers.md` to the other variant's discovery folder.
+3. Skip discovery on that variant; jump straight to `/sf-brief`.
+4. Compare the resulting briefs:
+   - If quality matches the original variant → the gap is 100% in
+     question generation; brief authoring is equivalent.
+   - If quality still lags → there's a separate brief-authoring gap on
+     top of the question-extraction gap.
 
 5. Have a third party (Gemini, ChatGPT, another Claude session) blind-
    review the artifacts produced by each variant. Score:
@@ -142,6 +192,16 @@ file from `agents/<role>.md` (existing) and adopts that role.
   release.
 - Don't merge unless the experiment produces a clear answer AND the
   decision (collapse or keep) is made deliberately.
+- **Don't treat hypothesis (e) as confirmed by the run that motivated
+  it.** (e) was added 2026-05-05 *after* observing template-adherence
+  reversal in the first comparison run — the same run is its motivating
+  evidence, so it's circular if cited as proof. (e) only counts as
+  tested when a *different* seed produces the same per-artifact pattern
+  on an independent run.
+- **Same caveat for hypothesis (f).** Added 2026-05-06 after diffing
+  the first run's two `answers.md` files. The motivating run cannot
+  also confirm it. (f) counts as tested only when a different seed
+  shows multi again extracting more concrete founder-context facts.
 
 ## After the experiment
 

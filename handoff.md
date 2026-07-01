@@ -274,4 +274,58 @@ If you want Claude Code to maintain its own running memory of ShipFlow developme
 
 ---
 
+## Independent review of `shipflow-memory-measurement.md` — 2026-05-06
+
+External review identified 9 actionable + 1 intentional issues. **Park
+for now; revisit when memory architecture is next touched.** Item 10
+explicitly excluded as intentional design.
+
+- [ ] **(1) Doc is prescription, not measurement.** No instrumentation,
+      no telemetry. Budgets are arbitrary without "across N runs of
+      Build phase, p95 read = X KB" data. Action: add a measurement
+      hook or rename to `memory-budgets.md` to drop the false claim.
+- [ ] **(2) Hard token budgets create perverse incentives.** Why 5 KB
+      and not 6? Users hide context in subdirs the agent never reads,
+      or fragment files. Replace with soft warn-and-explain.
+- [ ] **(3) `/sf-lint` is a brittle keystone.** A pure-shell linter
+      enforcing structural invariants across briefs/stories/ADRs/
+      releases/dialogues/diaries is a single point of failure that
+      will silently miss edge cases. Plan for a more durable check
+      (e.g., a node script with an actual parser, or split linter per
+      artifact type).
+- [ ] **(4) Diary ≠ MemPalace diary.** README implies equivalence but
+      MemPalace = verbatim transcripts + ChromaDB + BM25 (real
+      semantic retrieval). ShipFlow's diary = markdown summaries the
+      agent decides to write. Honest framing: "we wanted MemPalace's
+      idea but couldn't take the runtime dep, so we ship a much
+      simpler version that requires the agent to be a good summarizer."
+- [ ] **(5) Context inheritance pollution is structural, not a small
+      caveat.** By Ship phase, reviewers are 4 layers downstream of
+      original user intent. DESIGN.md flags it but no first-principles
+      reset agent exists (e.g., a reviewer that reads only the
+      original Discover transcript). Biases compound.
+- [ ] **(6) No forgetting / decay policy.** Archive exists as a
+      mechanism, but the doc never says when something moves to
+      archive. Manual? Time-based? Status-based? Without policy,
+      archive becomes "another folder I never read."
+- [ ] **(7) Per-agent diaries are merge-conflict-prone.** Discover
+      handles parallel writes via per-persona files. But two reviewers
+      running in parallel on the same diary file = git collision.
+      Either there's an undocumented serialization mechanism or this
+      hasn't been hit in practice yet.
+- [ ] **(8) 5-phase workflow + 22 agents is ceremony-heavy for small
+      solo work.** "Fix the typo on the landing page" doesn't need
+      Discover → Spec → Build → Verify → Ship. The system feels built
+      for Features-with-capital-F. Most solo work isn't. (May relate
+      to future v0.3 scope decisions and the mono-agent A/B result.)
+- [ ] **(9) `CLAUDE.md ≤ 2 KB` will overflow in practice.** ~500 words.
+      Key decisions + current focus + recent changes + conventions
+      don't fit. The discipline erodes the moment a real project lands.
+      Either raise the cap or split into multiple files explicitly.
+- [x] **(10) Memory doesn't carry across projects.** Each repo has its
+      own `docs/shipflow/`. Lessons from Project A don't transfer to
+      Project B. **Intentional design choice — no action.**
+
+---
+
 For the record: the file does exist at `/claude-code-project/HANDOFF.md` (17KB, 263 lines) in your selected folder — I verified with `ls` before displaying. If you're browsing the folder in your file manager and not seeing it, try refreshing, or you can copy the markdown above directly into a new file on your end.
