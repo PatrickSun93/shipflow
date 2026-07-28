@@ -36,7 +36,11 @@
   完整诚实分类见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
 - 跨切审阅者（security、DB、cofounder）的 `Verdict: blocking` 会硬阻
   `/sf-ship`，仅可通过 `--force-risk-acknowledged` 显式覆盖。
-- **样本 fixture 与测量脚本**：已完成设计，从 Cowork 迁移到 Claude Code 后尚未重建。
+- **样本 fixture 与测量脚本**：已在
+  [`shipflow-sample/measure.py`](./shipflow-sample/measure.py) 重建——五个
+  阶段（发现 → 规格 → 构建 → 验证 → 发布）全部通过内存预算检查，零归档
+  泄漏。重新测得的数据见
+  [`shipflow-memory-measurement.md`](./shipflow-memory-measurement.md)。
 
 当前待办清单见 [`handoff.md`](./handoff.md) 的"下一步"部分。
 

@@ -4,10 +4,13 @@
 > budgets, and lays out the methodology for verifying that ShipFlow's
 > phase-skill reads actually fit the budget.
 >
-> **Status:** methodology only. The fixture (`shipflow-sample/`) and the
+> **Status:** rebuilt and passing. The fixture (`shipflow-sample/`) and the
 > measurement script (`measure.py`) that produced the original numbers in
-> `handoff.md` did not transfer from Cowork. The numbers below are restated
-> from the handoff as the baseline to re-verify once the fixture is rebuilt.
+> `handoff.md` did not transfer from Cowork, so both were rebuilt from this
+> doc's methodology (not copied from the original — that fixture is gone).
+> `python3 shipflow-sample/measure.py` now runs green: all five phases PASS
+> within budget with zero archive leakage. See "Re-measured" below for the
+> actual numbers from the rebuilt fixture.
 
 ---
 
@@ -49,7 +52,11 @@ something it shouldn't — almost always unrelated briefs or the archive.
 ## Baseline (from handoff)
 
 These numbers were measured in Cowork against the original 26-file fixture,
-per `handoff.md`. They are the baseline to re-verify:
+per `handoff.md`. That fixture and script did not transfer, so these are
+kept only as the historical reference point — not something the rebuilt
+fixture reproduces byte-for-byte (the file contents are new; the file
+*shape* — counts, section structure, budgets — follows the same
+methodology below):
 
 | Phase    | Measured | Budget | Status |
 |----------|----------|--------|--------|
@@ -64,6 +71,33 @@ Additional baseline facts from `handoff.md`:
 - Zero archive leakage — no read against `docs/shipflow/archive/` during
   normal phase work.
 - Hot layer (`CLAUDE.md`) stays under 2 KB in all sessions.
+
+## Re-measured (rebuilt fixture, `<date>`)
+
+Numbers below are from actually running `python3 shipflow-sample/measure.py`
+against the rebuilt fixture (new content, same methodology and file shape
+as the list in "Methodology" below) — not restated from handoff, not
+hand-computed. Re-run the command yourself to reproduce:
+
+| Phase    | Measured | Budget | # Files | Status |
+|----------|----------|--------|---------|--------|
+| Discover | 1.79 KB  | 3 KB   | 5       | PASS |
+| Spec     | 4.61 KB  | 6 KB   | 5       | PASS |
+| Build    | 3.35 KB  | 5 KB   | 4       | PASS |
+| Verify   | 1.88 KB  | 3 KB   | 2       | PASS |
+| Ship     | 2.78 KB  | 3 KB   | 5       | PASS |
+
+`measure.py` exits `0`. Zero archive leakage confirmed programmatically
+(the script asserts no `archive/` path appears in any phase's resolved
+read set — see `--json` output for each phase's full read set). All
+numbers use 1 KB = 1024 bytes.
+
+These land close to but not identical to the Cowork baseline above, which
+is expected — the rebuilt fixture's briefs/stories/ADRs are newly written
+prose (a habit-tracker product, "Loopline"), not a recovery of the
+original text. What the re-measurement actually confirms is the thing
+that matters: realistic per-phase content of mature-project shape stays
+within budget with no archive leakage, across all five phases.
 
 ---
 
@@ -121,11 +155,20 @@ contract.
 
 ## Next actions
 
-1. **Rebuild the fixture** at `shipflow-sample/`. Keep it realistic but not
-   excessive — ~26 files is enough to test all five phases.
-2. **Port the measurement script** (`measure.py` or equivalent). Node would
-   also work if Python isn't preferred on this machine.
-3. **Re-run the table above** and check that the numbers still pass.
+1. ~~**Rebuild the fixture** at `shipflow-sample/`. Keep it realistic but not
+   excessive — ~26 files is enough to test all five phases.~~ **Done.**
+   26 core files (1 `CLAUDE.md`, `stack.md`, `index.md`, 2 briefs, 6 active
+   stories, 6 ADRs, 2 releases, 1 retro, 6 archived stories) plus a
+   `discovery/habit-templates/` dialogue dir, `shipflow.config.json`,
+   `measure.py`, and a short `README.md`.
+2. ~~**Port the measurement script** (`measure.py` or equivalent). Node would
+   also work if Python isn't preferred on this machine.~~ **Done.**
+   `shipflow-sample/measure.py`, stdlib-only Python 3, `--json` flag.
+3. ~~**Re-run the table above** and check that the numbers still pass.~~
+   **Done.** See "Re-measured (rebuilt fixture, `<date>`)" above — all
+   five phases PASS, zero archive leakage, exit code 0.
 4. **Add a stress test** — a fixture with 100 ADRs and 500 stories — to
    verify the model holds at mature-project scale. This is an open question
-   in `handoff.md` and has not been tested.
+   in `handoff.md` and has **not** been tested (still open — out of scope
+   for this rebuild, which targeted parity with the original ~26-file
+   fixture, not the stress case).

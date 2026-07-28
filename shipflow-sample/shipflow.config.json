@@ -1,0 +1,11 @@
+{
+  "gate_modes": {
+    "gate_1": "advisory",
+    "gate_2": "advisory",
+    "gate_3": "advisory",
+    "gate_4": "advisory"
+  },
+  "cofounder_review_mode": "advisory",
+  "index_regen_every_n_stories": 5,
+  "archive_on_ship": true
+}

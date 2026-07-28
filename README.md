@@ -39,8 +39,12 @@ gets: Tech Lead, Product Lead, Cofounder, QA, Security + DB reviewers, plus
   See [`shipflow/README.md`](./shipflow/README.md) for the honest breakdown.
 - Cross-cutting reviewers (security, DB, cofounder) hard-stop `/sf-ship`
   on `Verdict: blocking` unless explicitly overridden.
-- **Sample fixture + measurement script:** designed, not yet rebuilt after the
-  Cowork → Claude Code transition.
+- **Sample fixture + measurement script:** rebuilt at
+  [`shipflow-sample/measure.py`](./shipflow-sample/measure.py) — all five
+  phases (Discover → Spec → Build → Verify → Ship) PASS their memory
+  budget with zero archive leakage. See
+  [`shipflow-memory-measurement.md`](./shipflow-memory-measurement.md) for
+  the re-measured numbers.
 
 See the "Next steps" section in [`handoff.md`](./handoff.md) for the current
 punch list.
