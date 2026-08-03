@@ -46,7 +46,7 @@ ship、regen-index、resurvey、next、checkpoint、lint、grill、diagnose，
 在任意 Claude Code 会话中，**两条命令分开发**（一条返回结果后再发下一条）：
 
 ```
-/plugin marketplace add https://github.com/PatrickSun93/shipflow
+/plugin marketplace add PatrickSun93/shipflow
 ```
 
 ```

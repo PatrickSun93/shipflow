@@ -51,7 +51,7 @@ In any Claude Code session, **run these two commands one at a time**
 (wait for each to return before sending the next):
 
 ```
-/plugin marketplace add https://github.com/PatrickSun93/shipflow
+/plugin marketplace add PatrickSun93/shipflow
 ```
 
 ```
