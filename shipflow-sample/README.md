@@ -43,3 +43,7 @@ python3 shipflow-sample/measure.py --json
 ```
 
 No dependencies beyond the Python 3 standard library.
+
+CI runs this on every push to `main` and every pull request (see
+[`../.github/workflows/ci.yml`](../.github/workflows/ci.yml)); a budget
+overrun or an archive read fails the build.

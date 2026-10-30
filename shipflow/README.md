@@ -18,7 +18,7 @@ external services.
 
 ## Status
 
-**v0.2.21** — all five phases scaffolded and dogfood-validated.
+**v0.2.24** — all five phases scaffolded and dogfood-validated.
 
 **Honest agent count: 22 total, structured as:**
 - **8 role-embodied reviewers with Identity & POV** — `tech-lead`,

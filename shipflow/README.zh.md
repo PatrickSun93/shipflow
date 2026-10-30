@@ -16,7 +16,7 @@ CAP / 三人测试 / Rollback Test⋯），以及在不对劲的时候敢于 pus
 
 ## 状态
 
-**v0.2.21** —— 五个阶段全部搭建完成，已通过 dogfood 验证。
+**v0.2.24** —— 五个阶段全部搭建完成，已通过 dogfood 验证。
 
 **诚实统计：22 个智能体，结构如下：**
 - **8 个带 Identity & POV 的具身化审阅者** —— `tech-lead`、`product-lead`、

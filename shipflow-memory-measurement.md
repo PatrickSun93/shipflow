@@ -121,11 +121,14 @@ contract.
 
 ## Next actions
 
-1. **Rebuild the fixture** at `shipflow-sample/`. Keep it realistic but not
-   excessive — ~26 files is enough to test all five phases.
-2. **Port the measurement script** (`measure.py` or equivalent). Node would
-   also work if Python isn't preferred on this machine.
-3. **Re-run the table above** and check that the numbers still pass.
+1. ~~**Rebuild the fixture** at `shipflow-sample/`.~~ Done — 26 files, see
+   [`shipflow-sample/README.md`](./shipflow-sample/README.md).
+2. ~~**Port the measurement script.**~~ Done — `shipflow-sample/measure.py`,
+   stdlib Python, implements the pseudocode above.
+3. ~~**Re-run the table above.**~~ Done — all five phases pass. CI
+   (`.github/workflows/ci.yml`) re-runs `measure.py` on every push to `main`
+   and every pull request, so a fixture or template edit that breaks a
+   budget fails the build instead of drifting silently.
 4. **Add a stress test** — a fixture with 100 ADRs and 500 stories — to
    verify the model holds at mature-project scale. This is an open question
    in `handoff.md` and has not been tested.

@@ -1,5 +1,7 @@
 # shipflow
 
+[![CI](https://github.com/PatrickSun93/shipflow/actions/workflows/ci.yml/badge.svg)](https://github.com/PatrickSun93/shipflow/actions/workflows/ci.yml)
+
 > **Other languages:** [中文](./README.zh.md)
 
 This repo houses **ShipFlow** — *a multi-agent product team in a folder*. A
@@ -13,6 +15,8 @@ gets: Tech Lead, Product Lead, Cofounder, QA, Security + DB reviewers, plus
 | Path | What it is |
 |------|------------|
 | [`shipflow/`](./shipflow/) | The plugin itself. Installable in Claude Code. |
+| [`shipflow-sample/`](./shipflow-sample/) | Realistic fixture repo + `measure.py`, the memory-budget harness: proves each phase's narrow read set fits its byte budget. Runs in CI. |
+| [`scripts/lint_plugin.py`](./scripts/lint_plugin.py) | Structural lint for the plugin itself — frontmatter, agent/skill references, hooks. Runs in CI. |
 | [`DESIGN.md`](./DESIGN.md) | **Honest design rationale** including unverified assumptions and trade-offs we made on intuition rather than evidence. The README sells; this explains. |
 | [`handoff.md`](./handoff.md) | Running log of locked design decisions and the punch list of next steps. |
 | [`shipflow-plan.md`](./shipflow-plan.md) | Detailed per-phase design — agents, skills, gates, trade-offs, cross-cutting concerns. |
@@ -21,14 +25,15 @@ gets: Tech Lead, Product Lead, Cofounder, QA, Security + DB reviewers, plus
 
 ## Status
 
-- **v0.2.21** — all five phases scaffolded and dogfood-validated.
+- **v0.2.24** — all five phases scaffolded and dogfood-validated.
 - **22 agents** (8 reviewers + 3 Discovery personas with Identity & POV;
   6 domain experts; 5 coordinator/specialty), 24 skills, 4 hooks.
   See [`shipflow/README.md`](./shipflow/README.md) for the honest breakdown.
 - Cross-cutting reviewers (security, DB, cofounder) hard-stop `/sf-ship`
   on `Verdict: blocking` unless explicitly overridden.
-- **Sample fixture + measurement script:** designed, not yet rebuilt after the
-  Cowork → Claude Code transition.
+- **Sample fixture + measurement script:** rebuilt; all five phases pass
+  their budgets. CI re-runs `measure.py` and the plugin lint on every push
+  to `main` and every pull request.
 
 See the "Next steps" section in [`handoff.md`](./handoff.md) for the current
 punch list.
@@ -52,6 +57,19 @@ Then in a fresh repo where you want to use ShipFlow:
 Or just run `/sf-next` anytime — it reads the repo state and runs whatever
 phase comes next. See [`shipflow/README.md`](./shipflow/README.md) for the
 full quick-start and feature list.
+
+## Checks
+
+CI ([`.github/workflows/ci.yml`](./.github/workflows/ci.yml)) runs two
+stdlib-only Python scripts on every push to `main` and every pull request.
+Run them locally the same way, from the repo root:
+
+```
+python3 shipflow-sample/measure.py   # memory budgets — all five phases must fit, no archive reads
+python3 scripts/lint_plugin.py       # plugin structure — frontmatter, agent/skill references, hooks
+```
+
+Both exit non-zero on failure, which is what turns the badge red.
 
 ## Conventions
 
