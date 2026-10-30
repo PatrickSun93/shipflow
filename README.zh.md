@@ -1,4 +1,6 @@
-# claude-code-project
+# shipflow
+
+[![CI](https://github.com/PatrickSun93/shipflow/actions/workflows/ci.yml/badge.svg)](https://github.com/PatrickSun93/shipflow/actions/workflows/ci.yml)
 
 > **其他语言：** [English](./README.md)
 
@@ -12,6 +14,8 @@
 | 路径 | 说明 |
 |------|------|
 | [`shipflow/`](./shipflow/) | 插件本体，可安装到 Claude Code 中。 |
+| [`shipflow-sample/`](./shipflow-sample/) | 仿真 fixture 仓库 + `measure.py`（内存预算测量脚本）：证明每个阶段的窄读集合在字节预算之内。CI 会跑。 |
+| [`scripts/lint_plugin.py`](./scripts/lint_plugin.py) | 插件自身的结构 lint —— frontmatter、agent / skill 引用、钩子。CI 会跑。 |
 | [`DESIGN.md`](./DESIGN.md) | **诚实的设计 rationale**，包括未经验证的假设和我们凭直觉而非证据做的 trade-off。README 是销售；这份是解释。 |
 | [`handoff.md`](./handoff.md) | 已锁定的设计决策和待办清单的持续记录。 |
 | [`shipflow-plan.md`](./shipflow-plan.md) | 各阶段的详细设计——智能体、技能、关卡、权衡与横切关注点。 |
@@ -20,14 +24,15 @@
 
 ## 状态
 
-- **v0.2.21** —— 五个阶段全部搭建完成，已通过 dogfood 验证（发现 → 规格 →
+- **v0.2.24** —— 五个阶段全部搭建完成，已通过 dogfood 验证（发现 → 规格 →
   构建 → 验证 → 发布）。
 - **22 个智能体**（8 个审阅者 + 3 个 Discovery persona 带 Identity & POV；
   6 个领域专家；5 个协调者 / specialty），24 个技能、4 个钩子。
   完整诚实分类见 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
 - 跨切审阅者（security、DB、cofounder）的 `Verdict: blocking` 会硬阻
   `/sf-ship`，仅可通过 `--force-risk-acknowledged` 显式覆盖。
-- **样本 fixture 与测量脚本**：已完成设计，从 Cowork 迁移到 Claude Code 后尚未重建。
+- **样本 fixture 与测量脚本**：已重建，五个阶段全部在预算之内。CI 在每次推送到 `main`
+  和每个 pull request 上重跑 `measure.py` 和插件 lint。
 
 当前待办清单见 [`handoff.md`](./handoff.md) 的"下一步"部分。
 
@@ -49,6 +54,18 @@
 
 或者直接 `/sf-next` —— 它读仓库状态并执行下一步。完整快速入门见
 [`shipflow/README.zh.md`](./shipflow/README.zh.md)。
+
+## 检查
+
+CI（[`.github/workflows/ci.yml`](./.github/workflows/ci.yml)）在每次推送到 `main` 和每个
+pull request 上跑两个只依赖标准库的 Python 脚本。本地在仓库根目录用同样的命令跑：
+
+```
+python3 shipflow-sample/measure.py   # 内存预算 —— 五个阶段都要在预算内，且不读 archive
+python3 scripts/lint_plugin.py       # 插件结构 —— frontmatter、agent / skill 引用、钩子
+```
+
+任一失败都以非零退出，badge 就会变红。
 
 ## 开发约定
 
